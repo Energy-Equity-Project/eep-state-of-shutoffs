@@ -6,6 +6,17 @@
   --color-highlight: #fbcc0f;
   --font-serif: "Fraunces", serif;
   --font-sans: "Inter", sans-serif;
+
+  /* State explorer palette */
+  --color-accent: #185fa5;
+  --color-surface: #ffffff;
+  --color-muted: #f1efe8;
+  --color-text-secondary: #5f5e5a;
+  --color-text-tertiary: #888780;
+  --color-border-light: rgba(10, 10, 10, 0.15);
+  --color-border-medium: rgba(10, 10, 10, 0.30);
+  --color-neutral-bar: #b4b2a9;
+  --color-neutral-bar-light: #d3d1c7;
 }
 
 @layer components {
