@@ -1,6 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Counter from '../components/Counter';
+
+const shutoffs = await getCollection('shutoffs');
 ---
 
 <BaseLayout title="State of Shutoffs — EEP">
