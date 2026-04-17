@@ -1,23 +1,46 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Counter from '../components/Counter';
+import Section from '../components/Section.astro';
+import Introduction from '../components/Introduction.astro';
+import Insight from '../components/Insight.astro';
+import Conclusion from '../components/Conclusion.astro';
+import Resources from '../components/Resources.astro';
+import ScrollProgress from '../components/ScrollProgress';
+import { insights } from '../data/insights';
 
-const shutoffs = await getCollection('shutoffs');
+const sections = [
+  { id: 'intro', label: 'Introduction' },
+  ...insights.map((ins) => ({
+    id: `insight-${ins.number}`,
+    label: `Insight ${ins.number} of 10: ${ins.headline}`,
+  })),
+  { id: 'conclusion', label: 'Conclusion' },
+  { id: 'resources', label: 'Resources' },
+];
 ---
 
-<BaseLayout title="State of Shutoffs — EEP">
-  <main class="mx-auto max-w-3xl px-6 py-16">
-    <h1 class="mb-6 text-4xl font-bold">State of Shutoffs</h1>
-    <p class="mb-10 text-lg text-gray-700">
-      Each year, millions of American households face utility disconnections — a quiet crisis that
-      disproportionately affects low-income communities and communities of color. This project makes
-      EIA-112 utility shutoff data legible to a general audience, combining guided narrative with
-      state-by-state interactive exploration.
-    </p>
-    <div class="rounded border border-gray-200 p-6">
-      <p class="mb-2 text-sm text-gray-500">React island — confirms hydration works:</p>
-      <Counter client:load />
-    </div>
+<BaseLayout title="Another World Is Possible — Energy Equity Project">
+  <ScrollProgress client:load sections={sections} />
+  <main
+    data-scroll-container
+    class="h-screen overflow-y-auto snap-y snap-mandatory motion-reduce:h-auto motion-reduce:overflow-visible motion-reduce:snap-none"
+  >
+    <Section id="intro" label="Introduction">
+      <Introduction />
+    </Section>
+
+    {insights.map((insight) => (
+      <Section id={`insight-${insight.number}`} label={`Insight ${insight.number} of 10`}>
+        <Insight insight={insight} total={10} />
+      </Section>
+    ))}
+
+    <Section id="conclusion" label="Conclusion and call to action">
+      <Conclusion />
+    </Section>
+
+    <Section id="resources" label="Resources">
+      <Resources />
+    </Section>
   </main>
 </BaseLayout>
