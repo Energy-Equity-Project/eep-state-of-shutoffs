@@ -58,7 +58,7 @@ export default function TopRightMenu({ pathname }: Props) {
       <div
         id="top-right-menu-panel"
         role="menu"
-        className={`absolute right-0 mt-2 min-w-[160px] bg-[--color-surface] border border-[--color-border-light] rounded-md shadow-md transition-all duration-150 origin-top-right ${
+        className={`absolute right-0 mt-2 min-w-[160px] bg-white border border-[--color-border-light] rounded-md shadow-md transition-all duration-150 origin-top-right ${
           open
             ? 'opacity-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 -translate-y-1 pointer-events-none'
