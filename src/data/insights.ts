@@ -10,10 +10,10 @@ export interface Insight {
 export const insights: Insight[] = [
   {
     number: 1,
-    headline: "The scale is worse than we said",
+    headline: "The scale is worse than we thought",
     stat: "In 2024, utilities in the United States carried out nearly 15 million shutoffs \u2014 about 13.4 million electric and 1.5 million gas. That is one shutoff every 2.1 seconds, every day, all year.",
     frame: `For years the movement has cited \u201Cabout 7 million shutoffs a year.\u201D The new federal data doubles that. Whatever the old number told us, the real one tells us more loudly: this is not an edge case. This is a national practice. A country that shuts off power 15 million times a year does not have an affordability problem around the margins. It has a system that runs on cruelty.`,
-    headlineHighlights: ["worse than we said"],
+    headlineHighlights: ["worse than we thought"],
     statHighlights: ["nearly 15 million shutoffs"],
   },
   {
