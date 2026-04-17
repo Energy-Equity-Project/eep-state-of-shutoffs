@@ -1,0 +1,60 @@
+---
+import AnimateOnEnter from './AnimateOnEnter';
+
+const resources = [
+  {
+    href: "https://energyequityproject.org/shutoff-abolition-hub/",
+    title: "EEP's Shutoff Abolition Hub",
+    description: "The central resource for EEP's position, articles, and advocacy materials.",
+  },
+  {
+    href: "https://energyequityproject.org/iou-tko-resource-hub/",
+    title: "IOU TKO Resource Hub",
+    description: "Testimony templates, discovery requests, and cost-disallowance guidance for PUC interventions.",
+  },
+  {
+    href: "https://energyequityproject.org/2022/11/14/why-do-we-still-have-energy-shutoffs-another-world-is-possible/",
+    title: '"Why Do We Still Have Energy Shutoffs? Another World Is Possible"',
+    description: "The core manifesto and rebuttal framework.",
+  },
+  {
+    href: "https://energyequityproject.org/2025/06/18/the-story-of-cal-and-lena/",
+    title: '"The Story of Cal and Lena"',
+    description: "The structural inequity argument in one family's bill.",
+  },
+  {
+    href: "https://energyequityproject.org/2025/09/30/shielding-a-single-stone-the-experience-of-combating-one-moms-energy-shutoff/",
+    title: '"Shielding a Single Stone"',
+    description: "What procedural cruelty actually looks like.",
+  },
+  {
+    href: "https://energyequityproject.org/",
+    title: "Energy Equity Project homepage",
+    description: "About us, our team, and how to get in touch.",
+  },
+];
+---
+
+<AnimateOnEnter client:visible>
+  <h2 class="font-serif text-3xl md:text-4xl font-bold leading-tight mb-8">
+    Resources
+  </h2>
+  <ul class="space-y-4 mb-12">
+    {resources.map((r) => (
+      <li>
+        <a
+          href={r.href}
+          class="highlight-link font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {r.title}
+        </a>
+        <span class="text-ink/70"> — {r.description}</span>
+      </li>
+    ))}
+  </ul>
+  <p class="text-xs text-ink/40 mt-auto">
+    Data source: U.S. Energy Information Administration Form EIA-112, 2024 reporting year. Processed by EEP.
+  </p>
+</AnimateOnEnter>
