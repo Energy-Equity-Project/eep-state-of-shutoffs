@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TopNav from '../../components/explore/TopNav.astro';
+import LimitationsPanel from '../../components/explore/LimitationsPanel.astro';
+import SeeAllStatesButton from '../../components/explore/SeeAllStatesButton.astro';
+import KpiGrid from '../../components/explore/KpiGrid';
+import MonthlyChart from '../../components/explore/MonthlyChart';
+import WarningsVsDisconnections from '../../components/explore/WarningsVsDisconnections';
+import CompareStates from '../../components/explore/CompareStates';
+import {
+  getAllStateCodes,
+  getStateAnnual,
+  getStateMonthly,
+  getNationalMonthly,
+  getNationalRank,
+  getMultiplierVsNational,
+  getOneInX,
+  getYear,
+  STATE_CODES,
+} from '../../lib/shutoffs';
+import { formatMultiplier } from '../../lib/format';
+
+export function getStaticPaths() {
+  return getAllStateCodes().map((code) => ({
+    params: { code },
+  }));
+}
+
+const { code } = Astro.params;
+const stateName = STATE_CODES[code] ?? code;
+const stateAnnual = getStateAnnual(code);
+const stateMonthly = getStateMonthly(code);
+const nationalMonthly = getNationalMonthly();
+
+const electricRank = getNationalRank(code, 'electric');
+const electricMultiplier = getMultiplierVsNational(code, 'electric');
+const oneInX = getOneInX(stateAnnual.electric_annual_shutoff_rate);
+const year = getYear();
+const totalStates = 51;
+
+const ordinalSuffix = (n: number) => {
+  const s = ['th', 'st', 'nd', 'rd'];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] ?? s[v] ?? s[0]);
+};
+
+const headline = `In ${stateName}, utilities disconnected electricity at ${Math.round(stateAnnual.electric_shutoffs_total).toLocaleString()} homes last year.`;
+const subhead = `That's about 1 in every ${oneInX} customers — the ${ordinalSuffix(electricRank)} highest rate in the country, and roughly ${formatMultiplier(electricMultiplier)} the national average.`;
+---
+
+<BaseLayout title={`${stateName} utility shutoffs, ${year} — EEP`}>
+  <main class="max-w-[960px] mx-auto px-4 md:px-6 py-6">
+    <TopNav currentCode={code} />
+
+    <p class="text-[13px] text-[--color-text-tertiary] tracking-wide mb-2">
+      {year} · Investor-owned utilities
+    </p>
+    <h1 class="text-[19px] md:text-[26px] font-medium leading-snug mb-3 max-w-2xl">
+      {headline}
+    </h1>
+    <p class="text-[15px] text-[--color-text-secondary] leading-relaxed mb-8 max-w-2xl">
+      {subhead}
+    </p>
+
+    <KpiGrid
+      stateAnnual={stateAnnual}
+      stateCode={code}
+      electricRank={electricRank}
+      electricMultiplier={electricMultiplier}
+      totalStates={totalStates}
+      client:load
+    />
+
+    <MonthlyChart
+      stateMonthly={stateMonthly}
+      nationalMonthly={nationalMonthly}
+      stateName={stateName}
+      stateCode={code}
+      client:load
+    />
+
+    <WarningsVsDisconnections
+      stateAnnual={stateAnnual}
+      stateName={stateName}
+      client:load
+    />
+
+    <CompareStates currentCode={code} client:load />
+
+    <LimitationsPanel />
+    <SeeAllStatesButton />
+  </main>
+</BaseLayout>
