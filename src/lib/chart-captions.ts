@@ -8,7 +8,6 @@ const MONTH_NAMES = [
 export function getChartCaption(
   records: ShutoffRecord[],
   fuel: 'electric' | 'gas',
-  stateCode: string,
 ): string {
   const field = fuel === 'electric' ? 'electric_shutoffs' : 'gas_shutoffs';
   let peakMonth = 1;
@@ -25,11 +24,6 @@ export function getChartCaption(
   const monthName = MONTH_NAMES[peakMonth - 1];
   const fuelLabel = fuel === 'electric' ? 'Electric' : 'Gas';
   const formatted = peakValue > 0 ? peakValue.toLocaleString() : '—';
-
-  // Michigan-specific contextual clause for electric (moratorium lift)
-  if (stateCode === 'MI' && fuel === 'electric') {
-    return `${fuelLabel} shutoffs peaked in ${monthName} at ${formatted} — the month after Michigan's winter moratorium ended.`;
-  }
 
   return `${fuelLabel} shutoffs peaked in ${monthName} at ${formatted}.`;
 }

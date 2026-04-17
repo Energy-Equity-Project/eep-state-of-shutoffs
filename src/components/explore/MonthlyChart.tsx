@@ -71,7 +71,7 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
 
   const caption = fuel === 'both'
     ? getBothCaption()
-    : getChartCaption(sorted, fuel as 'electric' | 'gas', stateCode);
+    : getChartCaption(sorted, fuel as 'electric' | 'gas');
 
   const circleColor = fuel === 'gas' ? '#888780' : '#185fa5';
   const stateLineColor = fuel === 'gas' ? '#888780' : '#185fa5';
