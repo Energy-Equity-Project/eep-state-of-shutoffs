@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-17T03:16:52.735055+00:00",
+  "generated_at": "2026-04-17T16:19:41.691949+00:00",
   "source_file": "16-04-2026-eia-112-shutoffs.csv",
   "year": 2024,
   "records": [
@@ -8750,5 +8750,2569 @@
       "avg_electric_customers": 2804587.9689542484,
       "avg_gas_customers": 1450982.366013072
     }
+  },
+  "cost_metrics": {
+    "source_files": {
+      "electric": "14-02-2026-eia-861-sales.csv",
+      "gas": "15-04-2026-eia-176-residential-natural-gas.csv"
+    },
+    "year_range": [
+      2020,
+      2024
+    ],
+    "state_annual_costs": [
+      {
+        "state": "Alabama",
+        "year": 2020,
+        "avg_monthly_electric_cost": 144.52,
+        "avg_monthly_gas_cost": 48.36,
+        "avg_monthly_total_utility_cost": 192.88,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alabama",
+        "year": 2021,
+        "avg_monthly_electric_cost": 148.43,
+        "avg_monthly_gas_cost": 53.52,
+        "avg_monthly_total_utility_cost": 201.96,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alabama",
+        "year": 2022,
+        "avg_monthly_electric_cost": 168.8,
+        "avg_monthly_gas_cost": 55.81,
+        "avg_monthly_total_utility_cost": 224.61,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alabama",
+        "year": 2023,
+        "avg_monthly_electric_cost": 163.25,
+        "avg_monthly_gas_cost": 57.64,
+        "avg_monthly_total_utility_cost": 220.88,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alabama",
+        "year": 2024,
+        "avg_monthly_electric_cost": 174.28,
+        "avg_monthly_gas_cost": 57.28,
+        "avg_monthly_total_utility_cost": 231.56,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alaska",
+        "year": 2020,
+        "avg_monthly_electric_cost": 121.58,
+        "avg_monthly_gas_cost": 142.83,
+        "avg_monthly_total_utility_cost": 264.41,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alaska",
+        "year": 2021,
+        "avg_monthly_electric_cost": 130.8,
+        "avg_monthly_gas_cost": 141.91,
+        "avg_monthly_total_utility_cost": 272.71,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alaska",
+        "year": 2022,
+        "avg_monthly_electric_cost": 129.69,
+        "avg_monthly_gas_cost": 133.18,
+        "avg_monthly_total_utility_cost": 262.87,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alaska",
+        "year": 2023,
+        "avg_monthly_electric_cost": 134.05,
+        "avg_monthly_gas_cost": 138.54,
+        "avg_monthly_total_utility_cost": 272.59,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alaska",
+        "year": 2024,
+        "avg_monthly_electric_cost": 140.08,
+        "avg_monthly_gas_cost": 145.03,
+        "avg_monthly_total_utility_cost": 285.11,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arizona",
+        "year": 2020,
+        "avg_monthly_electric_cost": 137.11,
+        "avg_monthly_gas_cost": 34.7,
+        "avg_monthly_total_utility_cost": 171.81,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arizona",
+        "year": 2021,
+        "avg_monthly_electric_cost": 131.72,
+        "avg_monthly_gas_cost": 38.73,
+        "avg_monthly_total_utility_cost": 170.45,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arizona",
+        "year": 2022,
+        "avg_monthly_electric_cost": 138.51,
+        "avg_monthly_gas_cost": 46.08,
+        "avg_monthly_total_utility_cost": 184.59,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arizona",
+        "year": 2023,
+        "avg_monthly_electric_cost": 148.77,
+        "avg_monthly_gas_cost": 53.04,
+        "avg_monthly_total_utility_cost": 201.81,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arizona",
+        "year": 2024,
+        "avg_monthly_electric_cost": 160.77,
+        "avg_monthly_gas_cost": 50.49,
+        "avg_monthly_total_utility_cost": 211.26,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arkansas",
+        "year": 2020,
+        "avg_monthly_electric_cost": 110.18,
+        "avg_monthly_gas_cost": 54.92,
+        "avg_monthly_total_utility_cost": 165.1,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arkansas",
+        "year": 2021,
+        "avg_monthly_electric_cost": 123.62,
+        "avg_monthly_gas_cost": 62.24,
+        "avg_monthly_total_utility_cost": 185.86,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arkansas",
+        "year": 2022,
+        "avg_monthly_electric_cost": 133.7,
+        "avg_monthly_gas_cost": 78.24,
+        "avg_monthly_total_utility_cost": 211.93,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arkansas",
+        "year": 2023,
+        "avg_monthly_electric_cost": 128.44,
+        "avg_monthly_gas_cost": 74.8,
+        "avg_monthly_total_utility_cost": 203.24,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arkansas",
+        "year": 2024,
+        "avg_monthly_electric_cost": 129.0,
+        "avg_monthly_gas_cost": 64.99,
+        "avg_monthly_total_utility_cost": 193.99,
+        "gas_data_available": true
+      },
+      {
+        "state": "California",
+        "year": 2020,
+        "avg_monthly_electric_cost": 118.56,
+        "avg_monthly_gas_cost": 50.27,
+        "avg_monthly_total_utility_cost": 168.83,
+        "gas_data_available": true
+      },
+      {
+        "state": "California",
+        "year": 2021,
+        "avg_monthly_electric_cost": 124.95,
+        "avg_monthly_gas_cost": 56.52,
+        "avg_monthly_total_utility_cost": 181.48,
+        "gas_data_available": true
+      },
+      {
+        "state": "California",
+        "year": 2022,
+        "avg_monthly_electric_cost": 140.35,
+        "avg_monthly_gas_cost": 66.71,
+        "avg_monthly_total_utility_cost": 207.06,
+        "gas_data_available": true
+      },
+      {
+        "state": "California",
+        "year": 2023,
+        "avg_monthly_electric_cost": 148.17,
+        "avg_monthly_gas_cost": 76.82,
+        "avg_monthly_total_utility_cost": 224.98,
+        "gas_data_available": true
+      },
+      {
+        "state": "California",
+        "year": 2024,
+        "avg_monthly_electric_cost": 164.21,
+        "avg_monthly_gas_cost": 60.64,
+        "avg_monthly_total_utility_cost": 224.84,
+        "gas_data_available": true
+      },
+      {
+        "state": "Colorado",
+        "year": 2020,
+        "avg_monthly_electric_cost": 87.28,
+        "avg_monthly_gas_cost": 44.66,
+        "avg_monthly_total_utility_cost": 131.94,
+        "gas_data_available": true
+      },
+      {
+        "state": "Colorado",
+        "year": 2021,
+        "avg_monthly_electric_cost": 91.55,
+        "avg_monthly_gas_cost": 55.02,
+        "avg_monthly_total_utility_cost": 146.58,
+        "gas_data_available": true
+      },
+      {
+        "state": "Colorado",
+        "year": 2022,
+        "avg_monthly_electric_cost": 97.9,
+        "avg_monthly_gas_cost": 79.78,
+        "avg_monthly_total_utility_cost": 177.68,
+        "gas_data_available": true
+      },
+      {
+        "state": "Colorado",
+        "year": 2023,
+        "avg_monthly_electric_cost": 94.22,
+        "avg_monthly_gas_cost": 71.96,
+        "avg_monthly_total_utility_cost": 166.18,
+        "gas_data_available": true
+      },
+      {
+        "state": "Colorado",
+        "year": 2024,
+        "avg_monthly_electric_cost": 100.26,
+        "avg_monthly_gas_cost": 58.61,
+        "avg_monthly_total_utility_cost": 158.86,
+        "gas_data_available": true
+      },
+      {
+        "state": "Connecticut",
+        "year": 2020,
+        "avg_monthly_electric_cost": 165.48,
+        "avg_monthly_gas_cost": 103.49,
+        "avg_monthly_total_utility_cost": 268.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "Connecticut",
+        "year": 2021,
+        "avg_monthly_electric_cost": 156.08,
+        "avg_monthly_gas_cost": 114.55,
+        "avg_monthly_total_utility_cost": 270.63,
+        "gas_data_available": true
+      },
+      {
+        "state": "Connecticut",
+        "year": 2022,
+        "avg_monthly_electric_cost": 175.71,
+        "avg_monthly_gas_cost": 132.15,
+        "avg_monthly_total_utility_cost": 307.86,
+        "gas_data_available": true
+      },
+      {
+        "state": "Connecticut",
+        "year": 2023,
+        "avg_monthly_electric_cost": 201.87,
+        "avg_monthly_gas_cost": 124.95,
+        "avg_monthly_total_utility_cost": 326.81,
+        "gas_data_available": true
+      },
+      {
+        "state": "Connecticut",
+        "year": 2024,
+        "avg_monthly_electric_cost": 200.78,
+        "avg_monthly_gas_cost": 112.01,
+        "avg_monthly_total_utility_cost": 312.79,
+        "gas_data_available": true
+      },
+      {
+        "state": "Delaware",
+        "year": 2020,
+        "avg_monthly_electric_cost": 118.13,
+        "avg_monthly_gas_cost": 63.22,
+        "avg_monthly_total_utility_cost": 181.35,
+        "gas_data_available": true
+      },
+      {
+        "state": "Delaware",
+        "year": 2021,
+        "avg_monthly_electric_cost": 120.27,
+        "avg_monthly_gas_cost": 66.32,
+        "avg_monthly_total_utility_cost": 186.58,
+        "gas_data_available": true
+      },
+      {
+        "state": "Delaware",
+        "year": 2022,
+        "avg_monthly_electric_cost": 129.36,
+        "avg_monthly_gas_cost": 75.95,
+        "avg_monthly_total_utility_cost": 205.31,
+        "gas_data_available": true
+      },
+      {
+        "state": "Delaware",
+        "year": 2023,
+        "avg_monthly_electric_cost": 138.28,
+        "avg_monthly_gas_cost": 80.35,
+        "avg_monthly_total_utility_cost": 218.63,
+        "gas_data_available": true
+      },
+      {
+        "state": "Delaware",
+        "year": 2024,
+        "avg_monthly_electric_cost": 150.88,
+        "avg_monthly_gas_cost": 66.95,
+        "avg_monthly_total_utility_cost": 217.82,
+        "gas_data_available": true
+      },
+      {
+        "state": "District of Columbia",
+        "year": 2020,
+        "avg_monthly_electric_cost": 82.33,
+        "avg_monthly_gas_cost": 80.64,
+        "avg_monthly_total_utility_cost": 162.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "District of Columbia",
+        "year": 2021,
+        "avg_monthly_electric_cost": 86.31,
+        "avg_monthly_gas_cost": 99.6,
+        "avg_monthly_total_utility_cost": 185.91,
+        "gas_data_available": true
+      },
+      {
+        "state": "District of Columbia",
+        "year": 2022,
+        "avg_monthly_electric_cost": 90.46,
+        "avg_monthly_gas_cost": 120.03,
+        "avg_monthly_total_utility_cost": 210.5,
+        "gas_data_available": true
+      },
+      {
+        "state": "District of Columbia",
+        "year": 2023,
+        "avg_monthly_electric_cost": 96.6,
+        "avg_monthly_gas_cost": 104.69,
+        "avg_monthly_total_utility_cost": 201.29,
+        "gas_data_available": true
+      },
+      {
+        "state": "District of Columbia",
+        "year": 2024,
+        "avg_monthly_electric_cost": 104.94,
+        "avg_monthly_gas_cost": 103.18,
+        "avg_monthly_total_utility_cost": 208.13,
+        "gas_data_available": true
+      },
+      {
+        "state": "Florida",
+        "year": 2020,
+        "avg_monthly_electric_cost": 128.64,
+        "avg_monthly_gas_cost": 38.83,
+        "avg_monthly_total_utility_cost": 167.46,
+        "gas_data_available": true
+      },
+      {
+        "state": "Florida",
+        "year": 2021,
+        "avg_monthly_electric_cost": 130.4,
+        "avg_monthly_gas_cost": 44.89,
+        "avg_monthly_total_utility_cost": 175.3,
+        "gas_data_available": true
+      },
+      {
+        "state": "Florida",
+        "year": 2022,
+        "avg_monthly_electric_cost": 154.52,
+        "avg_monthly_gas_cost": 48.28,
+        "avg_monthly_total_utility_cost": 202.81,
+        "gas_data_available": true
+      },
+      {
+        "state": "Florida",
+        "year": 2023,
+        "avg_monthly_electric_cost": 168.48,
+        "avg_monthly_gas_cost": 43.42,
+        "avg_monthly_total_utility_cost": 211.9,
+        "gas_data_available": true
+      },
+      {
+        "state": "Florida",
+        "year": 2024,
+        "avg_monthly_electric_cost": 156.22,
+        "avg_monthly_gas_cost": 46.48,
+        "avg_monthly_total_utility_cost": 202.7,
+        "gas_data_available": true
+      },
+      {
+        "state": "Georgia",
+        "year": 2020,
+        "avg_monthly_electric_cost": 129.89,
+        "avg_monthly_gas_cost": 468.33,
+        "avg_monthly_total_utility_cost": 598.22,
+        "gas_data_available": true
+      },
+      {
+        "state": "Georgia",
+        "year": 2021,
+        "avg_monthly_electric_cost": 134.35,
+        "avg_monthly_gas_cost": 503.7,
+        "avg_monthly_total_utility_cost": 638.05,
+        "gas_data_available": true
+      },
+      {
+        "state": "Georgia",
+        "year": 2022,
+        "avg_monthly_electric_cost": 151.48,
+        "avg_monthly_gas_cost": 601.73,
+        "avg_monthly_total_utility_cost": 753.2,
+        "gas_data_available": true
+      },
+      {
+        "state": "Georgia",
+        "year": 2023,
+        "avg_monthly_electric_cost": 141.95,
+        "avg_monthly_gas_cost": 566.56,
+        "avg_monthly_total_utility_cost": 708.5,
+        "gas_data_available": true
+      },
+      {
+        "state": "Georgia",
+        "year": 2024,
+        "avg_monthly_electric_cost": 151.48,
+        "avg_monthly_gas_cost": 579.37,
+        "avg_monthly_total_utility_cost": 730.85,
+        "gas_data_available": true
+      },
+      {
+        "state": "Hawaii",
+        "year": 2020,
+        "avg_monthly_electric_cost": 162.66,
+        "avg_monthly_gas_cost": 65.43,
+        "avg_monthly_total_utility_cost": 228.1,
+        "gas_data_available": true
+      },
+      {
+        "state": "Hawaii",
+        "year": 2021,
+        "avg_monthly_electric_cost": 177.78,
+        "avg_monthly_gas_cost": 83.28,
+        "avg_monthly_total_utility_cost": 261.06,
+        "gas_data_available": true
+      },
+      {
+        "state": "Hawaii",
+        "year": 2022,
+        "avg_monthly_electric_cost": 221.53,
+        "avg_monthly_gas_cost": 99.19,
+        "avg_monthly_total_utility_cost": 320.72,
+        "gas_data_available": true
+      },
+      {
+        "state": "Hawaii",
+        "year": 2023,
+        "avg_monthly_electric_cost": 213.23,
+        "avg_monthly_gas_cost": 91.36,
+        "avg_monthly_total_utility_cost": 304.58,
+        "gas_data_available": true
+      },
+      {
+        "state": "Hawaii",
+        "year": 2024,
+        "avg_monthly_electric_cost": 212.12,
+        "avg_monthly_gas_cost": 87.66,
+        "avg_monthly_total_utility_cost": 299.78,
+        "gas_data_available": true
+      },
+      {
+        "state": "Idaho",
+        "year": 2020,
+        "avg_monthly_electric_cost": 94.41,
+        "avg_monthly_gas_cost": 40.15,
+        "avg_monthly_total_utility_cost": 134.56,
+        "gas_data_available": true
+      },
+      {
+        "state": "Idaho",
+        "year": 2021,
+        "avg_monthly_electric_cost": 96.98,
+        "avg_monthly_gas_cost": 40.69,
+        "avg_monthly_total_utility_cost": 137.67,
+        "gas_data_available": true
+      },
+      {
+        "state": "Idaho",
+        "year": 2022,
+        "avg_monthly_electric_cost": 103.74,
+        "avg_monthly_gas_cost": 52.57,
+        "avg_monthly_total_utility_cost": 156.31,
+        "gas_data_available": true
+      },
+      {
+        "state": "Idaho",
+        "year": 2023,
+        "avg_monthly_electric_cost": 106.31,
+        "avg_monthly_gas_cost": 60.33,
+        "avg_monthly_total_utility_cost": 166.64,
+        "gas_data_available": true
+      },
+      {
+        "state": "Idaho",
+        "year": 2024,
+        "avg_monthly_electric_cost": 108.41,
+        "avg_monthly_gas_cost": 49.46,
+        "avg_monthly_total_utility_cost": 157.87,
+        "gas_data_available": true
+      },
+      {
+        "state": "Illinois",
+        "year": 2020,
+        "avg_monthly_electric_cost": 91.62,
+        "avg_monthly_gas_cost": 71.02,
+        "avg_monthly_total_utility_cost": 162.64,
+        "gas_data_available": true
+      },
+      {
+        "state": "Illinois",
+        "year": 2021,
+        "avg_monthly_electric_cost": 93.54,
+        "avg_monthly_gas_cost": 91.03,
+        "avg_monthly_total_utility_cost": 184.58,
+        "gas_data_available": true
+      },
+      {
+        "state": "Illinois",
+        "year": 2022,
+        "avg_monthly_electric_cost": 110.93,
+        "avg_monthly_gas_cost": 129.92,
+        "avg_monthly_total_utility_cost": 240.84,
+        "gas_data_available": true
+      },
+      {
+        "state": "Illinois",
+        "year": 2023,
+        "avg_monthly_electric_cost": 103.35,
+        "avg_monthly_gas_cost": 92.77,
+        "avg_monthly_total_utility_cost": 196.11,
+        "gas_data_available": true
+      },
+      {
+        "state": "Illinois",
+        "year": 2024,
+        "avg_monthly_electric_cost": 106.94,
+        "avg_monthly_gas_cost": 83.79,
+        "avg_monthly_total_utility_cost": 190.72,
+        "gas_data_available": true
+      },
+      {
+        "state": "Indiana",
+        "year": 2020,
+        "avg_monthly_electric_cost": 120.12,
+        "avg_monthly_gas_cost": 55.31,
+        "avg_monthly_total_utility_cost": 175.43,
+        "gas_data_available": true
+      },
+      {
+        "state": "Indiana",
+        "year": 2021,
+        "avg_monthly_electric_cost": 126.6,
+        "avg_monthly_gas_cost": 62.64,
+        "avg_monthly_total_utility_cost": 189.24,
+        "gas_data_available": true
+      },
+      {
+        "state": "Indiana",
+        "year": 2022,
+        "avg_monthly_electric_cost": 139.02,
+        "avg_monthly_gas_cost": 78.31,
+        "avg_monthly_total_utility_cost": 217.33,
+        "gas_data_available": true
+      },
+      {
+        "state": "Indiana",
+        "year": 2023,
+        "avg_monthly_electric_cost": 130.4,
+        "avg_monthly_gas_cost": 66.96,
+        "avg_monthly_total_utility_cost": 197.36,
+        "gas_data_available": true
+      },
+      {
+        "state": "Indiana",
+        "year": 2024,
+        "avg_monthly_electric_cost": 132.26,
+        "avg_monthly_gas_cost": 58.25,
+        "avg_monthly_total_utility_cost": 190.51,
+        "gas_data_available": true
+      },
+      {
+        "state": "Iowa",
+        "year": 2020,
+        "avg_monthly_electric_cost": 105.4,
+        "avg_monthly_gas_cost": 43.97,
+        "avg_monthly_total_utility_cost": 149.37,
+        "gas_data_available": true
+      },
+      {
+        "state": "Iowa",
+        "year": 2021,
+        "avg_monthly_electric_cost": 107.66,
+        "avg_monthly_gas_cost": 55.2,
+        "avg_monthly_total_utility_cost": 162.86,
+        "gas_data_available": true
+      },
+      {
+        "state": "Iowa",
+        "year": 2022,
+        "avg_monthly_electric_cost": 114.76,
+        "avg_monthly_gas_cost": 80.39,
+        "avg_monthly_total_utility_cost": 195.15,
+        "gas_data_available": true
+      },
+      {
+        "state": "Iowa",
+        "year": 2023,
+        "avg_monthly_electric_cost": 110.0,
+        "avg_monthly_gas_cost": 61.31,
+        "avg_monthly_total_utility_cost": 171.31,
+        "gas_data_available": true
+      },
+      {
+        "state": "Iowa",
+        "year": 2024,
+        "avg_monthly_electric_cost": 108.55,
+        "avg_monthly_gas_cost": 49.51,
+        "avg_monthly_total_utility_cost": 158.06,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kansas",
+        "year": 2020,
+        "avg_monthly_electric_cost": 112.69,
+        "avg_monthly_gas_cost": 55.23,
+        "avg_monthly_total_utility_cost": 167.93,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kansas",
+        "year": 2021,
+        "avg_monthly_electric_cost": 113.82,
+        "avg_monthly_gas_cost": 62.97,
+        "avg_monthly_total_utility_cost": 176.78,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kansas",
+        "year": 2022,
+        "avg_monthly_electric_cost": 129.6,
+        "avg_monthly_gas_cost": 88.11,
+        "avg_monthly_total_utility_cost": 217.7,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kansas",
+        "year": 2023,
+        "avg_monthly_electric_cost": 116.43,
+        "avg_monthly_gas_cost": 80.49,
+        "avg_monthly_total_utility_cost": 196.92,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kansas",
+        "year": 2024,
+        "avg_monthly_electric_cost": 123.04,
+        "avg_monthly_gas_cost": 65.92,
+        "avg_monthly_total_utility_cost": 188.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kentucky",
+        "year": 2020,
+        "avg_monthly_electric_cost": 116.78,
+        "avg_monthly_gas_cost": 55.6,
+        "avg_monthly_total_utility_cost": 172.37,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kentucky",
+        "year": 2021,
+        "avg_monthly_electric_cost": 124.89,
+        "avg_monthly_gas_cost": 61.73,
+        "avg_monthly_total_utility_cost": 186.62,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kentucky",
+        "year": 2022,
+        "avg_monthly_electric_cost": 141.67,
+        "avg_monthly_gas_cost": 77.92,
+        "avg_monthly_total_utility_cost": 219.59,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kentucky",
+        "year": 2023,
+        "avg_monthly_electric_cost": 126.05,
+        "avg_monthly_gas_cost": 67.62,
+        "avg_monthly_total_utility_cost": 193.67,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kentucky",
+        "year": 2024,
+        "avg_monthly_electric_cost": 134.13,
+        "avg_monthly_gas_cost": 60.32,
+        "avg_monthly_total_utility_cost": 194.45,
+        "gas_data_available": true
+      },
+      {
+        "state": "Louisiana",
+        "year": 2020,
+        "avg_monthly_electric_cost": 116.13,
+        "avg_monthly_gas_cost": 36.02,
+        "avg_monthly_total_utility_cost": 152.15,
+        "gas_data_available": true
+      },
+      {
+        "state": "Louisiana",
+        "year": 2021,
+        "avg_monthly_electric_cost": 131.54,
+        "avg_monthly_gas_cost": 41.87,
+        "avg_monthly_total_utility_cost": 173.41,
+        "gas_data_available": true
+      },
+      {
+        "state": "Louisiana",
+        "year": 2022,
+        "avg_monthly_electric_cost": 159.66,
+        "avg_monthly_gas_cost": 50.72,
+        "avg_monthly_total_utility_cost": 210.39,
+        "gas_data_available": true
+      },
+      {
+        "state": "Louisiana",
+        "year": 2023,
+        "avg_monthly_electric_cost": 143.25,
+        "avg_monthly_gas_cost": 43.25,
+        "avg_monthly_total_utility_cost": 186.5,
+        "gas_data_available": true
+      },
+      {
+        "state": "Louisiana",
+        "year": 2024,
+        "avg_monthly_electric_cost": 141.14,
+        "avg_monthly_gas_cost": 46.65,
+        "avg_monthly_total_utility_cost": 187.79,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maine",
+        "year": 2020,
+        "avg_monthly_electric_cost": 95.69,
+        "avg_monthly_gas_cost": 97.55,
+        "avg_monthly_total_utility_cost": 193.23,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maine",
+        "year": 2021,
+        "avg_monthly_electric_cost": 99.54,
+        "avg_monthly_gas_cost": 105.36,
+        "avg_monthly_total_utility_cost": 204.9,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maine",
+        "year": 2022,
+        "avg_monthly_electric_cost": 130.91,
+        "avg_monthly_gas_cost": 148.42,
+        "avg_monthly_total_utility_cost": 279.33,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maine",
+        "year": 2023,
+        "avg_monthly_electric_cost": 153.67,
+        "avg_monthly_gas_cost": 113.81,
+        "avg_monthly_total_utility_cost": 267.48,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maine",
+        "year": 2024,
+        "avg_monthly_electric_cost": 133.93,
+        "avg_monthly_gas_cost": 108.73,
+        "avg_monthly_total_utility_cost": 242.67,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maryland",
+        "year": 2020,
+        "avg_monthly_electric_cost": 125.65,
+        "avg_monthly_gas_cost": 86.27,
+        "avg_monthly_total_utility_cost": 211.92,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maryland",
+        "year": 2021,
+        "avg_monthly_electric_cost": 128.98,
+        "avg_monthly_gas_cost": 95.85,
+        "avg_monthly_total_utility_cost": 224.83,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maryland",
+        "year": 2022,
+        "avg_monthly_electric_cost": 141.72,
+        "avg_monthly_gas_cost": 115.62,
+        "avg_monthly_total_utility_cost": 257.34,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maryland",
+        "year": 2023,
+        "avg_monthly_electric_cost": 148.74,
+        "avg_monthly_gas_cost": 99.88,
+        "avg_monthly_total_utility_cost": 248.62,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maryland",
+        "year": 2024,
+        "avg_monthly_electric_cost": 165.55,
+        "avg_monthly_gas_cost": 92.27,
+        "avg_monthly_total_utility_cost": 257.82,
+        "gas_data_available": true
+      },
+      {
+        "state": "Massachusetts",
+        "year": 2020,
+        "avg_monthly_electric_cost": 137.22,
+        "avg_monthly_gas_cost": 80.34,
+        "avg_monthly_total_utility_cost": 217.55,
+        "gas_data_available": true
+      },
+      {
+        "state": "Massachusetts",
+        "year": 2021,
+        "avg_monthly_electric_cost": 141.49,
+        "avg_monthly_gas_cost": 105.2,
+        "avg_monthly_total_utility_cost": 246.7,
+        "gas_data_available": true
+      },
+      {
+        "state": "Massachusetts",
+        "year": 2022,
+        "avg_monthly_electric_cost": 158.08,
+        "avg_monthly_gas_cost": 126.83,
+        "avg_monthly_total_utility_cost": 284.91,
+        "gas_data_available": true
+      },
+      {
+        "state": "Massachusetts",
+        "year": 2023,
+        "avg_monthly_electric_cost": 168.53,
+        "avg_monthly_gas_cost": 123.66,
+        "avg_monthly_total_utility_cost": 292.19,
+        "gas_data_available": true
+      },
+      {
+        "state": "Massachusetts",
+        "year": 2024,
+        "avg_monthly_electric_cost": 173.73,
+        "avg_monthly_gas_cost": 128.8,
+        "avg_monthly_total_utility_cost": 302.52,
+        "gas_data_available": true
+      },
+      {
+        "state": "Michigan",
+        "year": 2020,
+        "avg_monthly_electric_cost": 110.35,
+        "avg_monthly_gas_cost": 65.42,
+        "avg_monthly_total_utility_cost": 175.77,
+        "gas_data_available": true
+      },
+      {
+        "state": "Michigan",
+        "year": 2021,
+        "avg_monthly_electric_cost": 118.15,
+        "avg_monthly_gas_cost": 70.33,
+        "avg_monthly_total_utility_cost": 188.48,
+        "gas_data_available": true
+      },
+      {
+        "state": "Michigan",
+        "year": 2022,
+        "avg_monthly_electric_cost": 116.94,
+        "avg_monthly_gas_cost": 103.46,
+        "avg_monthly_total_utility_cost": 220.4,
+        "gas_data_available": true
+      },
+      {
+        "state": "Michigan",
+        "year": 2023,
+        "avg_monthly_electric_cost": 114.06,
+        "avg_monthly_gas_cost": 82.6,
+        "avg_monthly_total_utility_cost": 196.66,
+        "gas_data_available": true
+      },
+      {
+        "state": "Michigan",
+        "year": 2024,
+        "avg_monthly_electric_cost": 119.83,
+        "avg_monthly_gas_cost": 73.79,
+        "avg_monthly_total_utility_cost": 193.62,
+        "gas_data_available": true
+      },
+      {
+        "state": "Minnesota",
+        "year": 2020,
+        "avg_monthly_electric_cost": 100.11,
+        "avg_monthly_gas_cost": 55.09,
+        "avg_monthly_total_utility_cost": 155.2,
+        "gas_data_available": true
+      },
+      {
+        "state": "Minnesota",
+        "year": 2021,
+        "avg_monthly_electric_cost": 103.01,
+        "avg_monthly_gas_cost": 63.82,
+        "avg_monthly_total_utility_cost": 166.83,
+        "gas_data_available": true
+      },
+      {
+        "state": "Minnesota",
+        "year": 2022,
+        "avg_monthly_electric_cost": 108.66,
+        "avg_monthly_gas_cost": 93.72,
+        "avg_monthly_total_utility_cost": 202.38,
+        "gas_data_available": true
+      },
+      {
+        "state": "Minnesota",
+        "year": 2023,
+        "avg_monthly_electric_cost": 109.51,
+        "avg_monthly_gas_cost": 79.01,
+        "avg_monthly_total_utility_cost": 188.53,
+        "gas_data_available": true
+      },
+      {
+        "state": "Minnesota",
+        "year": 2024,
+        "avg_monthly_electric_cost": 108.68,
+        "avg_monthly_gas_cost": 63.46,
+        "avg_monthly_total_utility_cost": 172.14,
+        "gas_data_available": true
+      },
+      {
+        "state": "Mississippi",
+        "year": 2020,
+        "avg_monthly_electric_cost": 128.32,
+        "avg_monthly_gas_cost": 42.63,
+        "avg_monthly_total_utility_cost": 170.95,
+        "gas_data_available": true
+      },
+      {
+        "state": "Mississippi",
+        "year": 2021,
+        "avg_monthly_electric_cost": 135.76,
+        "avg_monthly_gas_cost": 52.15,
+        "avg_monthly_total_utility_cost": 187.92,
+        "gas_data_available": true
+      },
+      {
+        "state": "Mississippi",
+        "year": 2022,
+        "avg_monthly_electric_cost": 147.92,
+        "avg_monthly_gas_cost": 62.83,
+        "avg_monthly_total_utility_cost": 210.75,
+        "gas_data_available": true
+      },
+      {
+        "state": "Mississippi",
+        "year": 2023,
+        "avg_monthly_electric_cost": 153.96,
+        "avg_monthly_gas_cost": 56.53,
+        "avg_monthly_total_utility_cost": 210.49,
+        "gas_data_available": true
+      },
+      {
+        "state": "Mississippi",
+        "year": 2024,
+        "avg_monthly_electric_cost": 155.5,
+        "avg_monthly_gas_cost": 58.39,
+        "avg_monthly_total_utility_cost": 213.89,
+        "gas_data_available": true
+      },
+      {
+        "state": "Missouri",
+        "year": 2020,
+        "avg_monthly_electric_cost": 114.52,
+        "avg_monthly_gas_cost": 60.22,
+        "avg_monthly_total_utility_cost": 174.74,
+        "gas_data_available": true
+      },
+      {
+        "state": "Missouri",
+        "year": 2021,
+        "avg_monthly_electric_cost": 117.86,
+        "avg_monthly_gas_cost": 63.65,
+        "avg_monthly_total_utility_cost": 181.51,
+        "gas_data_available": true
+      },
+      {
+        "state": "Missouri",
+        "year": 2022,
+        "avg_monthly_electric_cost": 126.26,
+        "avg_monthly_gas_cost": 85.11,
+        "avg_monthly_total_utility_cost": 211.37,
+        "gas_data_available": true
+      },
+      {
+        "state": "Missouri",
+        "year": 2023,
+        "avg_monthly_electric_cost": 125.62,
+        "avg_monthly_gas_cost": 90.54,
+        "avg_monthly_total_utility_cost": 216.16,
+        "gas_data_available": true
+      },
+      {
+        "state": "Missouri",
+        "year": 2024,
+        "avg_monthly_electric_cost": 128.5,
+        "avg_monthly_gas_cost": 82.03,
+        "avg_monthly_total_utility_cost": 210.53,
+        "gas_data_available": true
+      },
+      {
+        "state": "Montana",
+        "year": 2020,
+        "avg_monthly_electric_cost": 92.71,
+        "avg_monthly_gas_cost": 46.19,
+        "avg_monthly_total_utility_cost": 138.91,
+        "gas_data_available": true
+      },
+      {
+        "state": "Montana",
+        "year": 2021,
+        "avg_monthly_electric_cost": 94.32,
+        "avg_monthly_gas_cost": 54.38,
+        "avg_monthly_total_utility_cost": 148.7,
+        "gas_data_available": true
+      },
+      {
+        "state": "Montana",
+        "year": 2022,
+        "avg_monthly_electric_cost": 99.61,
+        "avg_monthly_gas_cost": 69.78,
+        "avg_monthly_total_utility_cost": 169.39,
+        "gas_data_available": true
+      },
+      {
+        "state": "Montana",
+        "year": 2023,
+        "avg_monthly_electric_cost": 107.75,
+        "avg_monthly_gas_cost": 64.11,
+        "avg_monthly_total_utility_cost": 171.86,
+        "gas_data_available": true
+      },
+      {
+        "state": "Montana",
+        "year": 2024,
+        "avg_monthly_electric_cost": 105.46,
+        "avg_monthly_gas_cost": 48.85,
+        "avg_monthly_total_utility_cost": 154.31,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nebraska",
+        "year": 2020,
+        "avg_monthly_electric_cost": 104.89,
+        "avg_monthly_gas_cost": 52.22,
+        "avg_monthly_total_utility_cost": 157.11,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nebraska",
+        "year": 2021,
+        "avg_monthly_electric_cost": 103.54,
+        "avg_monthly_gas_cost": 59.94,
+        "avg_monthly_total_utility_cost": 163.49,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nebraska",
+        "year": 2022,
+        "avg_monthly_electric_cost": 107.49,
+        "avg_monthly_gas_cost": 86.52,
+        "avg_monthly_total_utility_cost": 194.01,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nebraska",
+        "year": 2023,
+        "avg_monthly_electric_cost": 108.31,
+        "avg_monthly_gas_cost": 86.37,
+        "avg_monthly_total_utility_cost": 194.68,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nebraska",
+        "year": 2024,
+        "avg_monthly_electric_cost": 107.4,
+        "avg_monthly_gas_cost": 60.28,
+        "avg_monthly_total_utility_cost": 167.68,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nevada",
+        "year": 2020,
+        "avg_monthly_electric_cost": 110.25,
+        "avg_monthly_gas_cost": 43.84,
+        "avg_monthly_total_utility_cost": 154.09,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nevada",
+        "year": 2021,
+        "avg_monthly_electric_cost": 110.2,
+        "avg_monthly_gas_cost": 39.36,
+        "avg_monthly_total_utility_cost": 149.56,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nevada",
+        "year": 2022,
+        "avg_monthly_electric_cost": 129.5,
+        "avg_monthly_gas_cost": 53.32,
+        "avg_monthly_total_utility_cost": 182.82,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nevada",
+        "year": 2023,
+        "avg_monthly_electric_cost": 145.82,
+        "avg_monthly_gas_cost": 75.21,
+        "avg_monthly_total_utility_cost": 221.03,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nevada",
+        "year": 2024,
+        "avg_monthly_electric_cost": 139.46,
+        "avg_monthly_gas_cost": 71.0,
+        "avg_monthly_total_utility_cost": 210.45,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Hampshire",
+        "year": 2020,
+        "avg_monthly_electric_cost": 119.77,
+        "avg_monthly_gas_cost": 80.73,
+        "avg_monthly_total_utility_cost": 200.5,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Hampshire",
+        "year": 2021,
+        "avg_monthly_electric_cost": 124.93,
+        "avg_monthly_gas_cost": 89.01,
+        "avg_monthly_total_utility_cost": 213.94,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Hampshire",
+        "year": 2022,
+        "avg_monthly_electric_cost": 157.86,
+        "avg_monthly_gas_cost": 111.03,
+        "avg_monthly_total_utility_cost": 268.89,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Hampshire",
+        "year": 2023,
+        "avg_monthly_electric_cost": 162.19,
+        "avg_monthly_gas_cost": 105.84,
+        "avg_monthly_total_utility_cost": 268.04,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Hampshire",
+        "year": 2024,
+        "avg_monthly_electric_cost": 144.84,
+        "avg_monthly_gas_cost": 92.48,
+        "avg_monthly_total_utility_cost": 237.31,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Jersey",
+        "year": 2020,
+        "avg_monthly_electric_cost": 109.37,
+        "avg_monthly_gas_cost": 66.6,
+        "avg_monthly_total_utility_cost": 175.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Jersey",
+        "year": 2021,
+        "avg_monthly_electric_cost": 112.57,
+        "avg_monthly_gas_cost": 70.52,
+        "avg_monthly_total_utility_cost": 183.09,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Jersey",
+        "year": 2022,
+        "avg_monthly_electric_cost": 114.49,
+        "avg_monthly_gas_cost": 87.27,
+        "avg_monthly_total_utility_cost": 201.75,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Jersey",
+        "year": 2023,
+        "avg_monthly_electric_cost": 112.95,
+        "avg_monthly_gas_cost": 82.29,
+        "avg_monthly_total_utility_cost": 195.24,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Jersey",
+        "year": 2024,
+        "avg_monthly_electric_cost": 128.15,
+        "avg_monthly_gas_cost": 87.3,
+        "avg_monthly_total_utility_cost": 215.45,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Mexico",
+        "year": 2020,
+        "avg_monthly_electric_cost": 86.65,
+        "avg_monthly_gas_cost": 35.3,
+        "avg_monthly_total_utility_cost": 121.95,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Mexico",
+        "year": 2021,
+        "avg_monthly_electric_cost": 87.5,
+        "avg_monthly_gas_cost": 47.53,
+        "avg_monthly_total_utility_cost": 135.03,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Mexico",
+        "year": 2022,
+        "avg_monthly_electric_cost": 91.54,
+        "avg_monthly_gas_cost": 62.51,
+        "avg_monthly_total_utility_cost": 154.05,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Mexico",
+        "year": 2023,
+        "avg_monthly_electric_cost": 91.38,
+        "avg_monthly_gas_cost": 58.1,
+        "avg_monthly_total_utility_cost": 149.49,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Mexico",
+        "year": 2024,
+        "avg_monthly_electric_cost": 92.98,
+        "avg_monthly_gas_cost": 43.61,
+        "avg_monthly_total_utility_cost": 136.59,
+        "gas_data_available": true
+      },
+      {
+        "state": "New York",
+        "year": 2020,
+        "avg_monthly_electric_cost": 111.57,
+        "avg_monthly_gas_cost": 114.26,
+        "avg_monthly_total_utility_cost": 225.83,
+        "gas_data_available": true
+      },
+      {
+        "state": "New York",
+        "year": 2021,
+        "avg_monthly_electric_cost": 117.56,
+        "avg_monthly_gas_cost": 122.3,
+        "avg_monthly_total_utility_cost": 239.86,
+        "gas_data_available": true
+      },
+      {
+        "state": "New York",
+        "year": 2022,
+        "avg_monthly_electric_cost": 131.8,
+        "avg_monthly_gas_cost": 142.76,
+        "avg_monthly_total_utility_cost": 274.56,
+        "gas_data_available": true
+      },
+      {
+        "state": "New York",
+        "year": 2023,
+        "avg_monthly_electric_cost": 126.07,
+        "avg_monthly_gas_cost": 134.42,
+        "avg_monthly_total_utility_cost": 260.49,
+        "gas_data_available": true
+      },
+      {
+        "state": "New York",
+        "year": 2024,
+        "avg_monthly_electric_cost": 140.43,
+        "avg_monthly_gas_cost": 126.29,
+        "avg_monthly_total_utility_cost": 266.72,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Carolina",
+        "year": 2020,
+        "avg_monthly_electric_cost": 118.22,
+        "avg_monthly_gas_cost": 53.02,
+        "avg_monthly_total_utility_cost": 171.23,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Carolina",
+        "year": 2021,
+        "avg_monthly_electric_cost": 120.14,
+        "avg_monthly_gas_cost": 62.0,
+        "avg_monthly_total_utility_cost": 182.15,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Carolina",
+        "year": 2022,
+        "avg_monthly_electric_cost": 124.35,
+        "avg_monthly_gas_cost": 74.23,
+        "avg_monthly_total_utility_cost": 198.58,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Carolina",
+        "year": 2023,
+        "avg_monthly_electric_cost": 127.78,
+        "avg_monthly_gas_cost": 64.61,
+        "avg_monthly_total_utility_cost": 192.39,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Carolina",
+        "year": 2024,
+        "avg_monthly_electric_cost": 143.74,
+        "avg_monthly_gas_cost": 65.16,
+        "avg_monthly_total_utility_cost": 208.9,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Dakota",
+        "year": 2020,
+        "avg_monthly_electric_cost": 111.69,
+        "avg_monthly_gas_cost": 45.39,
+        "avg_monthly_total_utility_cost": 157.08,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Dakota",
+        "year": 2021,
+        "avg_monthly_electric_cost": 112.03,
+        "avg_monthly_gas_cost": 55.71,
+        "avg_monthly_total_utility_cost": 167.73,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Dakota",
+        "year": 2022,
+        "avg_monthly_electric_cost": 121.32,
+        "avg_monthly_gas_cost": 82.43,
+        "avg_monthly_total_utility_cost": 203.74,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Dakota",
+        "year": 2023,
+        "avg_monthly_electric_cost": 116.6,
+        "avg_monthly_gas_cost": 67.87,
+        "avg_monthly_total_utility_cost": 184.47,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Dakota",
+        "year": 2024,
+        "avg_monthly_electric_cost": 117.24,
+        "avg_monthly_gas_cost": 54.9,
+        "avg_monthly_total_utility_cost": 172.14,
+        "gas_data_available": true
+      },
+      {
+        "state": "Ohio",
+        "year": 2020,
+        "avg_monthly_electric_cost": 113.23,
+        "avg_monthly_gas_cost": 373.25,
+        "avg_monthly_total_utility_cost": 486.48,
+        "gas_data_available": true
+      },
+      {
+        "state": "Ohio",
+        "year": 2021,
+        "avg_monthly_electric_cost": 119.66,
+        "avg_monthly_gas_cost": 418.7,
+        "avg_monthly_total_utility_cost": 538.36,
+        "gas_data_available": true
+      },
+      {
+        "state": "Ohio",
+        "year": 2022,
+        "avg_monthly_electric_cost": 126.15,
+        "avg_monthly_gas_cost": 506.58,
+        "avg_monthly_total_utility_cost": 632.73,
+        "gas_data_available": true
+      },
+      {
+        "state": "Ohio",
+        "year": 2023,
+        "avg_monthly_electric_cost": 124.47,
+        "avg_monthly_gas_cost": 474.7,
+        "avg_monthly_total_utility_cost": 599.16,
+        "gas_data_available": true
+      },
+      {
+        "state": "Ohio",
+        "year": 2024,
+        "avg_monthly_electric_cost": 131.61,
+        "avg_monthly_gas_cost": 482.11,
+        "avg_monthly_total_utility_cost": 613.72,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oklahoma",
+        "year": 2020,
+        "avg_monthly_electric_cost": 109.35,
+        "avg_monthly_gas_cost": 47.94,
+        "avg_monthly_total_utility_cost": 157.29,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oklahoma",
+        "year": 2021,
+        "avg_monthly_electric_cost": 120.5,
+        "avg_monthly_gas_cost": 56.55,
+        "avg_monthly_total_utility_cost": 177.05,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oklahoma",
+        "year": 2022,
+        "avg_monthly_electric_cost": 145.11,
+        "avg_monthly_gas_cost": 77.04,
+        "avg_monthly_total_utility_cost": 222.15,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oklahoma",
+        "year": 2023,
+        "avg_monthly_electric_cost": 130.17,
+        "avg_monthly_gas_cost": 75.25,
+        "avg_monthly_total_utility_cost": 205.42,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oklahoma",
+        "year": 2024,
+        "avg_monthly_electric_cost": 133.29,
+        "avg_monthly_gas_cost": 63.0,
+        "avg_monthly_total_utility_cost": 196.29,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oregon",
+        "year": 2020,
+        "avg_monthly_electric_cost": 102.04,
+        "avg_monthly_gas_cost": 53.24,
+        "avg_monthly_total_utility_cost": 155.28,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oregon",
+        "year": 2021,
+        "avg_monthly_electric_cost": 106.21,
+        "avg_monthly_gas_cost": 57.44,
+        "avg_monthly_total_utility_cost": 163.64,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oregon",
+        "year": 2022,
+        "avg_monthly_electric_cost": 107.65,
+        "avg_monthly_gas_cost": 65.83,
+        "avg_monthly_total_utility_cost": 173.48,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oregon",
+        "year": 2023,
+        "avg_monthly_electric_cost": 117.57,
+        "avg_monthly_gas_cost": 76.5,
+        "avg_monthly_total_utility_cost": 194.07,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oregon",
+        "year": 2024,
+        "avg_monthly_electric_cost": 129.95,
+        "avg_monthly_gas_cost": 72.59,
+        "avg_monthly_total_utility_cost": 202.54,
+        "gas_data_available": true
+      },
+      {
+        "state": "Pennsylvania",
+        "year": 2020,
+        "avg_monthly_electric_cost": 114.73,
+        "avg_monthly_gas_cost": 85.65,
+        "avg_monthly_total_utility_cost": 200.37,
+        "gas_data_available": true
+      },
+      {
+        "state": "Pennsylvania",
+        "year": 2021,
+        "avg_monthly_electric_cost": 117.4,
+        "avg_monthly_gas_cost": 89.79,
+        "avg_monthly_total_utility_cost": 207.19,
+        "gas_data_available": true
+      },
+      {
+        "state": "Pennsylvania",
+        "year": 2022,
+        "avg_monthly_electric_cost": 136.49,
+        "avg_monthly_gas_cost": 115.53,
+        "avg_monthly_total_utility_cost": 252.02,
+        "gas_data_available": true
+      },
+      {
+        "state": "Pennsylvania",
+        "year": 2023,
+        "avg_monthly_electric_cost": 143.23,
+        "avg_monthly_gas_cost": 104.28,
+        "avg_monthly_total_utility_cost": 247.51,
+        "gas_data_available": true
+      },
+      {
+        "state": "Pennsylvania",
+        "year": 2024,
+        "avg_monthly_electric_cost": 145.24,
+        "avg_monthly_gas_cost": 93.49,
+        "avg_monthly_total_utility_cost": 238.73,
+        "gas_data_available": true
+      },
+      {
+        "state": "Rhode Island",
+        "year": 2020,
+        "avg_monthly_electric_cost": 131.16,
+        "avg_monthly_gas_cost": 92.72,
+        "avg_monthly_total_utility_cost": 223.88,
+        "gas_data_available": true
+      },
+      {
+        "state": "Rhode Island",
+        "year": 2021,
+        "avg_monthly_electric_cost": 130.88,
+        "avg_monthly_gas_cost": 101.28,
+        "avg_monthly_total_utility_cost": 232.16,
+        "gas_data_available": true
+      },
+      {
+        "state": "Rhode Island",
+        "year": 2022,
+        "avg_monthly_electric_cost": 136.66,
+        "avg_monthly_gas_cost": 111.49,
+        "avg_monthly_total_utility_cost": 248.15,
+        "gas_data_available": true
+      },
+      {
+        "state": "Rhode Island",
+        "year": 2023,
+        "avg_monthly_electric_cost": 141.42,
+        "avg_monthly_gas_cost": 118.17,
+        "avg_monthly_total_utility_cost": 259.59,
+        "gas_data_available": true
+      },
+      {
+        "state": "Rhode Island",
+        "year": 2024,
+        "avg_monthly_electric_cost": 154.75,
+        "avg_monthly_gas_cost": 125.72,
+        "avg_monthly_total_utility_cost": 280.47,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Carolina",
+        "year": 2020,
+        "avg_monthly_electric_cost": 138.32,
+        "avg_monthly_gas_cost": 44.53,
+        "avg_monthly_total_utility_cost": 182.85,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Carolina",
+        "year": 2021,
+        "avg_monthly_electric_cost": 138.84,
+        "avg_monthly_gas_cost": 52.14,
+        "avg_monthly_total_utility_cost": 190.98,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Carolina",
+        "year": 2022,
+        "avg_monthly_electric_cost": 148.3,
+        "avg_monthly_gas_cost": 55.74,
+        "avg_monthly_total_utility_cost": 204.05,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Carolina",
+        "year": 2023,
+        "avg_monthly_electric_cost": 140.1,
+        "avg_monthly_gas_cost": 54.97,
+        "avg_monthly_total_utility_cost": 195.07,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Carolina",
+        "year": 2024,
+        "avg_monthly_electric_cost": 149.69,
+        "avg_monthly_gas_cost": 56.17,
+        "avg_monthly_total_utility_cost": 205.87,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Dakota",
+        "year": 2020,
+        "avg_monthly_electric_cost": 114.15,
+        "avg_monthly_gas_cost": 39.57,
+        "avg_monthly_total_utility_cost": 153.72,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Dakota",
+        "year": 2021,
+        "avg_monthly_electric_cost": 117.71,
+        "avg_monthly_gas_cost": 50.29,
+        "avg_monthly_total_utility_cost": 168.0,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Dakota",
+        "year": 2022,
+        "avg_monthly_electric_cost": 120.5,
+        "avg_monthly_gas_cost": 65.09,
+        "avg_monthly_total_utility_cost": 185.6,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Dakota",
+        "year": 2023,
+        "avg_monthly_electric_cost": 119.11,
+        "avg_monthly_gas_cost": 55.77,
+        "avg_monthly_total_utility_cost": 174.88,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Dakota",
+        "year": 2024,
+        "avg_monthly_electric_cost": 119.28,
+        "avg_monthly_gas_cost": 44.85,
+        "avg_monthly_total_utility_cost": 164.13,
+        "gas_data_available": true
+      },
+      {
+        "state": "Tennessee",
+        "year": 2020,
+        "avg_monthly_electric_cost": 125.7,
+        "avg_monthly_gas_cost": 41.06,
+        "avg_monthly_total_utility_cost": 166.76,
+        "gas_data_available": true
+      },
+      {
+        "state": "Tennessee",
+        "year": 2021,
+        "avg_monthly_electric_cost": 130.98,
+        "avg_monthly_gas_cost": 50.7,
+        "avg_monthly_total_utility_cost": 181.68,
+        "gas_data_available": true
+      },
+      {
+        "state": "Tennessee",
+        "year": 2022,
+        "avg_monthly_electric_cost": 145.49,
+        "avg_monthly_gas_cost": 61.8,
+        "avg_monthly_total_utility_cost": 207.29,
+        "gas_data_available": true
+      },
+      {
+        "state": "Tennessee",
+        "year": 2023,
+        "avg_monthly_electric_cost": 135.22,
+        "avg_monthly_gas_cost": 49.81,
+        "avg_monthly_total_utility_cost": 185.03,
+        "gas_data_available": true
+      },
+      {
+        "state": "Tennessee",
+        "year": 2024,
+        "avg_monthly_electric_cost": 143.32,
+        "avg_monthly_gas_cost": 47.48,
+        "avg_monthly_total_utility_cost": 190.8,
+        "gas_data_available": true
+      },
+      {
+        "state": "Texas",
+        "year": 2020,
+        "avg_monthly_electric_cost": 132.77,
+        "avg_monthly_gas_cost": 40.51,
+        "avg_monthly_total_utility_cost": 173.28,
+        "gas_data_available": true
+      },
+      {
+        "state": "Texas",
+        "year": 2021,
+        "avg_monthly_electric_cost": 132.57,
+        "avg_monthly_gas_cost": 48.33,
+        "avg_monthly_total_utility_cost": 180.9,
+        "gas_data_available": true
+      },
+      {
+        "state": "Texas",
+        "year": 2022,
+        "avg_monthly_electric_cost": 162.54,
+        "avg_monthly_gas_cost": 62.8,
+        "avg_monthly_total_utility_cost": 225.34,
+        "gas_data_available": true
+      },
+      {
+        "state": "Texas",
+        "year": 2023,
+        "avg_monthly_electric_cost": 166.21,
+        "avg_monthly_gas_cost": 55.76,
+        "avg_monthly_total_utility_cost": 221.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "Texas",
+        "year": 2024,
+        "avg_monthly_electric_cost": 164.12,
+        "avg_monthly_gas_cost": 55.63,
+        "avg_monthly_total_utility_cost": 219.75,
+        "gas_data_available": true
+      },
+      {
+        "state": "Utah",
+        "year": 2020,
+        "avg_monthly_electric_cost": 80.17,
+        "avg_monthly_gas_cost": 50.26,
+        "avg_monthly_total_utility_cost": 130.43,
+        "gas_data_available": true
+      },
+      {
+        "state": "Utah",
+        "year": 2021,
+        "avg_monthly_electric_cost": 80.87,
+        "avg_monthly_gas_cost": 52.13,
+        "avg_monthly_total_utility_cost": 133.0,
+        "gas_data_available": true
+      },
+      {
+        "state": "Utah",
+        "year": 2022,
+        "avg_monthly_electric_cost": 84.83,
+        "avg_monthly_gas_cost": 65.12,
+        "avg_monthly_total_utility_cost": 149.96,
+        "gas_data_available": true
+      },
+      {
+        "state": "Utah",
+        "year": 2023,
+        "avg_monthly_electric_cost": 84.47,
+        "avg_monthly_gas_cost": 85.27,
+        "avg_monthly_total_utility_cost": 169.74,
+        "gas_data_available": true
+      },
+      {
+        "state": "Utah",
+        "year": 2024,
+        "avg_monthly_electric_cost": 94.58,
+        "avg_monthly_gas_cost": 73.63,
+        "avg_monthly_total_utility_cost": 168.21,
+        "gas_data_available": true
+      },
+      {
+        "state": "Vermont",
+        "year": 2020,
+        "avg_monthly_electric_cost": 113.16,
+        "avg_monthly_gas_cost": 87.81,
+        "avg_monthly_total_utility_cost": 200.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "Vermont",
+        "year": 2021,
+        "avg_monthly_electric_cost": 111.3,
+        "avg_monthly_gas_cost": 90.34,
+        "avg_monthly_total_utility_cost": 201.64,
+        "gas_data_available": true
+      },
+      {
+        "state": "Vermont",
+        "year": 2022,
+        "avg_monthly_electric_cost": 115.72,
+        "avg_monthly_gas_cost": 103.71,
+        "avg_monthly_total_utility_cost": 219.43,
+        "gas_data_available": true
+      },
+      {
+        "state": "Vermont",
+        "year": 2023,
+        "avg_monthly_electric_cost": 119.67,
+        "avg_monthly_gas_cost": 105.55,
+        "avg_monthly_total_utility_cost": 225.22,
+        "gas_data_available": true
+      },
+      {
+        "state": "Vermont",
+        "year": 2024,
+        "avg_monthly_electric_cost": 128.14,
+        "avg_monthly_gas_cost": 103.61,
+        "avg_monthly_total_utility_cost": 231.74,
+        "gas_data_available": true
+      },
+      {
+        "state": "Virginia",
+        "year": 2020,
+        "avg_monthly_electric_cost": 131.75,
+        "avg_monthly_gas_cost": 67.27,
+        "avg_monthly_total_utility_cost": 199.02,
+        "gas_data_available": true
+      },
+      {
+        "state": "Virginia",
+        "year": 2021,
+        "avg_monthly_electric_cost": 130.94,
+        "avg_monthly_gas_cost": 77.44,
+        "avg_monthly_total_utility_cost": 208.38,
+        "gas_data_available": true
+      },
+      {
+        "state": "Virginia",
+        "year": 2022,
+        "avg_monthly_electric_cost": 145.02,
+        "avg_monthly_gas_cost": 93.33,
+        "avg_monthly_total_utility_cost": 238.35,
+        "gas_data_available": true
+      },
+      {
+        "state": "Virginia",
+        "year": 2023,
+        "avg_monthly_electric_cost": 141.61,
+        "avg_monthly_gas_cost": 85.31,
+        "avg_monthly_total_utility_cost": 226.92,
+        "gas_data_available": true
+      },
+      {
+        "state": "Virginia",
+        "year": 2024,
+        "avg_monthly_electric_cost": 148.73,
+        "avg_monthly_gas_cost": 78.22,
+        "avg_monthly_total_utility_cost": 226.95,
+        "gas_data_available": true
+      },
+      {
+        "state": "Washington",
+        "year": 2020,
+        "avg_monthly_electric_cost": 95.44,
+        "avg_monthly_gas_cost": 64.65,
+        "avg_monthly_total_utility_cost": 160.09,
+        "gas_data_available": true
+      },
+      {
+        "state": "Washington",
+        "year": 2021,
+        "avg_monthly_electric_cost": 99.16,
+        "avg_monthly_gas_cost": 69.29,
+        "avg_monthly_total_utility_cost": 168.45,
+        "gas_data_available": true
+      },
+      {
+        "state": "Washington",
+        "year": 2022,
+        "avg_monthly_electric_cost": 103.53,
+        "avg_monthly_gas_cost": 79.0,
+        "avg_monthly_total_utility_cost": 182.53,
+        "gas_data_available": true
+      },
+      {
+        "state": "Washington",
+        "year": 2023,
+        "avg_monthly_electric_cost": 107.13,
+        "avg_monthly_gas_cost": 87.93,
+        "avg_monthly_total_utility_cost": 195.06,
+        "gas_data_available": true
+      },
+      {
+        "state": "Washington",
+        "year": 2024,
+        "avg_monthly_electric_cost": 113.5,
+        "avg_monthly_gas_cost": 69.59,
+        "avg_monthly_total_utility_cost": 183.09,
+        "gas_data_available": true
+      },
+      {
+        "state": "West Virginia",
+        "year": 2020,
+        "avg_monthly_electric_cost": 124.14,
+        "avg_monthly_gas_cost": 57.25,
+        "avg_monthly_total_utility_cost": 181.38,
+        "gas_data_available": true
+      },
+      {
+        "state": "West Virginia",
+        "year": 2021,
+        "avg_monthly_electric_cost": 129.66,
+        "avg_monthly_gas_cost": 61.74,
+        "avg_monthly_total_utility_cost": 191.39,
+        "gas_data_available": true
+      },
+      {
+        "state": "West Virginia",
+        "year": 2022,
+        "avg_monthly_electric_cost": 142.28,
+        "avg_monthly_gas_cost": 74.92,
+        "avg_monthly_total_utility_cost": 217.2,
+        "gas_data_available": true
+      },
+      {
+        "state": "West Virginia",
+        "year": 2023,
+        "avg_monthly_electric_cost": 138.77,
+        "avg_monthly_gas_cost": 83.24,
+        "avg_monthly_total_utility_cost": 222.01,
+        "gas_data_available": true
+      },
+      {
+        "state": "West Virginia",
+        "year": 2024,
+        "avg_monthly_electric_cost": 155.1,
+        "avg_monthly_gas_cost": 79.2,
+        "avg_monthly_total_utility_cost": 234.3,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wisconsin",
+        "year": 2020,
+        "avg_monthly_electric_cost": 98.05,
+        "avg_monthly_gas_cost": 47.88,
+        "avg_monthly_total_utility_cost": 145.93,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wisconsin",
+        "year": 2021,
+        "avg_monthly_electric_cost": 98.92,
+        "avg_monthly_gas_cost": 58.92,
+        "avg_monthly_total_utility_cost": 157.84,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wisconsin",
+        "year": 2022,
+        "avg_monthly_electric_cost": 105.68,
+        "avg_monthly_gas_cost": 76.64,
+        "avg_monthly_total_utility_cost": 182.32,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wisconsin",
+        "year": 2023,
+        "avg_monthly_electric_cost": 110.07,
+        "avg_monthly_gas_cost": 63.52,
+        "avg_monthly_total_utility_cost": 173.58,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wisconsin",
+        "year": 2024,
+        "avg_monthly_electric_cost": 109.87,
+        "avg_monthly_gas_cost": 55.1,
+        "avg_monthly_total_utility_cost": 164.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wyoming",
+        "year": 2020,
+        "avg_monthly_electric_cost": 95.65,
+        "avg_monthly_gas_cost": 82.24,
+        "avg_monthly_total_utility_cost": 177.89,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wyoming",
+        "year": 2021,
+        "avg_monthly_electric_cost": 96.06,
+        "avg_monthly_gas_cost": 92.69,
+        "avg_monthly_total_utility_cost": 188.75,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wyoming",
+        "year": 2022,
+        "avg_monthly_electric_cost": 97.92,
+        "avg_monthly_gas_cost": 129.84,
+        "avg_monthly_total_utility_cost": 227.76,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wyoming",
+        "year": 2023,
+        "avg_monthly_electric_cost": 98.61,
+        "avg_monthly_gas_cost": 133.76,
+        "avg_monthly_total_utility_cost": 232.38,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wyoming",
+        "year": 2024,
+        "avg_monthly_electric_cost": 107.92,
+        "avg_monthly_gas_cost": 108.01,
+        "avg_monthly_total_utility_cost": 215.94,
+        "gas_data_available": true
+      }
+    ],
+    "cost_changes_2020_to_2024": [
+      {
+        "state": "Alabama",
+        "electric_pct_change": 20.59,
+        "electric_dollar_change": 29.76,
+        "gas_pct_change": 18.44,
+        "gas_dollar_change": 8.92,
+        "total_pct_change": 20.05,
+        "total_dollar_change": 38.68,
+        "gas_data_available": true
+      },
+      {
+        "state": "Alaska",
+        "electric_pct_change": 15.22,
+        "electric_dollar_change": 18.5,
+        "gas_pct_change": 1.54,
+        "gas_dollar_change": 2.2,
+        "total_pct_change": 7.83,
+        "total_dollar_change": 20.7,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arizona",
+        "electric_pct_change": 17.26,
+        "electric_dollar_change": 23.66,
+        "gas_pct_change": 45.5,
+        "gas_dollar_change": 15.79,
+        "total_pct_change": 22.96,
+        "total_dollar_change": 39.45,
+        "gas_data_available": true
+      },
+      {
+        "state": "Arkansas",
+        "electric_pct_change": 17.08,
+        "electric_dollar_change": 18.82,
+        "gas_pct_change": 18.34,
+        "gas_dollar_change": 10.07,
+        "total_pct_change": 17.5,
+        "total_dollar_change": 28.89,
+        "gas_data_available": true
+      },
+      {
+        "state": "California",
+        "electric_pct_change": 38.5,
+        "electric_dollar_change": 45.65,
+        "gas_pct_change": 20.63,
+        "gas_dollar_change": 10.37,
+        "total_pct_change": 33.18,
+        "total_dollar_change": 56.01,
+        "gas_data_available": true
+      },
+      {
+        "state": "Colorado",
+        "electric_pct_change": 14.87,
+        "electric_dollar_change": 12.98,
+        "gas_pct_change": 31.24,
+        "gas_dollar_change": 13.95,
+        "total_pct_change": 20.4,
+        "total_dollar_change": 26.92,
+        "gas_data_available": true
+      },
+      {
+        "state": "Connecticut",
+        "electric_pct_change": 21.33,
+        "electric_dollar_change": 35.3,
+        "gas_pct_change": 8.23,
+        "gas_dollar_change": 8.52,
+        "total_pct_change": 16.29,
+        "total_dollar_change": 43.82,
+        "gas_data_available": true
+      },
+      {
+        "state": "Delaware",
+        "electric_pct_change": 27.72,
+        "electric_dollar_change": 32.75,
+        "gas_pct_change": 5.9,
+        "gas_dollar_change": 3.73,
+        "total_pct_change": 20.11,
+        "total_dollar_change": 36.47,
+        "gas_data_available": true
+      },
+      {
+        "state": "District of Columbia",
+        "electric_pct_change": 27.46,
+        "electric_dollar_change": 22.61,
+        "gas_pct_change": 27.95,
+        "gas_dollar_change": 22.54,
+        "total_pct_change": 27.71,
+        "total_dollar_change": 45.16,
+        "gas_data_available": true
+      },
+      {
+        "state": "Florida",
+        "electric_pct_change": 21.44,
+        "electric_dollar_change": 27.58,
+        "gas_pct_change": 19.7,
+        "gas_dollar_change": 7.65,
+        "total_pct_change": 21.04,
+        "total_dollar_change": 35.24,
+        "gas_data_available": true
+      },
+      {
+        "state": "Georgia",
+        "electric_pct_change": 16.62,
+        "electric_dollar_change": 21.59,
+        "gas_pct_change": 23.71,
+        "gas_dollar_change": 111.04,
+        "total_pct_change": 22.17,
+        "total_dollar_change": 132.63,
+        "gas_data_available": true
+      },
+      {
+        "state": "Hawaii",
+        "electric_pct_change": 30.41,
+        "electric_dollar_change": 49.46,
+        "gas_pct_change": 33.98,
+        "gas_dollar_change": 22.23,
+        "total_pct_change": 31.42,
+        "total_dollar_change": 71.68,
+        "gas_data_available": true
+      },
+      {
+        "state": "Idaho",
+        "electric_pct_change": 14.83,
+        "electric_dollar_change": 14.0,
+        "gas_pct_change": 23.19,
+        "gas_dollar_change": 9.31,
+        "total_pct_change": 17.32,
+        "total_dollar_change": 23.31,
+        "gas_data_available": true
+      },
+      {
+        "state": "Illinois",
+        "electric_pct_change": 16.72,
+        "electric_dollar_change": 15.32,
+        "gas_pct_change": 17.98,
+        "gas_dollar_change": 12.77,
+        "total_pct_change": 17.27,
+        "total_dollar_change": 28.08,
+        "gas_data_available": true
+      },
+      {
+        "state": "Indiana",
+        "electric_pct_change": 10.11,
+        "electric_dollar_change": 12.14,
+        "gas_pct_change": 5.32,
+        "gas_dollar_change": 2.94,
+        "total_pct_change": 8.6,
+        "total_dollar_change": 15.08,
+        "gas_data_available": true
+      },
+      {
+        "state": "Iowa",
+        "electric_pct_change": 2.99,
+        "electric_dollar_change": 3.15,
+        "gas_pct_change": 12.6,
+        "gas_dollar_change": 5.54,
+        "total_pct_change": 5.82,
+        "total_dollar_change": 8.69,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kansas",
+        "electric_pct_change": 9.18,
+        "electric_dollar_change": 10.35,
+        "gas_pct_change": 19.36,
+        "gas_dollar_change": 10.69,
+        "total_pct_change": 12.53,
+        "total_dollar_change": 21.04,
+        "gas_data_available": true
+      },
+      {
+        "state": "Kentucky",
+        "electric_pct_change": 14.86,
+        "electric_dollar_change": 17.35,
+        "gas_pct_change": 8.49,
+        "gas_dollar_change": 4.72,
+        "total_pct_change": 12.81,
+        "total_dollar_change": 22.08,
+        "gas_data_available": true
+      },
+      {
+        "state": "Louisiana",
+        "electric_pct_change": 21.54,
+        "electric_dollar_change": 25.01,
+        "gas_pct_change": 29.51,
+        "gas_dollar_change": 10.63,
+        "total_pct_change": 23.42,
+        "total_dollar_change": 35.64,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maine",
+        "electric_pct_change": 39.96,
+        "electric_dollar_change": 38.24,
+        "gas_pct_change": 11.46,
+        "gas_dollar_change": 11.18,
+        "total_pct_change": 25.59,
+        "total_dollar_change": 49.44,
+        "gas_data_available": true
+      },
+      {
+        "state": "Maryland",
+        "electric_pct_change": 31.75,
+        "electric_dollar_change": 39.9,
+        "gas_pct_change": 6.95,
+        "gas_dollar_change": 6.0,
+        "total_pct_change": 21.66,
+        "total_dollar_change": 45.9,
+        "gas_data_available": true
+      },
+      {
+        "state": "Massachusetts",
+        "electric_pct_change": 26.61,
+        "electric_dollar_change": 36.51,
+        "gas_pct_change": 60.32,
+        "gas_dollar_change": 48.46,
+        "total_pct_change": 39.06,
+        "total_dollar_change": 84.97,
+        "gas_data_available": true
+      },
+      {
+        "state": "Michigan",
+        "electric_pct_change": 8.59,
+        "electric_dollar_change": 9.48,
+        "gas_pct_change": 12.79,
+        "gas_dollar_change": 8.37,
+        "total_pct_change": 10.16,
+        "total_dollar_change": 17.85,
+        "gas_data_available": true
+      },
+      {
+        "state": "Minnesota",
+        "electric_pct_change": 8.56,
+        "electric_dollar_change": 8.57,
+        "gas_pct_change": 15.19,
+        "gas_dollar_change": 8.37,
+        "total_pct_change": 10.91,
+        "total_dollar_change": 16.94,
+        "gas_data_available": true
+      },
+      {
+        "state": "Mississippi",
+        "electric_pct_change": 21.18,
+        "electric_dollar_change": 27.18,
+        "gas_pct_change": 36.97,
+        "gas_dollar_change": 15.76,
+        "total_pct_change": 25.12,
+        "total_dollar_change": 42.94,
+        "gas_data_available": true
+      },
+      {
+        "state": "Missouri",
+        "electric_pct_change": 12.21,
+        "electric_dollar_change": 13.98,
+        "gas_pct_change": 36.22,
+        "gas_dollar_change": 21.81,
+        "total_pct_change": 20.48,
+        "total_dollar_change": 35.79,
+        "gas_data_available": true
+      },
+      {
+        "state": "Montana",
+        "electric_pct_change": 13.75,
+        "electric_dollar_change": 12.75,
+        "gas_pct_change": 5.76,
+        "gas_dollar_change": 2.66,
+        "total_pct_change": 11.09,
+        "total_dollar_change": 15.4,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nebraska",
+        "electric_pct_change": 2.39,
+        "electric_dollar_change": 2.51,
+        "gas_pct_change": 15.43,
+        "gas_dollar_change": 8.06,
+        "total_pct_change": 6.73,
+        "total_dollar_change": 10.57,
+        "gas_data_available": true
+      },
+      {
+        "state": "Nevada",
+        "electric_pct_change": 26.49,
+        "electric_dollar_change": 29.21,
+        "gas_pct_change": 61.95,
+        "gas_dollar_change": 27.16,
+        "total_pct_change": 36.58,
+        "total_dollar_change": 56.36,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Hampshire",
+        "electric_pct_change": 20.93,
+        "electric_dollar_change": 25.07,
+        "gas_pct_change": 14.55,
+        "gas_dollar_change": 11.75,
+        "total_pct_change": 18.36,
+        "total_dollar_change": 36.81,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Jersey",
+        "electric_pct_change": 17.17,
+        "electric_dollar_change": 18.78,
+        "gas_pct_change": 31.08,
+        "gas_dollar_change": 20.7,
+        "total_pct_change": 22.44,
+        "total_dollar_change": 39.48,
+        "gas_data_available": true
+      },
+      {
+        "state": "New Mexico",
+        "electric_pct_change": 7.31,
+        "electric_dollar_change": 6.33,
+        "gas_pct_change": 23.54,
+        "gas_dollar_change": 8.31,
+        "total_pct_change": 12.0,
+        "total_dollar_change": 14.64,
+        "gas_data_available": true
+      },
+      {
+        "state": "New York",
+        "electric_pct_change": 25.87,
+        "electric_dollar_change": 28.86,
+        "gas_pct_change": 10.53,
+        "gas_dollar_change": 12.03,
+        "total_pct_change": 18.11,
+        "total_dollar_change": 40.89,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Carolina",
+        "electric_pct_change": 21.59,
+        "electric_dollar_change": 25.52,
+        "gas_pct_change": 22.9,
+        "gas_dollar_change": 12.14,
+        "total_pct_change": 22.0,
+        "total_dollar_change": 37.67,
+        "gas_data_available": true
+      },
+      {
+        "state": "North Dakota",
+        "electric_pct_change": 4.97,
+        "electric_dollar_change": 5.55,
+        "gas_pct_change": 20.95,
+        "gas_dollar_change": 9.51,
+        "total_pct_change": 9.59,
+        "total_dollar_change": 15.06,
+        "gas_data_available": true
+      },
+      {
+        "state": "Ohio",
+        "electric_pct_change": 16.23,
+        "electric_dollar_change": 18.38,
+        "gas_pct_change": 29.17,
+        "gas_dollar_change": 108.86,
+        "total_pct_change": 26.16,
+        "total_dollar_change": 127.24,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oklahoma",
+        "electric_pct_change": 21.89,
+        "electric_dollar_change": 23.94,
+        "gas_pct_change": 31.41,
+        "gas_dollar_change": 15.06,
+        "total_pct_change": 24.79,
+        "total_dollar_change": 39.0,
+        "gas_data_available": true
+      },
+      {
+        "state": "Oregon",
+        "electric_pct_change": 27.35,
+        "electric_dollar_change": 27.91,
+        "gas_pct_change": 36.34,
+        "gas_dollar_change": 19.35,
+        "total_pct_change": 30.44,
+        "total_dollar_change": 47.26,
+        "gas_data_available": true
+      },
+      {
+        "state": "Pennsylvania",
+        "electric_pct_change": 26.59,
+        "electric_dollar_change": 30.51,
+        "gas_pct_change": 9.15,
+        "gas_dollar_change": 7.84,
+        "total_pct_change": 19.14,
+        "total_dollar_change": 38.36,
+        "gas_data_available": true
+      },
+      {
+        "state": "Rhode Island",
+        "electric_pct_change": 17.99,
+        "electric_dollar_change": 23.59,
+        "gas_pct_change": 35.59,
+        "gas_dollar_change": 33.0,
+        "total_pct_change": 25.28,
+        "total_dollar_change": 56.59,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Carolina",
+        "electric_pct_change": 8.22,
+        "electric_dollar_change": 11.37,
+        "gas_pct_change": 26.14,
+        "gas_dollar_change": 11.64,
+        "total_pct_change": 12.59,
+        "total_dollar_change": 23.02,
+        "gas_data_available": true
+      },
+      {
+        "state": "South Dakota",
+        "electric_pct_change": 4.49,
+        "electric_dollar_change": 5.13,
+        "gas_pct_change": 13.34,
+        "gas_dollar_change": 5.28,
+        "total_pct_change": 6.77,
+        "total_dollar_change": 10.41,
+        "gas_data_available": true
+      },
+      {
+        "state": "Tennessee",
+        "electric_pct_change": 14.02,
+        "electric_dollar_change": 17.62,
+        "gas_pct_change": 15.64,
+        "gas_dollar_change": 6.42,
+        "total_pct_change": 14.42,
+        "total_dollar_change": 24.04,
+        "gas_data_available": true
+      },
+      {
+        "state": "Texas",
+        "electric_pct_change": 23.61,
+        "electric_dollar_change": 31.35,
+        "gas_pct_change": 37.32,
+        "gas_dollar_change": 15.12,
+        "total_pct_change": 26.82,
+        "total_dollar_change": 46.47,
+        "gas_data_available": true
+      },
+      {
+        "state": "Utah",
+        "electric_pct_change": 17.97,
+        "electric_dollar_change": 14.41,
+        "gas_pct_change": 46.5,
+        "gas_dollar_change": 23.37,
+        "total_pct_change": 28.97,
+        "total_dollar_change": 37.78,
+        "gas_data_available": true
+      },
+      {
+        "state": "Vermont",
+        "electric_pct_change": 13.24,
+        "electric_dollar_change": 14.98,
+        "gas_pct_change": 17.99,
+        "gas_dollar_change": 15.8,
+        "total_pct_change": 15.31,
+        "total_dollar_change": 30.77,
+        "gas_data_available": true
+      },
+      {
+        "state": "Virginia",
+        "electric_pct_change": 12.89,
+        "electric_dollar_change": 16.98,
+        "gas_pct_change": 16.28,
+        "gas_dollar_change": 10.95,
+        "total_pct_change": 14.03,
+        "total_dollar_change": 27.93,
+        "gas_data_available": true
+      },
+      {
+        "state": "Washington",
+        "electric_pct_change": 18.92,
+        "electric_dollar_change": 18.06,
+        "gas_pct_change": 7.64,
+        "gas_dollar_change": 4.94,
+        "total_pct_change": 14.37,
+        "total_dollar_change": 23.0,
+        "gas_data_available": true
+      },
+      {
+        "state": "West Virginia",
+        "electric_pct_change": 24.94,
+        "electric_dollar_change": 30.96,
+        "gas_pct_change": 38.34,
+        "gas_dollar_change": 21.95,
+        "total_pct_change": 29.18,
+        "total_dollar_change": 52.92,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wisconsin",
+        "electric_pct_change": 12.06,
+        "electric_dollar_change": 11.82,
+        "gas_pct_change": 15.08,
+        "gas_dollar_change": 7.22,
+        "total_pct_change": 13.05,
+        "total_dollar_change": 19.04,
+        "gas_data_available": true
+      },
+      {
+        "state": "Wyoming",
+        "electric_pct_change": 12.83,
+        "electric_dollar_change": 12.27,
+        "gas_pct_change": 31.34,
+        "gas_dollar_change": 25.77,
+        "total_pct_change": 21.39,
+        "total_dollar_change": 38.05,
+        "gas_data_available": true
+      }
+    ]
   }
 }

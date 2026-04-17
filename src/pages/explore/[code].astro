@@ -14,6 +14,8 @@ import {
   getMultiplierVsNational,
   getOneInX,
   getYear,
+  getStateCost2024,
+  getCostChange,
   STATE_CODES,
 } from '../../lib/shutoffs';
 import { formatMultiplier } from '../../lib/format';
@@ -53,6 +55,17 @@ const ordinalSuffix = (n: number) => {
 
 const headline = `In ${stateName}, utilities disconnected electricity at ${Math.round(stateAnnual.electric_shutoffs_total).toLocaleString()} homes last year.`;
 const subhead = `That's about 1 in every ${oneInX} customers — the ${ordinalSuffix(electricRank)} highest rate in the country, and roughly ${formatMultiplier(electricMultiplier)} the national average.`;
+
+const cost = getStateCost2024(code);
+const costChange = getCostChange(code);
+const bill = cost?.avg_monthly_total_utility_cost ?? null;
+const totalPct = costChange?.total_pct_change ?? null;
+
+const costSubhead = bill == null
+  ? null
+  : totalPct == null
+    ? `The average household here now pays $${Math.round(bill)} per month for electricity and gas.`
+    : `The average household here now pays $${Math.round(bill)} per month for electricity and gas — ${totalPct >= 0 ? 'up' : 'down'} ${Math.round(Math.abs(totalPct))}% since 2020.`;
 ---
 
 <BaseLayout title={`${stateName} utility shutoffs, ${year} — EEP`}>
@@ -65,16 +78,22 @@ const subhead = `That's about 1 in every ${oneInX} customers — the ${ordinalSu
     <h1 class="text-[19px] md:text-[26px] font-medium leading-snug mb-3 max-w-2xl">
       {headline}
     </h1>
-    <p class="text-[15px] text-[--color-text-secondary] leading-relaxed mb-8 max-w-2xl">
+    <p class={`text-[15px] text-[--color-text-secondary] leading-relaxed ${costSubhead ? '' : 'mb-8'} max-w-2xl`}>
       {subhead}
     </p>
+    {costSubhead && (
+      <p class="text-[12px] md:text-[14px] text-[--color-text-tertiary] leading-relaxed mb-8 max-w-2xl">
+        {costSubhead}
+      </p>
+    )}
 
     <KpiGrid
       stateAnnual={stateAnnual}
       stateCode={code}
       electricRank={electricRank}
-      electricMultiplier={electricMultiplier}
       totalStates={totalStates}
+      costBill2024={bill}
+      costTotalPctChange={totalPct}
       client:load
     />
 

@@ -1,4 +1,4 @@
-import type { StateAnnual, ShutoffRecord, NationalMonthly } from '../data/shutoffs-types';
+import type { StateAnnual, ShutoffRecord, NationalMonthly, CostAnnual, CostChange } from '../data/shutoffs-types';
 import data from '../data/shutoffs.json';
 
 // State code ↔ full name mapping
@@ -117,6 +117,20 @@ export function getAllStateCodes(): string[] {
 
 export function getYear(): number {
   return data.year;
+}
+
+export function getStateCost2024(code: string): CostAnnual | null {
+  const name = STATE_CODES[code];
+  const row = data.cost_metrics.state_annual_costs.find(
+    (r) => r.state === name && r.year === 2024
+  );
+  return (row as CostAnnual) ?? null;
+}
+
+export function getCostChange(code: string): CostChange | null {
+  const name = STATE_CODES[code];
+  const row = data.cost_metrics.cost_changes_2020_to_2024.find((r) => r.state === name);
+  return (row as CostChange) ?? null;
 }
 
 export function getNationalElectricRate(): number {
