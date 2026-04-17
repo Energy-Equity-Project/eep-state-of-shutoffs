@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TopNav from '../../components/explore/TopNav.astro';
-import LimitationsPanel from '../../components/explore/LimitationsPanel.astro';
-import SeeAllStatesButton from '../../components/explore/SeeAllStatesButton.astro';
+
 import KpiGrid from '../../components/explore/KpiGrid';
 import MonthlyChart from '../../components/explore/MonthlyChart';
 import WarningsVsDisconnections from '../../components/explore/WarningsVsDisconnections';
@@ -11,7 +10,6 @@ import {
   getAllStateCodes,
   getStateAnnual,
   getStateMonthly,
-  getNationalMonthly,
   getNationalRank,
   getMultiplierVsNational,
   getOneInX,
@@ -21,16 +19,25 @@ import {
 import { formatMultiplier } from '../../lib/format';
 
 export function getStaticPaths() {
-  return getAllStateCodes().map((code) => ({
-    params: { code },
-  }));
+  const codes = getAllStateCodes();
+  return [
+    ...codes.map((code) => ({ params: { code } })),
+    ...codes.map((code) => ({ params: { code: code.toLowerCase() }, props: { canonical: code } })),
+  ];
 }
 
-const { code } = Astro.params;
+const { code: rawCode } = Astro.params;
+const { canonical } = Astro.props as { canonical?: string };
+
+// Redirect lowercase URLs to canonical uppercase
+if (canonical) {
+  return Astro.redirect(`/explore/${canonical}`, 301);
+}
+
+const code = rawCode.toUpperCase();
 const stateName = STATE_CODES[code] ?? code;
 const stateAnnual = getStateAnnual(code);
 const stateMonthly = getStateMonthly(code);
-const nationalMonthly = getNationalMonthly();
 
 const electricRank = getNationalRank(code, 'electric');
 const electricMultiplier = getMultiplierVsNational(code, 'electric');
@@ -73,7 +80,6 @@ const subhead = `That's about 1 in every ${oneInX} customers — the ${ordinalSu
 
     <MonthlyChart
       stateMonthly={stateMonthly}
-      nationalMonthly={nationalMonthly}
       stateName={stateName}
       stateCode={code}
       client:load
@@ -87,7 +93,5 @@ const subhead = `That's about 1 in every ${oneInX} customers — the ${ordinalSu
 
     <CompareStates currentCode={code} client:load />
 
-    <LimitationsPanel />
-    <SeeAllStatesButton />
   </main>
 </BaseLayout>
