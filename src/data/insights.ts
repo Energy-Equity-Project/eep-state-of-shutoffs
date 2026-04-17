@@ -82,10 +82,10 @@ export const insights: Insight[] = [
   },
   {
     number: 10,
-    headline: "Cost of universal affordability: about a soda per month",
-    stat: "Independent analyses cited by EEP estimate the cost of permanently ending shutoffs at roughly $5\u201310 per month spread across customers who can bear it. Meanwhile, U.S. investor-owned utilities collect on the order of $50 billion per year in excess revenue over operating needs. Less than 2% of IOU shareholder dividends would forgive every customer arrearage in the country.",
-    frame: "So when a regulator tells you we can't afford to stop \u2014 remember this. The money is there. It is already in the system. It is sitting in dividends and in guaranteed 10% returns on equity and in executive compensation packages. The question has never been whether America could afford to stop shutting people off. The question is whether we will decide to. That is the whole argument. It was always the whole argument.",
-    headlineHighlights: ["about a soda per month"],
-    statHighlights: ["$5\u201310 per month"],
+    headline: "Cost of universal affordability is already in the system",
+    stat: "Stat: U.S. investor-owned utilities collect on the order of $50 billion per year in excess revenue over operating needs. Less than 2% of IOU shareholder dividends would forgive every customer arrearage in the country. Over 80% of the low-income energy safety net — roughly $10 billion per year — already flows to bill assistance as a recurring band-aid, rather than to deep retrofits and weatherization that would end the problem at its root.",
+    frame: "So when a regulator tells you we can't afford to stop — remember this. The money is there. It is already in the system. It is sitting in dividends and in guaranteed 10% returns on equity and in executive compensation packages. It is already being spent, year after year, on a safety net that treats the symptom and ignores the disease. The question has never been whether America could afford to stop shutting people off. The question is whether we will decide to. That is the whole argument. It was always the whole argument.",
+    headlineHighlights: ["already in the system"],
+    statHighlights: ["Less than 2% of IOU shareholder dividends"],
   },
 ];
