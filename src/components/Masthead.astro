@@ -63,10 +63,6 @@ const NAV_LINKS = [
 
 <style>
   [data-masthead] {
-    background: transparent;
-    transition: background 200ms ease-out;
-  }
-  [data-masthead][data-collapsed] {
     background: rgba(250, 250, 247, 0.94);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
@@ -101,10 +97,6 @@ const NAV_LINKS = [
   }
 
   .masthead-border {
-    opacity: 0;
-    transition: opacity 200ms ease-out;
-  }
-  [data-masthead][data-collapsed] .masthead-border {
     opacity: 1;
   }
 
@@ -112,8 +104,7 @@ const NAV_LINKS = [
     [data-masthead],
     .masthead-eyebrow,
     .masthead-subtitle,
-    .masthead-title,
-    .masthead-border {
+    .masthead-title {
       transition: none;
     }
   }
