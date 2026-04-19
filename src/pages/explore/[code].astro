@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masthead from '../../components/Masthead.astro';
 import TopNav from '../../components/explore/TopNav.astro';
 
 import KpiGrid from '../../components/explore/KpiGrid';
@@ -68,8 +69,10 @@ const costSubhead = bill == null
     : `The average household here now pays $${Math.round(bill)} per month for electricity and gas — ${totalPct >= 0 ? 'up' : 'down'} ${Math.round(Math.abs(totalPct))}% since 2020.`;
 ---
 
-<BaseLayout title={`${stateName} utility shutoffs, ${year} — EEP`}>
-  <main class="max-w-[960px] mx-auto px-4 md:px-6 py-6">
+<BaseLayout title={`${stateName} utility shutoffs, ${year} — EEP`} hideTopRightMenu={true}>
+  <Masthead titleAs="p" />
+  <main class="max-w-[960px] mx-auto px-4 md:px-6 pt-28 pb-6">
+    <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
     <TopNav currentCode={code} />
 
     <p class="text-[13px] text-[--color-text-tertiary] tracking-wide mb-2">

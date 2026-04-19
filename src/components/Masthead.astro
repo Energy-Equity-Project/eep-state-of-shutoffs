@@ -1,0 +1,146 @@
+---
+import MobileMenu from './MobileMenu';
+
+interface Props {
+  titleAs?: 'h1' | 'p';
+}
+
+const { titleAs = 'h1' } = Astro.props;
+const TitleTag = titleAs;
+
+const NAV_LINKS = [
+  { index: '01', label: 'Read', href: '/' },
+  { index: '02', label: 'Explore the data', href: '/explore/' },
+];
+---
+
+<header role="banner" data-masthead class="fixed inset-x-0 top-0 z-40">
+  <div class="relative px-6 md:px-10 py-3 md:py-4">
+    <!-- Desktop layout (md+) -->
+    <div class="hidden md:flex items-center justify-between gap-8">
+      <div class="flex-1 min-w-0">
+        <p class="masthead-eyebrow text-[11px] font-sans text-[--color-text-secondary] uppercase tracking-widest mb-1">
+          Energy Equity Project · A report
+        </p>
+        <TitleTag class="masthead-title font-serif font-bold leading-none">
+          Tsunami of Shutoffs
+        </TitleTag>
+        <p class="masthead-subtitle text-sm font-sans text-[--color-text-secondary] mt-1">
+          What the US' first national survey reveals
+        </p>
+      </div>
+      <nav aria-label="Primary" class="flex items-center gap-6 shrink-0">
+        {NAV_LINKS.map(({ index, label, href }) => (
+          <a
+            href={href}
+            class="flex items-baseline gap-1.5 text-sm font-sans text-[--color-ink] hover:text-[--color-accent] focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors"
+          >
+            <span class="text-[10px] text-[--color-text-secondary] tabular-nums">{index}</span>
+            {label}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Mobile layout (<md) -->
+    <div class="flex md:hidden items-start justify-between gap-4">
+      <div class="flex-1 min-w-0">
+        <p class="masthead-eyebrow text-[10px] font-sans text-[--color-text-secondary] uppercase tracking-widest mb-0.5">
+          Energy Equity Project
+        </p>
+        <TitleTag class="masthead-title font-serif font-bold leading-none">
+          Tsunami of Shutoffs
+        </TitleTag>
+        <p class="masthead-subtitle text-xs font-sans text-[--color-text-secondary] mt-0.5">
+          What the US' first national survey reveals
+        </p>
+      </div>
+      <MobileMenu client:load />
+    </div>
+  </div>
+  <div class="masthead-border h-px bg-[--color-border-light] mx-6 md:mx-10"></div>
+</header>
+
+<style>
+  [data-masthead] {
+    background: transparent;
+    transition: background 200ms ease-out;
+  }
+  [data-masthead][data-collapsed] {
+    background: rgba(250, 250, 247, 0.94);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .masthead-eyebrow,
+  .masthead-subtitle {
+    max-height: 2em;
+    overflow: hidden;
+    transition:
+      opacity 200ms ease-out,
+      max-height 200ms ease-out;
+  }
+  [data-masthead][data-collapsed] .masthead-eyebrow,
+  [data-masthead][data-collapsed] .masthead-subtitle {
+    opacity: 0;
+    max-height: 0;
+    pointer-events: none;
+  }
+
+  .masthead-title {
+    font-size: 1.5rem;
+    transition: font-size 200ms ease-out;
+  }
+  @media (max-width: 767px) {
+    .masthead-title {
+      font-size: 1.2rem;
+    }
+  }
+  [data-masthead][data-collapsed] .masthead-title {
+    font-size: 1rem;
+  }
+
+  .masthead-border {
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+  [data-masthead][data-collapsed] .masthead-border {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-masthead],
+    .masthead-eyebrow,
+    .masthead-subtitle,
+    .masthead-title,
+    .masthead-border {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const masthead = document.querySelector('[data-masthead]');
+  const sentinel = document.querySelector('[data-masthead-sentinel]');
+  const root = document.querySelector('[data-scroll-container]') as Element | null;
+
+  if (sentinel && masthead) {
+    const eyebrows = masthead.querySelectorAll<HTMLElement>('.masthead-eyebrow, .masthead-subtitle');
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const collapsed = !entry.isIntersecting;
+        masthead.toggleAttribute('data-collapsed', collapsed);
+        eyebrows.forEach((el) => {
+          if (collapsed) {
+            el.setAttribute('aria-hidden', 'true');
+          } else {
+            el.removeAttribute('aria-hidden');
+          }
+        });
+      },
+      { root, threshold: 0 }
+    );
+    io.observe(sentinel);
+  }
+</script>

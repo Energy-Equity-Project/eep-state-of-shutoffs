@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
 import Section from '../components/Section.astro';
 import Introduction from '../components/Introduction.astro';
 import Insight from '../components/Insight.astro';
@@ -19,12 +20,14 @@ const sections = [
 ];
 ---
 
-<BaseLayout title="Another World Is Possible — Energy Equity Project">
+<BaseLayout title="Tsunami of Shutoffs: What the US' first national survey reveals" hideTopRightMenu={true}>
+  <Masthead />
   <ScrollProgress client:load sections={sections} />
   <main
     data-scroll-container
-    class="h-screen overflow-y-auto snap-y snap-mandatory motion-reduce:h-auto motion-reduce:overflow-visible motion-reduce:snap-none"
+    class="h-screen overflow-y-auto snap-y snap-mandatory scroll-pt-20 motion-reduce:h-auto motion-reduce:overflow-visible motion-reduce:snap-none"
   >
+    <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
     <Section id="intro" label="Introduction">
       <Introduction />
     </Section>

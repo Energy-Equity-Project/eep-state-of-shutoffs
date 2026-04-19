@@ -4,9 +4,10 @@ import TopRightMenu from '../components/TopRightMenu';
 
 interface Props {
   title: string;
+  hideTopRightMenu?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, hideTopRightMenu = false } = Astro.props;
 const pathname = Astro.url.pathname;
 ---
 
@@ -25,7 +26,7 @@ const pathname = Astro.url.pathname;
     />
   </head>
   <body class="bg-paper text-ink font-sans antialiased">
-    <TopRightMenu pathname={pathname} client:load />
+    {!hideTopRightMenu && <TopRightMenu pathname={pathname} client:load />}
     <slot />
   </body>
 </html>
