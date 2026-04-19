@@ -17,6 +17,9 @@
   --color-border-medium: rgba(10, 10, 10, 0.30);
   --color-neutral-bar: #b4b2a9;
   --color-neutral-bar-light: #d3d1c7;
+  --color-pipeline-fill: #ebbc36;
+  --color-pipeline-reconnect: #a8c4a2;
+  --color-pipeline-warn: #c2410c;
 }
 
 @layer components {

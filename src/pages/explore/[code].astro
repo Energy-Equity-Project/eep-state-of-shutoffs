@@ -5,7 +5,7 @@ import TopNav from '../../components/explore/TopNav.astro';
 
 import KpiGrid from '../../components/explore/KpiGrid';
 import MonthlyChart from '../../components/explore/MonthlyChart';
-import WarningsVsDisconnections from '../../components/explore/WarningsVsDisconnections';
+import ShutoffPipeline from '../../components/explore/ShutoffPipeline';
 import CompareStates from '../../components/explore/CompareStates';
 import {
   getAllStateCodes,
@@ -107,8 +107,8 @@ const costSubhead = bill == null
       client:load
     />
 
-    <WarningsVsDisconnections
-      stateAnnual={stateAnnual}
+    <ShutoffPipeline
+      stateCode={code}
       stateName={stateName}
       client:load
     />

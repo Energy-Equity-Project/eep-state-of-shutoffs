@@ -6,10 +6,14 @@ export interface ShutoffRecord {
   electric_shutoffs: number | null;
   electric_customers: number | null;
   electric_monthly_shutoff_rate: number;
+  electric_reconnections: number | null;
+  electric_net_shutoffs: number | null;
   gas_shutoff_notices: number | null;
   gas_shutoffs: number | null;
   gas_customers: number | null;
   gas_monthly_shutoff_rate: number;
+  gas_reconnections: number | null;
+  gas_net_shutoffs: number | null;
 }
 
 export interface StateAnnual {
@@ -18,10 +22,14 @@ export interface StateAnnual {
   electric_shutoffs_total: number;
   electric_avg_customers: number;
   electric_annual_shutoff_rate: number;
+  electric_reconnections_total: number | null;
+  electric_net_shutoffs_total: number | null;
   gas_shutoff_notices_total: number;
   gas_shutoffs_total: number;
   gas_avg_customers: number;
   gas_annual_shutoff_rate: number;
+  gas_reconnections_total: number | null;
+  gas_net_shutoffs_total: number | null;
 }
 
 export interface NationalMonthly {
@@ -29,9 +37,13 @@ export interface NationalMonthly {
   electric_shutoffs_total: number;
   electric_customers_total: number;
   electric_national_shutoff_rate: number;
+  electric_reconnections_total: number | null;
+  electric_net_shutoffs_total: number | null;
   gas_shutoffs_total: number;
   gas_customers_total: number;
   gas_national_shutoff_rate: number;
+  gas_reconnections_total: number | null;
+  gas_net_shutoffs_total: number | null;
 }
 
 export interface StateRankings {
@@ -42,10 +54,28 @@ export interface StateRankings {
 export interface NationalTotals {
   electric_shutoffs_total: number;
   electric_shutoff_notices_total: number;
+  electric_reconnections_total: number | null;
+  electric_net_shutoffs_total: number | null;
   gas_shutoffs_total: number;
   gas_shutoff_notices_total: number;
+  gas_reconnections_total: number | null;
+  gas_net_shutoffs_total: number | null;
   avg_electric_customers: number;
   avg_gas_customers: number;
+}
+
+export interface StateHouseholds {
+  state: string;
+  households: number;
+  moe: number;
+}
+
+export interface HouseholdMetrics {
+  source_file: string;
+  year: number;
+  survey: string;
+  variable: string;
+  state_households: StateHouseholds[];
 }
 
 export interface CostAnnual {
@@ -87,4 +117,5 @@ export interface ShutoffsData {
     national_totals: NationalTotals;
   };
   cost_metrics: CostMetrics;
+  household_metrics: HouseholdMetrics;
 }

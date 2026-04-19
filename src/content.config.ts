@@ -12,6 +12,10 @@ export const shutoffsSchema = z.object({
   gas_shutoffs: z.number().nullable(),
   gas_customers: z.number(),
   gas_monthly_shutoff_rate: z.number(),
+  electric_reconnections: z.number().nullable(),
+  electric_net_shutoffs: z.number().nullable(),
+  gas_reconnections: z.number().nullable(),
+  gas_net_shutoffs: z.number().nullable(),
 });
 
 const shutoffs = defineCollection({

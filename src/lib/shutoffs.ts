@@ -57,6 +57,12 @@ function buildMultiplierCache() {
   }
 }
 
+export function getStateHouseholds(code: string): number | null {
+  const name = STATE_CODES[code];
+  const row = (data as any).household_metrics?.state_households?.find((r: any) => r.state === name);
+  return row?.households ?? null;
+}
+
 export function getStateAnnual(code: string): StateAnnual {
   const name = STATE_CODES[code];
   const row = data.aggregates.state_annual.find((s) => s.state === name);
