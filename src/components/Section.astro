@@ -2,15 +2,16 @@
 interface Props {
   id: string;
   label: string;
+  class?: string;
 }
 
-const { id, label } = Astro.props;
+const { id, label, class: className = '' } = Astro.props;
 ---
 
 <section
   id={id}
   aria-label={label}
-  class="snap-start min-h-screen flex flex-col justify-center px-6 py-16 motion-reduce:snap-none"
+  class={`snap-start min-h-screen flex flex-col justify-center px-6 py-16 motion-reduce:snap-none ${className}`}
 >
   <div class="mx-auto w-full max-w-2xl">
     <slot />
