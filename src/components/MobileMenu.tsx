@@ -78,7 +78,8 @@ export default function MobileMenu() {
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
-        className={`fixed inset-0 z-50 bg-[--color-paper] flex flex-col motion-reduce:transition-none transition-all duration-200 ease-out ${
+        style={{ backgroundColor: 'var(--color-paper)' }}
+        className={`fixed inset-0 z-50 flex flex-col motion-reduce:transition-none transition-all duration-200 ease-out ${
           open
             ? 'opacity-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 -translate-y-2 pointer-events-none'
