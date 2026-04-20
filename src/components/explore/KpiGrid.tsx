@@ -6,57 +6,71 @@ import QualityFlag from './QualityFlag';
 interface Props {
   stateAnnual: StateAnnual;
   stateCode: string;
-  electricRank: number;
-  totalStates: number;
-  costBill2024: number | null;
-  costTotalPctChange: number | null;
+  electricBill: number | null;
+  electricBillPctChange: number | null;
+  gasBill: number | null;
+  gasBillPctChange: number | null;
 }
 
-export default function KpiGrid({ stateAnnual, stateCode, electricRank, totalStates, costBill2024, costTotalPctChange }: Props) {
+function billSubtext(bill: number | null, pctChange: number | null): string {
+  if (bill == null) return 'Data unavailable';
+  if (pctChange == null) return 'Change since 2020 unavailable';
+  return `${formatChangePct(pctChange)} since 2020`;
+}
+
+export default function KpiGrid({
+  stateAnnual,
+  stateCode,
+  electricBill,
+  electricBillPctChange,
+  gasBill,
+  gasBillPctChange,
+}: Props) {
   const elecFlag = getDataQuality(stateCode, 'electric');
   const gasFlag = getDataQuality(stateCode, 'gas');
 
-  const billValue = costBill2024 != null ? formatDollars(costBill2024) : '—';
-  const billSubtext = costBill2024 == null
-    ? 'Data unavailable'
-    : costTotalPctChange == null
-      ? 'Change since 2020 unavailable'
-      : `${formatChangePct(costTotalPctChange)} since 2020`;
+  const electricBillValue = electricBill != null ? formatDollars(electricBill) : '—';
+  const gasBillValue = gasBill != null ? formatDollars(gasBill) : '—';
+
+  const labelCls = 'text-[11px] md:text-xs text-[--color-text-secondary] mb-1.5';
+  const valueCls = 'text-[20px] md:text-[22px] font-medium mb-1';
+  const metaCls = 'text-[11px] md:text-xs text-[--color-text-tertiary]';
+  const cardCls = 'bg-[--color-surface] border border-[--color-border-light] rounded-lg p-4';
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-      <div className="bg-[--color-surface] border border-[--color-border-light] rounded-lg p-4">
-        <p className="text-xs text-[--color-text-secondary] mb-1.5">Electric shutoffs</p>
-        <p className="text-[22px] font-medium mb-1">
+      <div className={cardCls}>
+        <p className={labelCls}>Electric shutoffs</p>
+        <p className={valueCls}>
           {formatCount(stateAnnual.electric_shutoffs_total)}
           {elecFlag && <QualityFlag />}
         </p>
-        <p className="text-xs text-[--color-text-tertiary]">
+        <p className={metaCls}>
           {formatPercent(stateAnnual.electric_annual_shutoff_rate)} annual rate
         </p>
       </div>
 
-      <div className="bg-[--color-surface] border border-[--color-border-light] rounded-lg p-4">
-        <p className="text-xs text-[--color-text-secondary] mb-1.5">Gas shutoffs</p>
-        <p className="text-[22px] font-medium mb-1">
+      <div className={cardCls}>
+        <p className={labelCls}>Gas shutoffs</p>
+        <p className={valueCls}>
           {formatCount(stateAnnual.gas_shutoffs_total)}
           {gasFlag && <QualityFlag />}
         </p>
-        <p className="text-xs text-[--color-text-tertiary]">
+        <p className={metaCls}>
           {formatPercent(stateAnnual.gas_annual_shutoff_rate)} annual rate
         </p>
       </div>
 
-      <div className="bg-[--color-surface] border border-[--color-border-light] rounded-lg p-4">
-        <p className="text-xs text-[--color-text-secondary] mb-1.5">National rank</p>
-        <p className="text-[22px] font-medium mb-1">{electricRank} of {totalStates}</p>
-        <p className="text-xs text-[--color-text-tertiary]">1 = highest rate</p>
+      <div className={cardCls}>
+        <p className={labelCls}>Avg electric monthly bill</p>
+        <p className={valueCls}>{electricBillValue}</p>
+        <p className={metaCls}>{billSubtext(electricBill, electricBillPctChange)}</p>
       </div>
 
-      <div className="bg-[--color-surface] border border-[--color-border-light] rounded-lg p-4">
-        <p className="text-xs text-[--color-text-secondary] mb-1.5">Avg monthly utility bill</p>
-        <p className="text-[22px] font-medium mb-1">{billValue}</p>
-        <p className="text-xs text-[--color-text-tertiary]">{billSubtext}</p>
+      <div className={cardCls}>
+        <p className={labelCls}>Avg gas monthly bill</p>
+        <p className={valueCls}>{gasBillValue}</p>
+        <p className={metaCls}>{billSubtext(gasBill, gasBillPctChange)}</p>
       </div>
     </div>
   );

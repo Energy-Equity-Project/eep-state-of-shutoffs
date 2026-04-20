@@ -4,6 +4,7 @@ import Masthead from '../../components/Masthead.astro';
 import TopNav from '../../components/explore/TopNav.astro';
 
 import KpiGrid from '../../components/explore/KpiGrid';
+import StateRankCard from '../../components/explore/StateRankCard';
 import MonthlyChart from '../../components/explore/MonthlyChart';
 import ShutoffPipeline from '../../components/explore/ShutoffPipeline';
 import CompareStates from '../../components/explore/CompareStates';
@@ -48,23 +49,21 @@ const oneInX = getOneInX(stateAnnual.electric_annual_shutoff_rate);
 const year = getYear();
 const totalStates = 51;
 
-const ordinalSuffix = (n: number) => {
-  const s = ['th', 'st', 'nd', 'rd'];
-  const v = n % 100;
-  return n + (s[(v - 20) % 10] ?? s[v] ?? s[0]);
-};
-
 const totalShutoffs = Math.round(
   stateAnnual.electric_shutoffs_total + stateAnnual.gas_shutoffs_total
 );
 
 const headline = `In ${stateName}, utilities executed ${totalShutoffs.toLocaleString()} shutoffs in ${year}.`;
-const subhead = `That's about 1 shutoff for every ${oneInX} households — the ${ordinalSuffix(electricRank)} highest rate in the country, roughly ${formatPctDiffVsNational(electricMultiplier)} the national average.`;
+const subhead = `That's about 1 shutoff for every ${oneInX} households — roughly ${formatPctDiffVsNational(electricMultiplier)} the national average.`;
 
 const cost = getStateCost2024(code);
 const costChange = getCostChange(code);
 const bill = cost?.avg_monthly_total_utility_cost ?? null;
 const totalPct = costChange?.total_pct_change ?? null;
+const electricBill = cost?.avg_monthly_electric_cost ?? null;
+const electricBillPctChange = costChange?.electric_pct_change ?? null;
+const gasBill = cost?.avg_monthly_gas_cost ?? null;
+const gasBillPctChange = costChange?.gas_pct_change ?? null;
 
 const costSubhead = bill == null
   ? null
@@ -79,28 +78,36 @@ const costSubhead = bill == null
     <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
     <TopNav currentCode={code} />
 
-    <p class="text-[13px] text-[--color-text-tertiary] tracking-wide mb-2">
-      {year} · Investor-owned utilities
-    </p>
-    <h1 class="text-[19px] md:text-[26px] font-medium leading-snug mb-3 max-w-2xl">
-      {headline}
-    </h1>
-    <p class={`text-[15px] text-[--color-text-secondary] leading-relaxed ${costSubhead ? '' : 'mb-8'} max-w-2xl`}>
-      {subhead}
-    </p>
-    {costSubhead && (
-      <p class="text-[12px] md:text-[14px] text-[--color-text-tertiary] leading-relaxed mb-8 max-w-2xl">
-        {costSubhead}
+    <div class="relative">
+      <p class="text-[13px] text-[--color-text-tertiary] tracking-wide mb-2">
+        {year} · Investor-owned utilities
       </p>
-    )}
+      <h1 class="text-[19px] md:text-[26px] font-medium leading-snug mb-3 max-w-2xl">
+        {headline}
+      </h1>
+      <StateRankCard
+        rank={electricRank}
+        outOf={totalStates}
+        className="mb-3 md:mb-0 md:absolute md:right-0 md:top-[60px]"
+        client:load
+      />
+      <p class={`text-[15px] text-[--color-text-secondary] leading-relaxed ${costSubhead ? '' : 'mb-8'} max-w-2xl`}>
+        {subhead}
+      </p>
+      {costSubhead && (
+        <p class="text-[12px] md:text-[14px] text-[--color-text-tertiary] leading-relaxed mb-8 max-w-2xl">
+          {costSubhead}
+        </p>
+      )}
+    </div>
 
     <KpiGrid
       stateAnnual={stateAnnual}
       stateCode={code}
-      electricRank={electricRank}
-      totalStates={totalStates}
-      costBill2024={bill}
-      costTotalPctChange={totalPct}
+      electricBill={electricBill}
+      electricBillPctChange={electricBillPctChange}
+      gasBill={gasBill}
+      gasBillPctChange={gasBillPctChange}
       client:load
     />
 
