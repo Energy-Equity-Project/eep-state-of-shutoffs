@@ -25,7 +25,7 @@ export default function QualityFlag({
       {visible && (
         <span
           role="tooltip"
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 rounded bg-[--color-ink] text-[--color-surface] text-xs px-3 py-2 leading-snug z-50"
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 rounded bg-paper text-ink border border-[--color-border-light] shadow-md text-xs px-3 py-2 leading-snug z-50"
         >
           {message}
         </span>
