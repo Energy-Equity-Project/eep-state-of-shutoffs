@@ -59,7 +59,6 @@ const subhead = `That's about 1 shutoff for every ${oneInX} households — rough
 const cost = getStateCost2024(code);
 const costChange = getCostChange(code);
 const bill = cost?.avg_monthly_total_utility_cost ?? null;
-const totalPct = costChange?.total_pct_change ?? null;
 const electricBill = cost?.avg_monthly_electric_cost ?? null;
 const electricBillPctChange = costChange?.electric_pct_change ?? null;
 const gasBill = cost?.avg_monthly_gas_cost ?? null;
@@ -67,9 +66,7 @@ const gasBillPctChange = costChange?.gas_pct_change ?? null;
 
 const costSubhead = bill == null
   ? null
-  : totalPct == null
-    ? `The average household here now pays $${Math.round(bill)} per month for electricity and gas.`
-    : `The average household here now pays $${Math.round(bill)} per month for electricity and gas — ${totalPct >= 0 ? 'up' : 'down'} ${Math.round(Math.abs(totalPct))}% since 2020.`;
+  : `The average household here now pays $${Math.round(bill)} per month for electricity and gas.`;
 ---
 
 <BaseLayout title={`${stateName} utility shutoffs, ${year} — EEP`} hideTopRightMenu={true}>
@@ -79,16 +76,13 @@ const costSubhead = bill == null
     <TopNav currentCode={code} />
 
     <div class="relative">
-      <p class="text-[13px] text-[--color-text-tertiary] tracking-wide mb-2">
-        {year} · Investor-owned utilities
-      </p>
       <h1 class="text-[19px] md:text-[26px] font-medium leading-snug mb-3 max-w-2xl">
         {headline}
       </h1>
       <StateRankCard
         rank={electricRank}
         outOf={totalStates}
-        className="mb-3 md:mb-0 md:absolute md:right-0 md:top-[60px]"
+        className="mb-3 md:mb-0 md:absolute md:right-0 md:top-0"
         client:load
       />
       <p class={`text-[15px] text-[--color-text-secondary] leading-relaxed ${costSubhead ? '' : 'mb-8'} max-w-2xl`}>
