@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { ShutoffRecord } from '../../data/shutoffs-types';
 import { getChartCaption, getBothCaption } from '../../lib/chart-captions';
+import { getMonthlyFlags } from '../../lib/shutoffs';
+import { FlagFootnote } from './QualityFlag';
 
 type Fuel = 'electric' | 'gas' | 'both';
 
@@ -80,6 +82,13 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
   const caption = fuel === 'both'
     ? getBothCaption()
     : getChartCaption(sorted, fuel as 'electric' | 'gas');
+
+  const cardFlags = fuel === 'both'
+    ? new Set([
+        ...getMonthlyFlags(stateCode, 'electric', ['shutoffs']),
+        ...getMonthlyFlags(stateCode, 'gas', ['shutoffs']),
+      ])
+    : getMonthlyFlags(stateCode, fuel as 'electric' | 'gas', ['shutoffs']);
 
   const circleColor = fuel === 'gas' ? '#888780' : '#185fa5';
   const stateLineColor = fuel === 'gas' ? '#888780' : '#185fa5';
@@ -260,6 +269,8 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
           })}
         </g>
       </svg>
+
+      <FlagFootnote flags={cardFlags} />
 
       <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
         {(['electric', 'gas', 'both'] as Fuel[]).map((f) => (

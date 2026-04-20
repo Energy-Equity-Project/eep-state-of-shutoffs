@@ -20,6 +20,7 @@
   --color-pipeline-fill: #ebbc36;
   --color-pipeline-reconnect: #a8c4a2;
   --color-pipeline-warn: #c2410c;
+  --color-flag: #dc2626;
 }
 
 @layer components {

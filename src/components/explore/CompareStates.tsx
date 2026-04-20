@@ -7,9 +7,11 @@ import {
   getNationalGasRate,
   getHighestRateState,
   getNeighbor,
-  getDataQuality,
+  getMonthlyFlags,
+  type EiaFlag,
 } from '../../lib/shutoffs';
 import { formatPercent } from '../../lib/format';
+import { FlagAsterisk, FlagFootnote } from './QualityFlag';
 import StatePickerSheet from './StatePickerSheet';
 
 interface Props {
@@ -33,14 +35,11 @@ function buildDefaultRows(currentCode: string, fuel: 'electric' | 'gas'): Compar
 
   // Current state
   const cur = getStateAnnual(currentCode);
-  const curRate = getDataQuality(currentCode, fuel) === 'reporting_gap'
-    ? NaN
-    : cur[`${fuel}_annual_shutoff_rate`];
   rows.push({
     code: currentCode,
     name: STATE_CODES[currentCode] ?? currentCode,
-    rate: curRate,
-    rank: getDataQuality(currentCode, fuel) === 'reporting_gap' ? null : getNationalRank(currentCode, fuel),
+    rate: cur[`${fuel}_annual_shutoff_rate`],
+    rank: getNationalRank(currentCode, fuel),
   });
 
   // National average
@@ -54,14 +53,11 @@ function buildDefaultRows(currentCode: string, fuel: 'electric' | 'gas'): Compar
   // Neighbor
   if (neighborCode && neighborCode !== currentCode) {
     const n = getStateAnnual(neighborCode);
-    const nRate = getDataQuality(neighborCode, fuel) === 'reporting_gap'
-      ? NaN
-      : n[`${fuel}_annual_shutoff_rate`];
     rows.push({
       code: neighborCode,
       name: STATE_CODES[neighborCode] ?? neighborCode,
-      rate: nRate,
-      rank: getDataQuality(neighborCode, fuel) === 'reporting_gap' ? null : getNationalRank(neighborCode, fuel),
+      rate: n[`${fuel}_annual_shutoff_rate`],
+      rank: getNationalRank(neighborCode, fuel),
       tag: 'neighbor',
     });
   }
@@ -128,20 +124,24 @@ export default function CompareStates({ currentCode }: Props) {
     .filter((c) => !defaultRows.some((r) => r.code === c))
     .map((code) => {
       const a = getStateAnnual(code);
-      const rate = getDataQuality(code, fuel) === 'reporting_gap'
-        ? NaN
-        : a[`${fuel}_annual_shutoff_rate`];
       return {
         code,
         name: STATE_CODES[code] ?? code,
-        rate,
-        rank: getDataQuality(code, fuel) === 'reporting_gap' ? null : getNationalRank(code, fuel),
+        rate: a[`${fuel}_annual_shutoff_rate`],
+        rank: getNationalRank(code, fuel),
       };
     });
 
   const allRows = [...defaultRows, ...extraRows];
   const trueMax = Math.max(...allRows.map((r) => r.rate).filter(Number.isFinite), 0.0001);
   const canAdd = extraCodes.length < MAX_EXTRA;
+
+  const flagsByCode = new Map<string, Set<EiaFlag>>();
+  for (const row of allRows) {
+    if (row.code) flagsByCode.set(row.code, getMonthlyFlags(row.code, fuel, ['shutoffs']));
+  }
+  const cardFlags = new Set<EiaFlag>();
+  flagsByCode.forEach((s) => s.forEach((f) => cardFlags.add(f)));
 
   const alreadyInList = new Set([
     ...allRows.map((r) => r.code).filter(Boolean) as string[],
@@ -215,7 +215,10 @@ export default function CompareStates({ currentCode }: Props) {
                 )}
               </div>
 
-              <span className="text-[13px] text-right">{Number.isFinite(row.rate) ? formatPercent(row.rate) : '—'}</span>
+              <span className="text-[13px] text-right">
+                {Number.isFinite(row.rate) ? formatPercent(row.rate) : '—'}
+                {row.code && flagsByCode.get(row.code)?.size ? <FlagAsterisk /> : null}
+              </span>
               <span className="text-xs text-[--color-text-tertiary] text-right">
                 {row.rank != null ? `#${row.rank}` : '—'}
               </span>
@@ -223,6 +226,8 @@ export default function CompareStates({ currentCode }: Props) {
           );
         })}
       </div>
+
+      <FlagFootnote flags={cardFlags} />
 
       <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
         {(['electric', 'gas'] as const).map((f) => (

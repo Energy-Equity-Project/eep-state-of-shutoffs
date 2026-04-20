@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { getPipelineData, type PipelineStage } from '../../lib/pipeline';
 import { formatCount, formatCondensed } from '../../lib/format';
-import { getDataQuality } from '../../lib/shutoffs';
+import { getMonthlyFlags } from '../../lib/shutoffs';
+import { FlagAsterisk, FlagFootnote } from './QualityFlag';
 
 interface Props {
   stateCode: string;
@@ -45,8 +46,11 @@ function stageColor(stage: PipelineStage): string {
 
 export default function ShutoffPipeline({ stateCode, stateName }: Props) {
   const [fuel, setFuel] = useState<'electric' | 'gas'>('electric');
-  const gasDisabled = getDataQuality(stateCode, 'gas') === 'reporting_gap';
   const { stages, maxValue } = getPipelineData(stateCode, fuel);
+  const noticesFlags = getMonthlyFlags(stateCode, fuel, ['shutoff_notices']);
+  const shutoffsFlags = getMonthlyFlags(stateCode, fuel, ['shutoffs']);
+  const reconnectionsFlags = getMonthlyFlags(stateCode, fuel, ['reconnections']);
+  const cardFlags = getMonthlyFlags(stateCode, fuel, ['shutoff_notices', 'shutoffs', 'reconnections']);
 
   const householdsStage = stages.find((s) => s.id === 'households');
   const noticesStage = stages.find((s) => s.id === 'notices');
@@ -178,6 +182,10 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
                   fontFamily="var(--font-sans)"
                 >
                   {formatCondensed(stage.value)}
+                  {((stage.id === 'notices' && noticesFlags.size > 0) ||
+                    (stage.id === 'shutoffs' && shutoffsFlags.size > 0)) && (
+                    <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
+                  )}
                 </text>
               )}
 
@@ -226,6 +234,9 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
                     fontFamily="var(--font-sans)"
                   >
                     {formatCondensed(stage.value)}
+                    {reconnectionsFlags.size > 0 && (
+                      <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
+                    )}
                   </text>
                 )}
                 <text
@@ -278,6 +289,9 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
                     fontFamily="var(--font-sans)"
                   >
                     {formatCondensed(stage.value)}
+                    {reconnectionsFlags.size > 0 && (
+                      <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
+                    )}
                   </text>
                 )}
                 <text
@@ -307,26 +321,22 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
 
       </div>
 
+      <FlagFootnote flags={cardFlags} />
+
       {/* Fuel toggle */}
       <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
         {(['electric', 'gas'] as const).map((f) => (
           <button
             key={f}
             type="button"
-            onClick={() => { if (!(f === 'gas' && gasDisabled)) setFuel(f); }}
-            disabled={f === 'gas' && gasDisabled}
-            title={f === 'gas' && gasDisabled ? 'Gas data not available for this state' : undefined}
+            onClick={() => setFuel(f)}
             style={
-              !(f === 'gas' && gasDisabled) && fuel === f
+              fuel === f
                 ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
                 : undefined
             }
             className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
-              f === 'gas' && gasDisabled
-                ? 'opacity-50 cursor-not-allowed border-[--color-border-light] text-[--color-text-secondary]'
-                : fuel !== f
-                  ? 'border-[--color-border-light] text-[--color-text-secondary]'
-                  : ''
+              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
             }`}
           >
             {f === 'electric' ? 'Electric' : 'Gas'}

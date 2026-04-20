@@ -1,7 +1,7 @@
 import type { StateAnnual } from '../../data/shutoffs-types';
 import { formatCount, formatPercent, formatDollars, formatChangePct } from '../../lib/format';
-import { getDataQuality } from '../../lib/shutoffs';
-import QualityFlag from './QualityFlag';
+import { getMonthlyFlags } from '../../lib/shutoffs';
+import { FlagAsterisk, FlagFootnote } from './QualityFlag';
 
 interface Props {
   stateAnnual: StateAnnual;
@@ -26,8 +26,9 @@ export default function KpiGrid({
   gasBill,
   gasBillPctChange,
 }: Props) {
-  const elecFlag = getDataQuality(stateCode, 'electric');
-  const gasFlag = getDataQuality(stateCode, 'gas');
+  const electricFlags = getMonthlyFlags(stateCode, 'electric', ['shutoffs']);
+  const gasFlags = getMonthlyFlags(stateCode, 'gas', ['shutoffs']);
+  const allFlags = new Set([...electricFlags, ...gasFlags]);
 
   const electricBillValue = electricBill != null ? formatDollars(electricBill) : '—';
   const gasBillValue = gasBill != null ? formatDollars(gasBill) : '—';
@@ -38,40 +39,43 @@ export default function KpiGrid({
   const cardCls = 'bg-[--color-surface] border border-[--color-border-light] rounded-lg p-4';
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-      <div className={cardCls}>
-        <p className={labelCls}>Electric shutoffs</p>
-        <p className={valueCls}>
-          {formatCount(stateAnnual.electric_shutoffs_total)}
-          {elecFlag && <QualityFlag />}
-        </p>
-        <p className={metaCls}>
-          {formatPercent(stateAnnual.electric_annual_shutoff_rate)} annual rate
-        </p>
-      </div>
+    <div className="mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className={cardCls}>
+          <p className={labelCls}>Electric shutoffs</p>
+          <p className={valueCls}>
+            {formatCount(stateAnnual.electric_shutoffs_total)}
+            {electricFlags.size > 0 && <FlagAsterisk />}
+          </p>
+          <p className={metaCls}>
+            {formatPercent(stateAnnual.electric_annual_shutoff_rate)} annual rate
+          </p>
+        </div>
 
-      <div className={cardCls}>
-        <p className={labelCls}>Gas shutoffs</p>
-        <p className={valueCls}>
-          {formatCount(stateAnnual.gas_shutoffs_total)}
-          {gasFlag && <QualityFlag />}
-        </p>
-        <p className={metaCls}>
-          {formatPercent(stateAnnual.gas_annual_shutoff_rate)} annual rate
-        </p>
-      </div>
+        <div className={cardCls}>
+          <p className={labelCls}>Gas shutoffs</p>
+          <p className={valueCls}>
+            {formatCount(stateAnnual.gas_shutoffs_total)}
+            {gasFlags.size > 0 && <FlagAsterisk />}
+          </p>
+          <p className={metaCls}>
+            {formatPercent(stateAnnual.gas_annual_shutoff_rate)} annual rate
+          </p>
+        </div>
 
-      <div className={cardCls}>
-        <p className={labelCls}>Avg electric monthly bill</p>
-        <p className={valueCls}>{electricBillValue}</p>
-        <p className={metaCls}>{billSubtext(electricBill, electricBillPctChange)}</p>
-      </div>
+        <div className={cardCls}>
+          <p className={labelCls}>Avg electric monthly bill</p>
+          <p className={valueCls}>{electricBillValue}</p>
+          <p className={metaCls}>{billSubtext(electricBill, electricBillPctChange)}</p>
+        </div>
 
-      <div className={cardCls}>
-        <p className={labelCls}>Avg gas monthly bill</p>
-        <p className={valueCls}>{gasBillValue}</p>
-        <p className={metaCls}>{billSubtext(gasBill, gasBillPctChange)}</p>
+        <div className={cardCls}>
+          <p className={labelCls}>Avg gas monthly bill</p>
+          <p className={valueCls}>{gasBillValue}</p>
+          <p className={metaCls}>{billSubtext(gasBill, gasBillPctChange)}</p>
+        </div>
       </div>
+      <FlagFootnote flags={allFlags} />
     </div>
   );
 }

@@ -32,11 +32,14 @@ const STATE_NEIGHBORS: Record<string, string> = {
   WI: 'MN', WY: 'MT',
 };
 
-// Data quality flags
-type DataQualityFlag = 'reporting_gap' | 'muni_heavy' | null;
-const DATA_QUALITY: Record<string, Partial<Record<'electric' | 'gas', DataQualityFlag>>> = {
-  GA: { gas: 'reporting_gap' },
+export type EiaFlag = 'R' | 'Q';
+
+export const FLAG_DEFINITIONS: Record<EiaFlag, string> = {
+  R: 'Large relative standard error (RSE) greater than 50',
+  Q: 'State response rate less than 50%',
 };
+
+export type ShutoffMeasure = 'shutoffs' | 'shutoff_notices' | 'reconnections';
 
 // Cache for multiplier computations
 const multiplierCache = new Map<string, { electric: number; gas: number }>();
@@ -111,8 +114,21 @@ export function getNeighbor(code: string): string | null {
   return STATE_NEIGHBORS[code] ?? null;
 }
 
-export function getDataQuality(code: string, fuel: 'electric' | 'gas'): DataQualityFlag {
-  return DATA_QUALITY[code]?.[fuel] ?? null;
+export function getMonthlyFlags(
+  code: string,
+  fuel: 'electric' | 'gas',
+  measures: ShutoffMeasure[],
+): Set<EiaFlag> {
+  const records = getStateMonthly(code);
+  const flags = new Set<EiaFlag>();
+  for (const r of records) {
+    for (const m of measures) {
+      const key = `${fuel}_${m}_flag` as keyof ShutoffRecord;
+      const v = r[key] as 'Q' | 'R' | null;
+      if (v === 'R' || v === 'Q') flags.add(v);
+    }
+  }
+  return flags;
 }
 
 export function getAllStateCodes(): string[] {
