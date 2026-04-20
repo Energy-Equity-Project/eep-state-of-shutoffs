@@ -19,7 +19,7 @@ import {
   getCostChange,
   STATE_CODES,
 } from '../../lib/shutoffs';
-import { formatMultiplier } from '../../lib/format';
+import { formatPctDiffVsNational } from '../../lib/format';
 
 export function getStaticPaths() {
   const codes = getAllStateCodes();
@@ -54,8 +54,12 @@ const ordinalSuffix = (n: number) => {
   return n + (s[(v - 20) % 10] ?? s[v] ?? s[0]);
 };
 
-const headline = `In ${stateName}, utilities executed ${Math.round(stateAnnual.electric_shutoffs_total).toLocaleString()} electric shutoffs last year.`;
-const subhead = `That's about 1 in every ${oneInX} customers — the ${ordinalSuffix(electricRank)} highest rate in the country, and roughly ${formatMultiplier(electricMultiplier)} the national average.`;
+const totalShutoffs = Math.round(
+  stateAnnual.electric_shutoffs_total + stateAnnual.gas_shutoffs_total
+);
+
+const headline = `In ${stateName}, utilities executed ${totalShutoffs.toLocaleString()} shutoffs in ${year}.`;
+const subhead = `That's about 1 shutoff for every ${oneInX} households — the ${ordinalSuffix(electricRank)} highest rate in the country, roughly ${formatPctDiffVsNational(electricMultiplier)} the national average.`;
 
 const cost = getStateCost2024(code);
 const costChange = getCostChange(code);
