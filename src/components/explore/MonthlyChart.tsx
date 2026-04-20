@@ -147,10 +147,13 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
             key={f}
             type="button"
             onClick={() => setFuel(f)}
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+            style={
               fuel === f
-                ? 'border-[--color-border-medium] text-[--color-ink]'
-                : 'border-[--color-border-light] text-[--color-text-secondary] bg-transparent'
+                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
+                : undefined
+            }
+            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
             }`}
           >
             {f === 'electric' ? 'Electric' : f === 'gas' ? 'Gas' : 'Both'}

@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { getPipelineData, type PipelineStage } from '../../lib/pipeline';
 import { formatCount, formatCondensed } from '../../lib/format';
+import { getDataQuality } from '../../lib/shutoffs';
 
 interface Props {
   stateCode: string;
@@ -42,7 +44,9 @@ function stageColor(stage: PipelineStage): string {
 }
 
 export default function ShutoffPipeline({ stateCode, stateName }: Props) {
-  const { stages, maxValue } = getPipelineData(stateCode);
+  const [fuel, setFuel] = useState<'electric' | 'gas'>('electric');
+  const gasDisabled = getDataQuality(stateCode, 'gas') === 'reporting_gap';
+  const { stages, maxValue } = getPipelineData(stateCode, fuel);
 
   const householdsStage = stages.find((s) => s.id === 'households');
   const noticesStage = stages.find((s) => s.id === 'notices');
@@ -61,7 +65,7 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
     const pct = shutoffs > 0 ? Math.round((neverReconnected / shutoffs) * 100) : 0;
     caption = `Of ${formatCount(shutoffs)} shutoffs executed, ${formatCount(neverReconnected)} (${pct}%) were never followed by a reconnection in 2024.`;
   } else {
-    caption = `Utilities in ${stateName} sent ${formatCount(notices ?? 0)} shutoff notices and executed ${formatCount(shutoffs)} electric shutoffs in 2024.`;
+    caption = `Utilities in ${stateName} sent ${formatCount(notices ?? 0)} shutoff notices and executed ${formatCount(shutoffs)} ${fuel} shutoffs in 2024.`;
   }
 
   // Build aria label
@@ -303,8 +307,35 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
 
       </div>
 
+      {/* Fuel toggle */}
+      <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
+        {(['electric', 'gas'] as const).map((f) => (
+          <button
+            key={f}
+            type="button"
+            onClick={() => { if (!(f === 'gas' && gasDisabled)) setFuel(f); }}
+            disabled={f === 'gas' && gasDisabled}
+            title={f === 'gas' && gasDisabled ? 'Gas data not available for this state' : undefined}
+            style={
+              !(f === 'gas' && gasDisabled) && fuel === f
+                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
+                : undefined
+            }
+            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+              f === 'gas' && gasDisabled
+                ? 'opacity-50 cursor-not-allowed border-[--color-border-light] text-[--color-text-secondary]'
+                : fuel !== f
+                  ? 'border-[--color-border-light] text-[--color-text-secondary]'
+                  : ''
+            }`}
+          >
+            {f === 'electric' ? 'Electric' : 'Gas'}
+          </button>
+        ))}
+      </div>
+
       {/* Mobile ledger view */}
-      <div className="md:hidden space-y-3">
+      <div className="md:hidden space-y-3 mt-4">
         {stages.map((stage, idx) => {
           const scale = scaledSize(stage.value, maxValue);
           const isWarn = stage.emphasis === 'warn';

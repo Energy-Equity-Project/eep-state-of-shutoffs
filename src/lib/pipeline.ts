@@ -16,13 +16,13 @@ export interface PipelineData {
   noticesMultiplier: number | null;
 }
 
-export function getPipelineData(code: string): PipelineData {
+export function getPipelineData(code: string, fuel: 'electric' | 'gas' = 'electric'): PipelineData {
   const annual = getStateAnnual(code);
   const households = getStateHouseholds(code);
-  const notices = annual.electric_shutoff_notices_total || null;
-  const shutoffs = annual.electric_shutoffs_total;
-  const reconnections = annual.electric_reconnections_total ?? null;
-  const netShutoffs = annual.electric_net_shutoffs_total ?? null;
+  const notices = annual[`${fuel}_shutoff_notices_total`] || null;
+  const shutoffs = annual[`${fuel}_shutoffs_total`];
+  const reconnections = annual[`${fuel}_reconnections_total`] ?? null;
+  const netShutoffs = annual[`${fuel}_net_shutoffs_total`] ?? null;
 
   const stages: PipelineStage[] = [];
 
