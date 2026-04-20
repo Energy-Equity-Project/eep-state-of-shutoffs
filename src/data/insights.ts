@@ -27,7 +27,7 @@ export const insights: Insight[] = [
   {
     number: 3,
     headline: "This is not a winter problem. It is a year-round problem.",
-    stat: `Shutoffs were remarkably flat across the calendar. Every single month of 2024 saw more than 1 million combined shutoffs. October was the worst (1.62M). December was the \u201Clightest\u201D (1.02M) \u2014 still more than a million households lost power in the coldest month of the year.`,
+    stat: `Shutoffs were remarkably flat across the calendar. Every single month of 2024 saw more than 1 million combined shutoffs. October was the worst (1.62M). December was the \u201Clightest\u201D (1.02M) \u2014 still more than a million shutoffs executed in the coldest month of the year.`,
     frame: "Seasonal moratoriums are sold to the public as if the problem is weather. It isn't. Utilities shut people off in January. They shut people off in July. They shut people off in October, when the heat is finally off and the heat bills haven't started, and it's the single worst month of the year. A protection that only covers the coldest or hottest weeks is not a protection \u2014 it is a calendar. The real protection is ending the practice.",
     headlineHighlights: ["year-round problem"],
     statHighlights: ["1 million combined shutoffs"],
@@ -67,7 +67,7 @@ export const insights: Insight[] = [
   {
     number: 8,
     headline: "Texas shut off power 300,000 times in the two hottest months of the year",
-    stat: "In July and August 2024 alone, Texas utilities carried out ~300,000 electric shutoffs. Florida added another ~350,000 in those same two months. Combined, that is over 10,000 households per day losing electricity during the deadliest heat of the summer, in two states that regularly see heat indexes above 105\u00B0F.",
+    stat: "In July and August 2024 alone, Texas utilities carried out ~300,000 electric shutoffs. Florida added another ~350,000 in those same two months. Combined, that is over 10,000 electric shutoffs executed per day during the deadliest heat of the summer, in two states that regularly see heat indexes above 105\u00B0F.",
     frame: `Heat kills more Americans every year than any other weather event. Shutting off air conditioning in a Texas August is not a billing action. It is a gamble with a human life \u2014 a gamble the utility makes on the customer's behalf, without their consent, while paying dividends out the other side of the building. The federal government values a statistical life at roughly $8 million. A 105\u00B0 apartment with no power has never once been \u201Ccost-effective.\u201D`,
     headlineHighlights: ["300,000 times"],
     statHighlights: ["~300,000 electric shutoffs"],

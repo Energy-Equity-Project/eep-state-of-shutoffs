@@ -50,7 +50,7 @@ export function getPipelineData(code: string): PipelineData {
   stages.push({
     id: 'shutoffs',
     stageNumber: '03',
-    label: 'Disconnected',
+    label: 'Shutoffs executed',
     value: shutoffs,
     ratioCaption:
       notices != null && notices > 0

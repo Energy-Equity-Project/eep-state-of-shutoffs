@@ -54,7 +54,7 @@ const ordinalSuffix = (n: number) => {
   return n + (s[(v - 20) % 10] ?? s[v] ?? s[0]);
 };
 
-const headline = `In ${stateName}, utilities disconnected electricity at ${Math.round(stateAnnual.electric_shutoffs_total).toLocaleString()} homes last year.`;
+const headline = `In ${stateName}, utilities executed ${Math.round(stateAnnual.electric_shutoffs_total).toLocaleString()} electric shutoffs last year.`;
 const subhead = `That's about 1 in every ${oneInX} customers — the ${ordinalSuffix(electricRank)} highest rate in the country, and roughly ${formatMultiplier(electricMultiplier)} the national average.`;
 
 const cost = getStateCost2024(code);

@@ -59,9 +59,9 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
   let caption: string;
   if (hasReconnections && neverReconnected != null) {
     const pct = shutoffs > 0 ? Math.round((neverReconnected / shutoffs) * 100) : 0;
-    caption = `Of ${formatCount(shutoffs)} shutoffs, ${formatCount(neverReconnected)} households — ${pct}% — never came back online in 2024.`;
+    caption = `Of ${formatCount(shutoffs)} shutoffs executed, ${formatCount(neverReconnected)} (${pct}%) were never followed by a reconnection in 2024.`;
   } else {
-    caption = `Utilities in ${stateName} sent ${formatCount(notices ?? 0)} shutoff notices and disconnected ${formatCount(shutoffs)} households in 2024.`;
+    caption = `Utilities in ${stateName} sent ${formatCount(notices ?? 0)} shutoff notices and executed ${formatCount(shutoffs)} electric shutoffs in 2024.`;
   }
 
   // Build aria label

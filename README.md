@@ -1,12 +1,12 @@
 # State of Shutoffs
 
-A public-facing data debrief presenting EIA-112 utility disconnection data for a non-technical general audience.
+A public-facing data debrief presenting EIA-112 utility shutoff data for a non-technical general audience.
 
 ## Goals
 
 - Make energy insecurity and utility shutoff patterns legible to people unfamiliar with utility regulation
 - Combine guided narrative with interactive state-by-state data exploration
-- Surface disparities in electric and gas disconnection rates across the US for 2024
+- Surface disparities in electric and gas shutoff rates across the US for 2024
 
 ## Data
 
