@@ -21,6 +21,8 @@ const PAD_B = 30;
 const PLOT_W = SVG_W - PAD_L - PAD_R;
 const PLOT_H = SVG_H - PAD_T - PAD_B;
 
+const COL_W = PLOT_W / 12;
+
 function toPoints(values: number[], maxVal: number): string {
   return values
     .map((v, i) => {
@@ -38,8 +40,14 @@ function formatYLabel(val: number, isRate: boolean): string {
   return String(Math.round(val));
 }
 
+const TOOLTIP_W = 160;
+const TOOLTIP_LINE_H = 16;
+const TOOLTIP_PAD_X = 10;
+const TOOLTIP_PAD_Y = 8;
+
 export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Props) {
   const [fuel, setFuel] = useState<Fuel>('electric');
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
 
   const sorted = [...stateMonthly].sort((a, b) => a.month - b.month);
 
@@ -80,19 +88,86 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
     ? `Monthly electric and gas shutoff rates in ${stateName}, 2024`
     : `Monthly ${fuel} shutoffs in ${stateName}, 2024`;
 
+  // Tooltip rendering
+  function renderTooltip(idx: number) {
+    const record = sorted[idx];
+    const monthName = new Date(2024, idx, 1).toLocaleString('en-US', { month: 'long' });
+    const label1 = `${monthName} 2024`;
+
+    let lines: string[];
+    if (fuel === 'electric') {
+      const raw = record?.electric_shutoffs;
+      lines = [label1, raw == null ? 'No data' : `${raw.toLocaleString()} electric shutoffs`];
+    } else if (fuel === 'gas') {
+      const raw = record?.gas_shutoffs;
+      lines = [label1, raw == null ? 'No data' : `${raw.toLocaleString()} gas shutoffs`];
+    } else {
+      const elecRate = stateVals[idx];
+      const gasRate = stateVals2![idx];
+      lines = [
+        label1,
+        `Electric: ${formatYLabel(elecRate, true)}`,
+        `Gas: ${formatYLabel(gasRate, true)}`,
+      ];
+    }
+
+    const tooltipH = TOOLTIP_PAD_Y * 2 + lines.length * TOOLTIP_LINE_H;
+
+    // Anchor tooltip above topmost dot
+    const dotX = PAD_L + (idx / 11) * PLOT_W;
+    const dotY = PAD_T + PLOT_H - (stateVals[idx] / maxVal) * PLOT_H;
+
+    // Clamp X so tooltip stays inside SVG
+    let tx = dotX - TOOLTIP_W / 2;
+    tx = Math.max(PAD_L, Math.min(tx, SVG_W - PAD_R - TOOLTIP_W));
+
+    // Place above dot; flip below if it would clip the top
+    let ty = dotY - tooltipH - 8;
+    if (ty < PAD_T) ty = dotY + 8;
+
+    return (
+      <g pointerEvents="none">
+        <rect
+          x={tx}
+          y={ty}
+          width={TOOLTIP_W}
+          height={tooltipH}
+          rx="5"
+          ry="5"
+          fill="var(--color-ink)"
+          opacity="0.92"
+        />
+        {lines.map((line, li) => (
+          <text
+            key={li}
+            x={tx + TOOLTIP_PAD_X}
+            y={ty + TOOLTIP_PAD_Y + li * TOOLTIP_LINE_H + 10}
+            fontSize={li === 0 ? 10 : 10}
+            fontWeight={li === 0 ? 600 : 400}
+            fill="var(--color-surface)"
+          >
+            {line}
+          </text>
+        ))}
+      </g>
+    );
+  }
+
   return (
     <div className="bg-[--color-surface] border border-[--color-border-light] rounded-xl px-6 py-5 mb-6">
       <div className="flex justify-between items-baseline mb-1">
         <h2 className="text-base font-medium">Monthly pattern in 2024</h2>
         <div className="flex gap-4 text-xs text-[--color-text-secondary]">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="inline-block w-3.5 h-0.5" style={{ background: stateLineColor }} />
-            {stateName}
-          </span>
-          {fuel === 'both' && (
+          {fuel !== 'gas' && (
+            <span className="inline-flex items-center gap-1.5">
+              <span className="inline-block w-3.5 h-0.5" style={{ background: '#185fa5' }} />
+              Electric
+            </span>
+          )}
+          {fuel !== 'electric' && (
             <span className="inline-flex items-center gap-1.5">
               <span className="inline-block w-3.5 h-0.5" style={{ background: '#888780' }} />
-              {stateName} (gas)
+              Gas
             </span>
           )}
         </div>
@@ -124,12 +199,57 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
         {statePts2 && (
           <polyline fill="none" stroke="#888780" strokeWidth="1.5" points={statePts2} />
         )}
+        {/* Vertical guide line for hovered month */}
+        {hoverIdx !== null && (
+          <line
+            x1={(PAD_L + (hoverIdx / 11) * PLOT_W).toFixed(1)}
+            y1={PAD_T}
+            x2={(PAD_L + (hoverIdx / 11) * PLOT_W).toFixed(1)}
+            y2={PAD_T + PLOT_H}
+            stroke="rgba(10,10,10,0.2)"
+            strokeWidth="1"
+            strokeDasharray="3 3"
+          />
+        )}
         {/* State dots */}
         <g fill={stateLineColor}>
           {stateVals.map((v, i) => {
             const x = PAD_L + (i / 11) * PLOT_W;
             const y = PAD_T + PLOT_H - (v / maxVal) * PLOT_H;
-            return <circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r="2.5" />;
+            const r = hoverIdx === i ? 4 : 2.5;
+            return <circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r={r} />;
+          })}
+        </g>
+        {/* Gas dots (both mode) */}
+        {stateVals2 && (
+          <g fill="#888780">
+            {stateVals2.map((v, i) => {
+              const x = PAD_L + (i / 11) * PLOT_W;
+              const y = PAD_T + PLOT_H - (v / maxVal) * PLOT_H;
+              const r = hoverIdx === i ? 4 : 2.5;
+              return <circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r={r} />;
+            })}
+          </g>
+        )}
+        {/* Tooltip */}
+        {hoverIdx !== null && renderTooltip(hoverIdx)}
+        {/* Hit areas — transparent rects covering each month column */}
+        <g onMouseLeave={() => setHoverIdx(null)}>
+          {MONTH_LABELS.map((_, i) => {
+            const x = PAD_L + i * COL_W - COL_W / 2;
+            return (
+              <rect
+                key={i}
+                x={x.toFixed(1)}
+                y={PAD_T}
+                width={COL_W.toFixed(1)}
+                height={PLOT_H}
+                fill="transparent"
+                style={{ pointerEvents: 'all', cursor: 'crosshair' }}
+                onMouseEnter={() => setHoverIdx(i)}
+                onFocus={() => setHoverIdx(i)}
+              />
+            );
           })}
         </g>
         {/* X axis month labels */}
