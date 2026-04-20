@@ -1,18 +1,26 @@
+export type DataQualityFlag = 'Q' | 'R' | null;
+
 export interface ShutoffRecord {
   state: string;
   year: number;
   month: number;
   electric_shutoff_notices: number | null;
+  electric_shutoff_notices_flag: DataQualityFlag;
   electric_shutoffs: number | null;
+  electric_shutoffs_flag: DataQualityFlag;
   electric_customers: number | null;
   electric_monthly_shutoff_rate: number;
   electric_reconnections: number | null;
+  electric_reconnections_flag: DataQualityFlag;
   electric_net_shutoffs: number | null;
   gas_shutoff_notices: number | null;
+  gas_shutoff_notices_flag: DataQualityFlag;
   gas_shutoffs: number | null;
+  gas_shutoffs_flag: DataQualityFlag;
   gas_customers: number | null;
   gas_monthly_shutoff_rate: number;
   gas_reconnections: number | null;
+  gas_reconnections_flag: DataQualityFlag;
   gas_net_shutoffs: number | null;
 }
 
