@@ -7,6 +7,7 @@ import {
   getNationalGasRate,
   getHighestRateState,
   getNeighbor,
+  getDataQuality,
 } from '../../lib/shutoffs';
 import { formatPercent } from '../../lib/format';
 import StatePickerSheet from './StatePickerSheet';
@@ -25,31 +26,42 @@ interface CompareRow {
 
 const MAX_EXTRA = 5;
 
-function buildDefaultRows(currentCode: string): CompareRow[] {
+function buildDefaultRows(currentCode: string, fuel: 'electric' | 'gas'): CompareRow[] {
   const neighborCode = getNeighbor(currentCode);
-  const highest = getHighestRateState('electric');
+  const highest = getHighestRateState(fuel);
   const rows: CompareRow[] = [];
 
   // Current state
   const cur = getStateAnnual(currentCode);
+  const curRate = getDataQuality(currentCode, fuel) === 'reporting_gap'
+    ? NaN
+    : cur[`${fuel}_annual_shutoff_rate`];
   rows.push({
     code: currentCode,
     name: STATE_CODES[currentCode] ?? currentCode,
-    rate: cur.electric_annual_shutoff_rate,
-    rank: getNationalRank(currentCode, 'electric'),
+    rate: curRate,
+    rank: getDataQuality(currentCode, fuel) === 'reporting_gap' ? null : getNationalRank(currentCode, fuel),
   });
 
   // National average
-  rows.push({ code: null, name: 'National average', rate: getNationalElectricRate(), rank: null });
+  rows.push({
+    code: null,
+    name: 'National average',
+    rate: fuel === 'electric' ? getNationalElectricRate() : getNationalGasRate(),
+    rank: null,
+  });
 
   // Neighbor
   if (neighborCode && neighborCode !== currentCode) {
     const n = getStateAnnual(neighborCode);
+    const nRate = getDataQuality(neighborCode, fuel) === 'reporting_gap'
+      ? NaN
+      : n[`${fuel}_annual_shutoff_rate`];
     rows.push({
       code: neighborCode,
       name: STATE_CODES[neighborCode] ?? neighborCode,
-      rate: n.electric_annual_shutoff_rate,
-      rank: getNationalRank(neighborCode, 'electric'),
+      rate: nRate,
+      rank: getDataQuality(neighborCode, fuel) === 'reporting_gap' ? null : getNationalRank(neighborCode, fuel),
       tag: 'neighbor',
     });
   }
@@ -80,6 +92,7 @@ function parseCompareParam(): string[] {
 export default function CompareStates({ currentCode }: Props) {
   const [extraCodes, setExtraCodes] = useState<string[]>([]);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [fuel, setFuel] = useState<'electric' | 'gas'>('electric');
 
   useEffect(() => {
     setExtraCodes(parseCompareParam());
@@ -109,23 +122,25 @@ export default function CompareStates({ currentCode }: Props) {
     updateUrl(next);
   }
 
-  const defaultRows = buildDefaultRows(currentCode);
-  const maxRate = Math.max(...defaultRows.map((r) => r.rate), 0.0001);
+  const defaultRows = buildDefaultRows(currentCode, fuel);
 
   const extraRows: CompareRow[] = extraCodes
     .filter((c) => !defaultRows.some((r) => r.code === c))
     .map((code) => {
       const a = getStateAnnual(code);
+      const rate = getDataQuality(code, fuel) === 'reporting_gap'
+        ? NaN
+        : a[`${fuel}_annual_shutoff_rate`];
       return {
         code,
         name: STATE_CODES[code] ?? code,
-        rate: a.electric_annual_shutoff_rate,
-        rank: getNationalRank(code, 'electric'),
+        rate,
+        rank: getDataQuality(code, fuel) === 'reporting_gap' ? null : getNationalRank(code, fuel),
       };
     });
 
   const allRows = [...defaultRows, ...extraRows];
-  const trueMax = Math.max(...allRows.map((r) => r.rate), 0.0001);
+  const trueMax = Math.max(...allRows.map((r) => r.rate).filter(Number.isFinite), 0.0001);
   const canAdd = extraCodes.length < MAX_EXTRA;
 
   const alreadyInList = new Set([
@@ -146,7 +161,7 @@ export default function CompareStates({ currentCode }: Props) {
           </button>
         )}
       </div>
-      <p className="text-[13px] text-[--color-text-secondary] mb-4">Electric annual shutoff rate, 2024.</p>
+      <p className="text-[13px] text-[--color-text-secondary] mb-4">{fuel === 'electric' ? 'Electric' : 'Gas'} annual shutoff rate, 2024.</p>
 
       <div>
         {allRows.map((row, i) => {
@@ -192,19 +207,41 @@ export default function CompareStates({ currentCode }: Props) {
               </span>
 
               <div className="h-4 bg-[--color-muted] rounded-sm overflow-hidden">
-                <div
-                  className={`h-full ${isCurrent ? 'bg-[--color-accent]' : 'bg-[--color-neutral-bar]'}`}
-                  style={{ width: barWidth }}
-                />
+                {Number.isFinite(row.rate) && (
+                  <div
+                    className={`h-full ${isCurrent ? 'bg-[--color-accent]' : 'bg-[--color-neutral-bar]'}`}
+                    style={{ width: barWidth }}
+                  />
+                )}
               </div>
 
-              <span className="text-[13px] text-right">{formatPercent(row.rate)}</span>
+              <span className="text-[13px] text-right">{Number.isFinite(row.rate) ? formatPercent(row.rate) : '—'}</span>
               <span className="text-xs text-[--color-text-tertiary] text-right">
                 {row.rank != null ? `#${row.rank}` : '—'}
               </span>
             </div>
           );
         })}
+      </div>
+
+      <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
+        {(['electric', 'gas'] as const).map((f) => (
+          <button
+            key={f}
+            type="button"
+            onClick={() => setFuel(f)}
+            style={
+              fuel === f
+                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
+                : undefined
+            }
+            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
+            }`}
+          >
+            {f === 'electric' ? 'Electric' : 'Gas'}
+          </button>
+        ))}
       </div>
 
       {sheetOpen && (
