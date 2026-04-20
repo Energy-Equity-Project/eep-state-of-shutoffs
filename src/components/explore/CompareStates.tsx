@@ -161,7 +161,27 @@ export default function CompareStates({ currentCode }: Props) {
           </button>
         )}
       </div>
-      <p className="text-[13px] text-[--color-text-secondary] mb-4">{fuel === 'electric' ? 'Electric' : 'Gas'} annual shutoff rate, 2024.</p>
+      <p className="text-[13px] text-[--color-text-secondary] mb-3">{fuel === 'electric' ? 'Electric' : 'Gas'} annual shutoff rate, 2024.</p>
+
+      <div className="flex gap-3 mb-4">
+        {(['electric', 'gas'] as const).map((f) => (
+          <button
+            key={f}
+            type="button"
+            onClick={() => setFuel(f)}
+            style={
+              fuel === f
+                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
+                : undefined
+            }
+            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
+            }`}
+          >
+            {f === 'electric' ? 'Electric' : 'Gas'}
+          </button>
+        ))}
+      </div>
 
       <div>
         {allRows.map((row, i) => {
@@ -228,26 +248,6 @@ export default function CompareStates({ currentCode }: Props) {
       </div>
 
       <FlagFootnote flags={cardFlags} />
-
-      <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
-        {(['electric', 'gas'] as const).map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => setFuel(f)}
-            style={
-              fuel === f
-                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
-                : undefined
-            }
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
-              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
-            }`}
-          >
-            {f === 'electric' ? 'Electric' : 'Gas'}
-          </button>
-        ))}
-      </div>
 
       {sheetOpen && (
         <StatePickerSheet

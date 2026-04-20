@@ -120,7 +120,28 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
   return (
     <div className="bg-[--color-surface] border border-[--color-border-light] rounded-xl px-6 py-5 mb-6">
       <h2 className="text-base font-medium mb-1">The shutoff pipeline, to scale</h2>
-      <p className="text-[13px] text-[--color-text-secondary] mb-4 max-w-xl">{caption}</p>
+      <p className="text-[13px] text-[--color-text-secondary] mb-3 max-w-xl">{caption}</p>
+
+      {/* Fuel toggle */}
+      <div className="flex gap-3 mb-4">
+        {(['electric', 'gas'] as const).map((f) => (
+          <button
+            key={f}
+            type="button"
+            onClick={() => setFuel(f)}
+            style={
+              fuel === f
+                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
+                : undefined
+            }
+            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
+            }`}
+          >
+            {f === 'electric' ? 'Electric' : 'Gas'}
+          </button>
+        ))}
+      </div>
 
       {/* Desktop SVG view */}
       <div className="hidden md:block overflow-x-auto">
@@ -322,27 +343,6 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
       </div>
 
       <FlagFootnote flags={cardFlags} />
-
-      {/* Fuel toggle */}
-      <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
-        {(['electric', 'gas'] as const).map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => setFuel(f)}
-            style={
-              fuel === f
-                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
-                : undefined
-            }
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
-              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
-            }`}
-          >
-            {f === 'electric' ? 'Electric' : 'Gas'}
-          </button>
-        ))}
-      </div>
 
       {/* Mobile ledger view */}
       <div className="md:hidden space-y-3 mt-4">

@@ -183,6 +183,26 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
       </div>
       <p className="text-[13px] text-[--color-text-secondary] mb-3 max-w-xl">{caption}</p>
 
+      <div className="flex gap-3 mb-4">
+        {(['electric', 'gas', 'both'] as Fuel[]).map((f) => (
+          <button
+            key={f}
+            type="button"
+            onClick={() => setFuel(f)}
+            style={
+              fuel === f
+                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
+                : undefined
+            }
+            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
+            }`}
+          >
+            {f === 'electric' ? 'Electric' : f === 'gas' ? 'Gas' : 'Both'}
+          </button>
+        ))}
+      </div>
+
       <svg
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}
         role="img"
@@ -271,26 +291,6 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
       </svg>
 
       <FlagFootnote flags={cardFlags} />
-
-      <div className="flex gap-3 mt-3.5 pt-3.5 border-t border-[--color-border-light]">
-        {(['electric', 'gas', 'both'] as Fuel[]).map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => setFuel(f)}
-            style={
-              fuel === f
-                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
-                : undefined
-            }
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
-              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
-            }`}
-          >
-            {f === 'electric' ? 'Electric' : f === 'gas' ? 'Gas' : 'Both'}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
