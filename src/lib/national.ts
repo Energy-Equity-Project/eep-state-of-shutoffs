@@ -153,6 +153,38 @@ export function getStatesForNational({ fuel, metric, unit }: MetricControls): St
   return rows.sort((a, b) => b.value - a.value);
 }
 
+// Data-driven quintile breakpoints derived from all 51 state values in shutoffs.json.
+// Key format: `${fuel}-${metric}-${unit}`
+// Rate values are percentages; count values are raw integers.
+export const BREAKPOINTS: Record<string, [number, number, number, number]> = {
+  'electric-shutoffs-rate':        [3.2,    4.3,     6.3,     10.1],
+  'electric-shutoffs-count':       [31000,  85000,   174000,  376000],
+  'gas-shutoffs-rate':             [1.2,    1.8,     2.6,     4.3],
+  'gas-shutoffs-count':            [5000,   13000,   30000,   52000],
+  'combined-shutoffs-rate':        [3.9,    5.3,     7.2,     12.5],
+  'combined-shutoffs-count':       [33000,  100000,  191000,  427000],
+  'electric-finalNotices-rate':    [27.9,   42.3,    68.1,    94.3],
+  'electric-finalNotices-count':   [257000, 766000,  1642000, 3172000],
+  'gas-finalNotices-rate':         [15.3,   22.8,    34.7,    58.4],
+  'gas-finalNotices-count':        [39000,  154000,  273000,  716000],
+  'combined-finalNotices-rate':    [36.1,   51.8,    92.0,    121.7],
+  'combined-finalNotices-count':   [369000, 927000,  2296000, 3481000],
+  'electric-reconnections-rate':   [2.7,    3.9,     5.3,     9.3],
+  'electric-reconnections-count':  [26000,  71000,   134000,  315000],
+  'gas-reconnections-rate':        [0.5,    1.0,     1.4,     2.6],
+  'gas-reconnections-count':       [2200,   8800,    19000,   37000],
+  'combined-reconnections-rate':   [2.9,    4.2,     6.0,     10.9],
+  'combined-reconnections-count':  [28000,  86000,   164000,  341000],
+};
+
+export function getBreakpoints(
+  fuel: Fuel,
+  metric: Metric,
+  unit: Unit,
+): [number, number, number, number] {
+  return BREAKPOINTS[`${fuel}-${metric}-${unit}`] ?? [0, 0, 0, 0];
+}
+
 export const FUEL_LABELS: Record<Fuel, string> = {
   electric: 'electric',
   gas: 'gas',

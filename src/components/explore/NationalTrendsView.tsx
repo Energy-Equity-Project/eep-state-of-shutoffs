@@ -97,6 +97,8 @@ export default function NationalTrendsView() {
           </p>
           <HexMap
             data={hexData}
+            fuel={fuel}
+            metric={metric}
             size={28}
             unit={unit}
             onHexClick={navigateToState}

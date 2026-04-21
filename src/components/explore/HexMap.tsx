@@ -1,4 +1,6 @@
-import type { Unit } from '../../lib/national';
+import type { Fuel, Metric, Unit } from '../../lib/national';
+import { getBreakpoints } from '../../lib/national';
+import { formatCondensed } from '../../lib/format';
 
 // [state_code, row, col]
 const HEX_COORDS: [string, number, number][] = [
@@ -17,25 +19,28 @@ const HEX_COORDS: [string, number, number][] = [
 ];
 
 const RAMP = ['#f0ecdc', '#e4d7a6', '#d6b57c', '#c97568', '#8a3328'];
-// Text color: dark on light buckets, white on dark buckets
 const LABEL_FILL = ['#5f5e5a', '#5f5e5a', '#ffffff', '#ffffff', '#ffffff'];
-// Rate bucket thresholds (percentage points)
-const RATE_THRESHOLDS = [3, 6, 9, 12];
 
-function rateBucket(val: number): number {
-  for (let i = 0; i < RATE_THRESHOLDS.length; i++) {
-    if (val < RATE_THRESHOLDS[i]) return i;
+function getBucket(value: number, thresholds: [number, number, number, number]): number {
+  for (let i = 0; i < thresholds.length; i++) {
+    if (value < thresholds[i]) return i;
   }
   return 4;
 }
 
-function quintileBuckets(values: number[]): number[] {
-  const sorted = [...values].sort((a, b) => a - b);
-  const n = sorted.length;
-  return values.map((v) => {
-    const rank = sorted.filter((s) => s <= v).length;
-    return Math.min(4, Math.floor((rank / n) * 5));
-  });
+function formatBreakpoint(value: number, unit: Unit): string {
+  if (unit === 'rate') return `${value % 1 === 0 ? value : value.toFixed(1)}%`;
+  return formatCondensed(value);
+}
+
+function buildLegendLabels(thresholds: [number, number, number, number], unit: Unit): string[] {
+  return [
+    `<${formatBreakpoint(thresholds[0], unit)}`,
+    `${formatBreakpoint(thresholds[0], unit)}–${formatBreakpoint(thresholds[1], unit)}`,
+    `${formatBreakpoint(thresholds[1], unit)}–${formatBreakpoint(thresholds[2], unit)}`,
+    `${formatBreakpoint(thresholds[2], unit)}–${formatBreakpoint(thresholds[3], unit)}`,
+    `${formatBreakpoint(thresholds[3], unit)}+`,
+  ];
 }
 
 function hexPoints(cx: number, cy: number, r: number): string {
@@ -54,21 +59,24 @@ interface HexDatum {
 
 interface Props {
   data: HexDatum[];
+  fuel: Fuel;
+  metric: Metric;
   size?: number;
   unit: Unit;
   onHexClick?: (st: string) => void;
 }
 
-export default function HexMap({ data, size = 28, unit, onHexClick }: Props) {
+export default function HexMap({ data, fuel, metric, size = 28, unit, onHexClick }: Props) {
   const sqrt3 = Math.sqrt(3);
   const colW = sqrt3 * size;
   const rowH = 1.5 * size;
   const pad = size;
 
-  // Build lookup map
+  const thresholds = getBreakpoints(fuel, metric, unit);
+  const legendLabels = buildLegendLabels(thresholds, unit);
+
   const valueMap = new Map(data.map((d) => [d.st, d.value]));
 
-  // Compute positions
   const hexes = HEX_COORDS.map(([st, row, col]) => {
     const offsetX = row % 2 === 0 ? (sqrt3 / 2) * size : 0;
     const cx = col * colW + offsetX + pad;
@@ -76,26 +84,16 @@ export default function HexMap({ data, size = 28, unit, onHexClick }: Props) {
     return { st, row, col, cx, cy };
   });
 
-  // Viewport
   const maxCx = Math.max(...hexes.map((h) => h.cx)) + size + pad;
   const maxCy = Math.max(...hexes.map((h) => h.cy)) + size + pad;
 
-  // Compute buckets
-  const values = hexes.map((h) => valueMap.get(h.st) ?? 0);
-  const buckets =
-    unit === 'rate'
-      ? values.map(rateBucket)
-      : quintileBuckets(values);
+  const buckets = hexes.map((h) => getBucket(valueMap.get(h.st) ?? 0, thresholds));
 
-  // Top-3 indices by value (for leader stroke)
   const ranked = [...hexes.map((h, i) => ({ i, v: valueMap.get(h.st) ?? 0 }))]
     .sort((a, b) => b.v - a.v)
     .slice(0, 3)
     .map((x) => x.i);
   const leaderSet = new Set(ranked);
-
-  // Active metric label for figcaption
-  const metricLabel = unit === 'rate' ? 'by rate' : 'by count';
 
   return (
     <figure>
@@ -136,9 +134,6 @@ export default function HexMap({ data, size = 28, unit, onHexClick }: Props) {
                 fill={fill}
                 stroke={isLeader ? 'var(--color-ink)' : 'var(--color-border-medium)'}
                 strokeWidth={isLeader ? 2 : 0.8}
-                style={{
-                  transition: 'stroke 0.15s',
-                }}
                 onMouseEnter={(e) => {
                   if (!isLeader) (e.currentTarget as SVGElement).setAttribute('stroke', 'var(--color-ink)');
                 }}
@@ -165,34 +160,26 @@ export default function HexMap({ data, size = 28, unit, onHexClick }: Props) {
 
       {/* Legend */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-[11px] text-[--color-text-secondary]">
-        <span className="font-medium">Rate</span>
-        {RAMP.map((color, i) => {
-          const label = i === 0
-            ? '<3%'
-            : i === 4
-            ? '12%+'
-            : `${RATE_THRESHOLDS[i - 1]}–${RATE_THRESHOLDS[i]}%`;
-          return (
-            <span key={i} className="flex items-center gap-1">
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: 14,
-                  height: 10,
-                  background: color,
-                  border: '1px solid var(--color-border-light)',
-                  borderRadius: 2,
-                }}
-              />
-              {label}
-            </span>
-          );
-        })}
+        {RAMP.map((color, i) => (
+          <span key={i} className="flex items-center gap-1">
+            <span
+              style={{
+                display: 'inline-block',
+                width: 14,
+                height: 10,
+                background: color,
+                border: '1px solid var(--color-border-light)',
+                borderRadius: 2,
+              }}
+            />
+            {legendLabels[i]}
+          </span>
+        ))}
         <span className="ml-auto italic">Each hex = one state</span>
       </div>
 
       <figcaption className="sr-only">
-        Electric shutoff {metricLabel} by state, 2024.
+        Hex tile map showing values by state, 2024.
       </figcaption>
     </figure>
   );
