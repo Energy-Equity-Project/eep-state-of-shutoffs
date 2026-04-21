@@ -8,7 +8,7 @@ export default function StateRankCard({ rank, outOf, className }: Props) {
   return (
     <aside
       aria-label={`National ranking: ${rank} of ${outOf}`}
-      className={`border border-[--color-border-light] bg-[--color-surface] rounded-lg inline-block px-3.5 md:px-5 py-2.5 md:py-4 ${className ?? ''}`}
+      className={`border border-[--color-border-light] bg-white inline-block px-3.5 md:px-5 py-2.5 md:py-4 ${className ?? ''}`}
     >
       <div className="md:hidden inline-flex gap-3.5 items-baseline">
         <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-[--color-text-tertiary]">

@@ -127,7 +127,7 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
     : null;
 
   return (
-    <div className="bg-[--color-surface] border border-[--color-border-light] rounded-xl px-6 py-5 mb-6">
+    <div className="bg-white border border-[--color-border-light] px-6 py-5 mb-6">
       <h2 className="text-base font-medium mb-1">The shutoff pipeline, to scale</h2>
       <p className="text-[13px] text-[--color-text-secondary] mb-3 max-w-xl">{caption}</p>
 

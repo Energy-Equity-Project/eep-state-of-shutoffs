@@ -46,7 +46,7 @@ export default function TopRightMenu({ pathname }: Props) {
         aria-expanded={open}
         aria-controls="top-right-menu-panel"
         aria-label="Open navigation menu"
-        className="w-10 h-10 flex items-center justify-center bg-[--color-surface] border border-[--color-border-light] rounded-md hover:bg-[--color-muted] transition-colors focus-visible:outline-2 focus-visible:outline-[--color-accent]"
+        className="w-10 h-10 flex items-center justify-center bg-[--color-surface] border border-[--color-border-light] hover:bg-[--color-muted] transition-colors focus-visible:outline-2 focus-visible:outline-[--color-accent]"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <line x1="2" y1="4.5" x2="16" y2="4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -58,7 +58,7 @@ export default function TopRightMenu({ pathname }: Props) {
       <div
         id="top-right-menu-panel"
         role="menu"
-        className={`absolute right-0 mt-2 min-w-[160px] bg-white border border-[--color-border-light] rounded-md shadow-md transition-all duration-150 origin-top-right ${
+        className={`absolute right-0 mt-2 min-w-[160px] bg-white border border-[--color-border-light] shadow-md transition-all duration-150 origin-top-right ${
           open
             ? 'opacity-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 -translate-y-1 pointer-events-none'

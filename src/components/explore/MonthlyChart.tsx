@@ -171,7 +171,7 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
   }
 
   return (
-    <div className="bg-[--color-surface] border border-[--color-border-light] rounded-xl px-6 py-5 mb-6">
+    <div className="bg-white border border-[--color-border-light] px-6 py-5 mb-6">
       <div className="flex justify-between items-baseline mb-1">
         <h2 className="text-base font-medium">Monthly pattern in 2024</h2>
         <div className="flex gap-4 text-xs text-[--color-text-secondary]">

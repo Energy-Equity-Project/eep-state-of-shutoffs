@@ -2,12 +2,14 @@ import { useMemo } from 'react';
 import { useMetricControls } from '../../lib/useMetricControls';
 import {
   getStatesForNational,
-  getNationalRate,
+  getNationalTotals,
   FUEL_DISPLAY,
   METRIC_DISPLAY,
   FUEL_LABELS,
-  METRIC_NOUNS,
+  METRIC_VERBS,
+  METRIC_NOUNS_PLURAL,
 } from '../../lib/national';
+import type { Fuel, Metric, NationalSummary } from '../../lib/national';
 import { getYear } from '../../lib/shutoffs';
 import MetricBar from './MetricBar';
 import HexMap from './HexMap';
@@ -15,6 +17,23 @@ import NationalKpiRow from './NationalKpiRow';
 import ScrollableRankList from './ScrollableRankList';
 
 const YEAR = getYear();
+const TOTALS = getNationalTotals();
+
+function getNationalCount(totals: NationalSummary, fuel: Fuel, metric: Metric): number {
+  if (metric === 'shutoffs') {
+    if (fuel === 'electric') return totals.electricShutoffs;
+    if (fuel === 'gas') return totals.gasShutoffs;
+    return totals.combinedShutoffs;
+  }
+  if (metric === 'finalNotices') {
+    if (fuel === 'electric') return totals.electricFinalNotices;
+    if (fuel === 'gas') return totals.gasFinalNotices;
+    return totals.electricFinalNotices + totals.gasFinalNotices;
+  }
+  if (fuel === 'electric') return totals.electricReconnections;
+  if (fuel === 'gas') return totals.gasReconnections;
+  return totals.electricReconnections + totals.gasReconnections;
+}
 
 function getOtherFuelLabel(fuel: string): string {
   if (fuel === 'electric') return 'gas';
@@ -30,9 +49,6 @@ export default function NationalTrendsView() {
 
   const hexData = statesData.map((r) => ({ st: r.st, value: r.value }));
 
-  const nationalRate = useMemo(() => getNationalRate({ fuel, metric }), [fuel, metric]);
-  const oneInN = nationalRate > 0 ? Math.round(1 / nationalRate) : 0;
-
   // Headline lede stats
   const highState = statesData[0];
   const lowState = statesData.length > 0 ? statesData[statesData.length - 1] : null;
@@ -40,7 +56,7 @@ export default function NationalTrendsView() {
   const lowPct = lowState ? lowState.rateValue.toFixed(0) : '?';
 
   const fuelLabel = FUEL_LABELS[fuel];
-  const metricNoun = METRIC_NOUNS[metric];
+  const totalCount = getNationalCount(TOTALS, fuel, metric);
   const eyebrow = `National · ${YEAR} · ${FUEL_DISPLAY[fuel]} ${METRIC_DISPLAY[metric]}`;
 
   const sectionTag =
@@ -63,15 +79,11 @@ export default function NationalTrendsView() {
         </p>
         <h1 className="text-[26px] md:text-[34px] font-semibold leading-tight mb-3 max-w-3xl"
             style={{ fontFamily: 'var(--font-serif)', letterSpacing: '-0.01em' }}>
-          {oneInN > 0 ? (
-            <>
-              Across the country,{' '}
-              <span className="highlight">1 in {oneInN.toLocaleString()} households</span>{' '}
-              faced a{fuelLabel.startsWith('e') ? 'n' : ''} {fuelLabel} {metricNoun} in {YEAR}.
-            </>
-          ) : (
-            <>Across the country, utilities recorded {fuelLabel} {metricNoun}s in {YEAR}.</>
-          )}
+          Across the country,{' '}
+          <span className="highlight">
+            utilities {METRIC_VERBS[metric]} {totalCount.toLocaleString()} {fuelLabel} {METRIC_NOUNS_PLURAL[metric]}
+          </span>{' '}
+          in {YEAR}.
         </h1>
         {highState && lowState && (
           <p className="text-[14px] text-[--color-text-secondary] leading-relaxed max-w-2xl">

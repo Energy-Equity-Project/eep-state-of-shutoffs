@@ -36,7 +36,7 @@ export default function KpiGrid({
   const labelCls = 'text-[11px] md:text-xs text-[--color-text-secondary] mb-1.5';
   const valueCls = 'text-[20px] md:text-[22px] font-medium mb-1';
   const metaCls = 'text-[11px] md:text-xs text-[--color-text-tertiary]';
-  const cardCls = 'bg-[--color-surface] border border-[--color-border-light] rounded-lg p-4';
+  const cardCls = 'bg-white border border-[--color-border-light] p-4';
 
   return (
     <div className="mb-8">

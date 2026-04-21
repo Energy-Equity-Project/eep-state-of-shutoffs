@@ -13,7 +13,7 @@ export default function ScrollableRankList({ rows, unit, compact }: Props) {
 
   return (
     <div
-      className="border border-[--color-border-medium] bg-[--color-surface]"
+      className="border border-[--color-border-medium] bg-white"
       style={{ borderRadius: 0 }}
     >
       {/* Sticky header */}

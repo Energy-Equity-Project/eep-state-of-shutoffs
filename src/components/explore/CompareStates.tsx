@@ -157,14 +157,14 @@ export default function CompareStates({ currentCode }: Props) {
   ]);
 
   return (
-    <div className="bg-[--color-surface] border border-[--color-border-light] rounded-xl px-6 py-5 mb-6">
+    <div className="bg-white border border-[--color-border-light] px-6 py-5 mb-6">
       <div className="flex justify-between items-baseline mb-1">
         <h2 className="text-base font-medium">Compare to other states</h2>
         {canAdd && (
           <button
             type="button"
             onClick={() => setSheetOpen(true)}
-            className="text-xs px-2.5 py-1 rounded-lg border border-[--color-border-light] text-[--color-text-secondary] hover:border-[--color-border-medium] focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors"
+            className="text-xs px-2.5 py-1 border border-[--color-border-light] text-[--color-text-secondary] hover:border-[--color-border-medium] focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors"
           >
             + Add state
           </button>

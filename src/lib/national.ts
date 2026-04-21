@@ -200,6 +200,18 @@ export const METRIC_NOUNS: Record<Metric, string> = {
   reconnections: 'reconnection',
 };
 
+export const METRIC_VERBS: Record<Metric, string> = {
+  shutoffs: 'executed',
+  finalNotices: 'sent',
+  reconnections: 'executed',
+};
+
+export const METRIC_NOUNS_PLURAL: Record<Metric, string> = {
+  shutoffs: 'shutoffs',
+  finalNotices: 'final notices',
+  reconnections: 'reconnections',
+};
+
 export const FUEL_DISPLAY: Record<Fuel, string> = {
   electric: 'Electric',
   gas: 'Gas',

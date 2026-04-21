@@ -35,7 +35,7 @@ export default function SegmentedControl<T extends string>({
                 ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
                 : undefined
             }
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
+            className={`text-[13px] px-3 py-1.5 border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
               !isActive ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
             }`}
           >

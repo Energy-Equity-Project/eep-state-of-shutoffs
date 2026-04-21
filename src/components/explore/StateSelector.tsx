@@ -23,7 +23,7 @@ export default function StateSelector({ currentCode }: Props) {
       <select
         value={currentCode}
         onChange={(e) => navigate(e.target.value)}
-        className="hidden md:block text-[13px] px-2.5 py-1.5 rounded-lg border border-[--color-border-light] bg-[--color-surface] focus-visible:outline-2 focus-visible:outline-[--color-accent]"
+        className="hidden md:block text-[13px] px-2.5 py-1.5 border border-[--color-border-light] bg-[--color-surface] focus-visible:outline-2 focus-visible:outline-[--color-accent]"
         aria-label="Select a state"
       >
         {SORTED.map(([code, name]) => (
@@ -35,7 +35,7 @@ export default function StateSelector({ currentCode }: Props) {
       <button
         type="button"
         onClick={() => setSheetOpen(true)}
-        className="md:hidden w-full text-left text-[13px] px-2.5 py-1.5 rounded-lg border border-[--color-border-light] bg-[--color-surface] focus-visible:outline-2 focus-visible:outline-[--color-accent]"
+        className="md:hidden w-full text-left text-[13px] px-2.5 py-1.5 border border-[--color-border-light] bg-[--color-surface] focus-visible:outline-2 focus-visible:outline-[--color-accent]"
       >
         {currentName} ▾
       </button>
