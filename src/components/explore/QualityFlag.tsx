@@ -1,4 +1,4 @@
-import { FLAG_DEFINITIONS, type EiaFlag } from '../../lib/shutoffs';
+import { FLAG_DEFINITIONS, type EiaFlag } from '../../lib/shutoffs-constants';
 
 export function FlagAsterisk() {
   return (

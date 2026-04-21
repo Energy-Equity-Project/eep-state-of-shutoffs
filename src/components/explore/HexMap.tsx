@@ -1,5 +1,5 @@
-import type { Fuel, Metric, Unit } from '../../lib/national';
-import { getBreakpoints } from '../../lib/national';
+import type { Fuel, Metric, Unit } from '../../lib/national-constants';
+import { getBreakpoints } from '../../lib/national-constants';
 import { formatCondensed } from '../../lib/format';
 
 // [state_code, row, col]

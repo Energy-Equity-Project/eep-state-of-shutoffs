@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { STATE_CODES } from '../../lib/shutoffs';
+import { STATE_CODES } from '../../lib/shutoffs-constants';
 
 interface Props {
   title: string;

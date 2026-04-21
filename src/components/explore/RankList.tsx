@@ -1,4 +1,4 @@
-import type { StateNationalRow, Unit } from '../../lib/national';
+import type { StateNationalRow, Unit } from '../../lib/national-constants';
 
 interface Props {
   rows: StateNationalRow[];

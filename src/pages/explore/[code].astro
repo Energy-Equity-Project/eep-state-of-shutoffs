@@ -12,14 +12,20 @@ import {
   getAllStateCodes,
   getStateAnnual,
   getStateMonthly,
+  getStateHouseholds,
   getNationalRank,
   getMultiplierVsNational,
   getOneInX,
   getYear,
   getStateCost2024,
   getCostChange,
+  getNationalElectricRate,
+  getNationalGasRate,
+  getHighestRateState,
+  getNeighbor,
   STATE_CODES,
 } from '../../lib/shutoffs';
+import { computeMonthlyFlags } from '../../lib/shutoffs-constants';
 import { formatPctDiffVsNational } from '../../lib/format';
 
 export function getStaticPaths() {
@@ -42,6 +48,7 @@ const code = rawCode.toUpperCase();
 const stateName = STATE_CODES[code] ?? code;
 const stateAnnual = getStateAnnual(code);
 const stateMonthly = getStateMonthly(code);
+const households = getStateHouseholds(code);
 
 const electricRank = getNationalRank(code, 'electric');
 const electricMultiplier = getMultiplierVsNational(code, 'electric');
@@ -66,6 +73,35 @@ const gasBillPctChange = costChange?.gas_pct_change ?? null;
 const costSubhead = bill == null
   ? null
   : `The average household here now pays $${Math.round(bill)} per month for electricity and gas.`;
+
+// Pre-compute all data the CompareStates island needs (up to 51 states × two fuels)
+const allCodes = getAllStateCodes();
+const stateData: Record<string, {
+  electricRate: number;
+  gasRate: number;
+  electricRank: number;
+  gasRank: number;
+  electricFlags: ('R' | 'Q')[];
+  gasFlags: ('R' | 'Q')[];
+}> = {};
+for (const c of allCodes) {
+  const annual = getStateAnnual(c);
+  const monthly = getStateMonthly(c);
+  stateData[c] = {
+    electricRate: annual.electric_annual_shutoff_rate,
+    gasRate: annual.gas_annual_shutoff_rate,
+    electricRank: getNationalRank(c, 'electric'),
+    gasRank: getNationalRank(c, 'gas'),
+    electricFlags: [...computeMonthlyFlags(monthly, 'electric', ['shutoffs'])],
+    gasFlags: [...computeMonthlyFlags(monthly, 'gas', ['shutoffs'])],
+  };
+}
+
+const nationalElectricRate = getNationalElectricRate();
+const nationalGasRate = getNationalGasRate();
+const highestElectric = getHighestRateState('electric');
+const highestGas = getHighestRateState('gas');
+const neighborCode = getNeighbor(code);
 ---
 
 <BaseLayout title={`${stateName} utility shutoffs, ${year} — EEP`} hideTopRightMenu={true}>
@@ -101,7 +137,7 @@ const costSubhead = bill == null
 
     <KpiGrid
       stateAnnual={stateAnnual}
-      stateCode={code}
+      stateMonthly={stateMonthly}
       electricBill={electricBill}
       electricBillPctChange={electricBillPctChange}
       gasBill={gasBill}
@@ -117,12 +153,23 @@ const costSubhead = bill == null
     />
 
     <ShutoffPipeline
-      stateCode={code}
+      stateAnnual={stateAnnual}
+      stateMonthly={stateMonthly}
+      households={households}
       stateName={stateName}
       client:load
     />
 
-    <CompareStates currentCode={code} client:load />
+    <CompareStates
+      currentCode={code}
+      stateData={stateData}
+      nationalElectricRate={nationalElectricRate}
+      nationalGasRate={nationalGasRate}
+      highestElectric={highestElectric}
+      highestGas={highestGas}
+      neighborCode={neighborCode}
+      client:load
+    />
 
   </main>
 </BaseLayout>

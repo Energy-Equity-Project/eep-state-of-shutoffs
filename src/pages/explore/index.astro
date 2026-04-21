@@ -3,9 +3,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Masthead from '../../components/Masthead.astro';
 import ExploreTabNav from '../../components/explore/ExploreTabNav.astro';
 import NationalTrendsView from '../../components/explore/NationalTrendsView';
-import { getYear } from '../../lib/shutoffs';
+import { getYear, getAllStateAnnual } from '../../lib/shutoffs';
+import { getNationalTotals, getNationalRate } from '../../lib/national';
 
 const year = getYear();
+const totals = getNationalTotals();
+const stateAnnual = getAllStateAnnual();
+const shutoffRates = {
+  electric: getNationalRate({ fuel: 'electric', metric: 'shutoffs' }),
+  gas: getNationalRate({ fuel: 'gas', metric: 'shutoffs' }),
+  combined: getNationalRate({ fuel: 'combined', metric: 'shutoffs' }),
+};
 ---
 
 <BaseLayout
@@ -16,6 +24,12 @@ const year = getYear();
   <main class="max-w-[960px] mx-auto px-4 md:px-6 pt-28 pb-6">
     <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
     <ExploreTabNav activeTab="national" />
-    <NationalTrendsView client:load />
+    <NationalTrendsView
+      year={year}
+      totals={totals}
+      stateAnnual={stateAnnual}
+      shutoffRates={shutoffRates}
+      client:load
+    />
   </main>
 </BaseLayout>

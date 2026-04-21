@@ -1,4 +1,4 @@
-import type { MetricControls, Fuel, Metric, Unit } from '../../lib/national';
+import type { MetricControls, Fuel, Metric, Unit } from '../../lib/national-constants';
 import SegmentedControl from './SegmentedControl';
 import type { PillOption } from './SegmentedControl';
 

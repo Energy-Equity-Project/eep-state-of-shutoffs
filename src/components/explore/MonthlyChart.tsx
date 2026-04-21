@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { ShutoffRecord } from '../../data/shutoffs-types';
 import { getChartCaption, getBothCaption } from '../../lib/chart-captions';
-import { getMonthlyFlags } from '../../lib/shutoffs';
+import { computeMonthlyFlags } from '../../lib/shutoffs-constants';
 import { FlagFootnote } from './QualityFlag';
 import SegmentedControl from './SegmentedControl';
 import type { PillOption } from './SegmentedControl';
@@ -93,10 +93,10 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
 
   const cardFlags = fuel === 'both'
     ? new Set([
-        ...getMonthlyFlags(stateCode, 'electric', ['shutoffs']),
-        ...getMonthlyFlags(stateCode, 'gas', ['shutoffs']),
+        ...computeMonthlyFlags(stateMonthly, 'electric', ['shutoffs']),
+        ...computeMonthlyFlags(stateMonthly, 'gas', ['shutoffs']),
       ])
-    : getMonthlyFlags(stateCode, fuel as 'electric' | 'gas', ['shutoffs']);
+    : computeMonthlyFlags(stateMonthly, fuel as 'electric' | 'gas', ['shutoffs']);
 
   const circleColor = fuel === 'gas' ? '#888780' : '#185fa5';
   const stateLineColor = fuel === 'gas' ? '#888780' : '#185fa5';

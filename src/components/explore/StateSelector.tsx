@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { STATE_CODES } from '../../lib/shutoffs';
+import { STATE_CODES } from '../../lib/shutoffs-constants';
 import StatePickerSheet from './StatePickerSheet';
 
 interface Props {

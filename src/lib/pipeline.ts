@@ -1,4 +1,4 @@
-import { getStateAnnual, getStateHouseholds } from './shutoffs';
+import type { StateAnnual } from '../data/shutoffs-types';
 import { formatMultiplier, formatPercent } from './format';
 
 export interface PipelineStage {
@@ -16,9 +16,11 @@ export interface PipelineData {
   noticesMultiplier: number | null;
 }
 
-export function getPipelineData(code: string, fuel: 'electric' | 'gas' = 'electric'): PipelineData {
-  const annual = getStateAnnual(code);
-  const households = getStateHouseholds(code);
+export function getPipelineData(
+  annual: StateAnnual,
+  households: number | null,
+  fuel: 'electric' | 'gas' = 'electric',
+): PipelineData {
   const notices = annual[`${fuel}_shutoff_notices_total`] || null;
   const shutoffs = annual[`${fuel}_shutoffs_total`];
   const reconnections = annual[`${fuel}_reconnections_total`] ?? null;

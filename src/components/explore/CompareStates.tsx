@@ -1,15 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  STATE_CODES,
-  getStateAnnual,
-  getNationalRank,
-  getNationalElectricRate,
-  getNationalGasRate,
-  getHighestRateState,
-  getNeighbor,
-  getMonthlyFlags,
-  type EiaFlag,
-} from '../../lib/shutoffs';
+import { STATE_CODES, type EiaFlag } from '../../lib/shutoffs-constants';
 import { formatPercent } from '../../lib/format';
 import { FlagAsterisk, FlagFootnote } from './QualityFlag';
 import StatePickerSheet from './StatePickerSheet';
@@ -23,8 +13,29 @@ const FUEL_OPTIONS: PillOption<Fuel>[] = [
   { value: 'gas', label: 'Gas' },
 ];
 
+interface CompareStateRow {
+  electricRate: number;
+  gasRate: number;
+  electricRank: number;
+  gasRank: number;
+  electricFlags: EiaFlag[];
+  gasFlags: EiaFlag[];
+}
+
+interface HighestRateState {
+  code: string;
+  name: string;
+  rate: number;
+}
+
 interface Props {
   currentCode: string;
+  stateData: Record<string, CompareStateRow>;
+  nationalElectricRate: number;
+  nationalGasRate: number;
+  highestElectric: HighestRateState;
+  highestGas: HighestRateState;
+  neighborCode: string | null;
 }
 
 interface CompareRow {
@@ -37,36 +48,46 @@ interface CompareRow {
 
 const MAX_EXTRA = 5;
 
-function buildDefaultRows(currentCode: string, fuel: 'electric' | 'gas'): CompareRow[] {
-  const neighborCode = getNeighbor(currentCode);
-  const highest = getHighestRateState(fuel);
+function buildDefaultRows(
+  currentCode: string,
+  fuel: Fuel,
+  stateData: Record<string, CompareStateRow>,
+  nationalElectricRate: number,
+  nationalGasRate: number,
+  highest: HighestRateState,
+  neighborCode: string | null,
+): CompareRow[] {
   const rows: CompareRow[] = [];
+  const rateKey = `${fuel}Rate` as const;
+  const rankKey = `${fuel}Rank` as const;
 
   // Current state
-  const cur = getStateAnnual(currentCode);
-  rows.push({
-    code: currentCode,
-    name: STATE_CODES[currentCode] ?? currentCode,
-    rate: cur[`${fuel}_annual_shutoff_rate`],
-    rank: getNationalRank(currentCode, fuel),
-  });
+  const cur = stateData[currentCode];
+  if (cur) {
+    rows.push({
+      code: currentCode,
+      name: STATE_CODES[currentCode] ?? currentCode,
+      rate: cur[rateKey],
+      rank: cur[rankKey],
+    });
+  }
 
   // National average
   rows.push({
     code: null,
     name: 'National average',
-    rate: fuel === 'electric' ? getNationalElectricRate() : getNationalGasRate(),
+    rate: fuel === 'electric' ? nationalElectricRate : nationalGasRate,
     rank: null,
   });
 
   // Neighbor
-  if (neighborCode && neighborCode !== currentCode) {
-    const n = getStateAnnual(neighborCode);
+  if (neighborCode && neighborCode !== currentCode && stateData[neighborCode]) {
+    const n = stateData[neighborCode];
     rows.push({
       code: neighborCode,
       name: STATE_CODES[neighborCode] ?? neighborCode,
-      rate: n[`${fuel}_annual_shutoff_rate`],
-      rank: getNationalRank(neighborCode, fuel),
+      rate: n[rateKey],
+      rank: n[rankKey],
       tag: 'neighbor',
     });
   }
@@ -94,7 +115,15 @@ function parseCompareParam(): string[] {
     .filter((c) => c && STATE_CODES[c]) ?? [];
 }
 
-export default function CompareStates({ currentCode }: Props) {
+export default function CompareStates({
+  currentCode,
+  stateData,
+  nationalElectricRate,
+  nationalGasRate,
+  highestElectric,
+  highestGas,
+  neighborCode,
+}: Props) {
   const [extraCodes, setExtraCodes] = useState<string[]>([]);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [fuel, setFuel] = useState<Fuel>('electric');
@@ -127,17 +156,29 @@ export default function CompareStates({ currentCode }: Props) {
     updateUrl(next);
   }
 
-  const defaultRows = buildDefaultRows(currentCode, fuel);
+  const highest = fuel === 'electric' ? highestElectric : highestGas;
+  const defaultRows = buildDefaultRows(
+    currentCode,
+    fuel,
+    stateData,
+    nationalElectricRate,
+    nationalGasRate,
+    highest,
+    neighborCode,
+  );
+
+  const rateKey = `${fuel}Rate` as const;
+  const rankKey = `${fuel}Rank` as const;
 
   const extraRows: CompareRow[] = extraCodes
     .filter((c) => !defaultRows.some((r) => r.code === c))
     .map((code) => {
-      const a = getStateAnnual(code);
+      const a = stateData[code];
       return {
         code,
         name: STATE_CODES[code] ?? code,
-        rate: a[`${fuel}_annual_shutoff_rate`],
-        rank: getNationalRank(code, fuel),
+        rate: a?.[rateKey] ?? 0,
+        rank: a?.[rankKey] ?? 0,
       };
     });
 
@@ -145,16 +186,16 @@ export default function CompareStates({ currentCode }: Props) {
   const trueMax = Math.max(...allRows.map((r) => r.rate).filter(Number.isFinite), 0.0001);
   const canAdd = extraCodes.length < MAX_EXTRA;
 
+  const flagKey = fuel === 'electric' ? 'electricFlags' : 'gasFlags';
   const flagsByCode = new Map<string, Set<EiaFlag>>();
   for (const row of allRows) {
-    if (row.code) flagsByCode.set(row.code, getMonthlyFlags(row.code, fuel, ['shutoffs']));
+    if (row.code) {
+      const s = stateData[row.code];
+      flagsByCode.set(row.code, new Set(s?.[flagKey] ?? []));
+    }
   }
   const cardFlags = new Set<EiaFlag>();
   flagsByCode.forEach((s) => s.forEach((f) => cardFlags.add(f)));
-
-  const alreadyInList = new Set([
-    ...allRows.map((r) => r.code).filter(Boolean) as string[],
-  ]);
 
   return (
     <div className="bg-white border border-[--color-border-light] px-6 py-5 mb-6">
@@ -181,7 +222,7 @@ export default function CompareStates({ currentCode }: Props) {
       </div>
 
       <div>
-        {allRows.map((row, i) => {
+        {allRows.map((row) => {
           const isCurrent = row.code === currentCode;
           const barWidth = `${((row.rate / trueMax) * 100).toFixed(1)}%`;
           const isExtra = extraCodes.includes(row.code ?? '');

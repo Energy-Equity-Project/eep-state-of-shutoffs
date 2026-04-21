@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { getPipelineData, type PipelineStage } from '../../lib/pipeline';
 import { formatCount, formatCondensed } from '../../lib/format';
-import { getMonthlyFlags } from '../../lib/shutoffs';
+import { computeMonthlyFlags } from '../../lib/shutoffs-constants';
+import type { StateAnnual, ShutoffRecord } from '../../data/shutoffs-types';
 import { FlagAsterisk, FlagFootnote } from './QualityFlag';
 import SegmentedControl from './SegmentedControl';
 import type { PillOption } from './SegmentedControl';
@@ -14,7 +15,9 @@ const FUEL_OPTIONS: PillOption<Fuel>[] = [
 ];
 
 interface Props {
-  stateCode: string;
+  stateAnnual: StateAnnual;
+  stateMonthly: ShutoffRecord[];
+  households: number | null;
   stateName: string;
 }
 
@@ -53,13 +56,13 @@ function stageColor(stage: PipelineStage): string {
   return 'var(--color-pipeline-fill)';
 }
 
-export default function ShutoffPipeline({ stateCode, stateName }: Props) {
+export default function ShutoffPipeline({ stateAnnual, stateMonthly, households, stateName }: Props) {
   const [fuel, setFuel] = useState<Fuel>('electric');
-  const { stages, maxValue } = getPipelineData(stateCode, fuel);
-  const noticesFlags = getMonthlyFlags(stateCode, fuel, ['shutoff_notices']);
-  const shutoffsFlags = getMonthlyFlags(stateCode, fuel, ['shutoffs']);
-  const reconnectionsFlags = getMonthlyFlags(stateCode, fuel, ['reconnections']);
-  const cardFlags = getMonthlyFlags(stateCode, fuel, ['shutoff_notices', 'shutoffs', 'reconnections']);
+  const { stages, maxValue } = getPipelineData(stateAnnual, households, fuel);
+  const noticesFlags = computeMonthlyFlags(stateMonthly, fuel, ['shutoff_notices']);
+  const shutoffsFlags = computeMonthlyFlags(stateMonthly, fuel, ['shutoffs']);
+  const reconnectionsFlags = computeMonthlyFlags(stateMonthly, fuel, ['reconnections']);
+  const cardFlags = computeMonthlyFlags(stateMonthly, fuel, ['shutoff_notices', 'shutoffs', 'reconnections']);
 
   const householdsStage = stages.find((s) => s.id === 'households');
   const noticesStage = stages.find((s) => s.id === 'notices');

@@ -1,11 +1,11 @@
-import type { StateAnnual } from '../../data/shutoffs-types';
+import type { StateAnnual, ShutoffRecord } from '../../data/shutoffs-types';
 import { formatCount, formatPercent, formatDollars, formatChangePct } from '../../lib/format';
-import { getMonthlyFlags } from '../../lib/shutoffs';
+import { computeMonthlyFlags } from '../../lib/shutoffs-constants';
 import { FlagAsterisk, FlagFootnote } from './QualityFlag';
 
 interface Props {
   stateAnnual: StateAnnual;
-  stateCode: string;
+  stateMonthly: ShutoffRecord[];
   electricBill: number | null;
   electricBillPctChange: number | null;
   gasBill: number | null;
@@ -20,14 +20,14 @@ function billSubtext(bill: number | null, pctChange: number | null): string {
 
 export default function KpiGrid({
   stateAnnual,
-  stateCode,
+  stateMonthly,
   electricBill,
   electricBillPctChange,
   gasBill,
   gasBillPctChange,
 }: Props) {
-  const electricFlags = getMonthlyFlags(stateCode, 'electric', ['shutoffs']);
-  const gasFlags = getMonthlyFlags(stateCode, 'gas', ['shutoffs']);
+  const electricFlags = computeMonthlyFlags(stateMonthly, 'electric', ['shutoffs']);
+  const gasFlags = computeMonthlyFlags(stateMonthly, 'gas', ['shutoffs']);
   const allFlags = new Set([...electricFlags, ...gasFlags]);
 
   const electricBillValue = electricBill != null ? formatDollars(electricBill) : '—';

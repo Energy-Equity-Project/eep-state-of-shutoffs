@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { MetricControls, Fuel, Metric, Unit } from './national';
+import type { MetricControls, Fuel, Metric, Unit } from './national-constants';
 
 const DEFAULT: MetricControls = { fuel: 'electric', metric: 'shutoffs', unit: 'rate' };
 const SESSION_KEY = 'eep.metricControls';

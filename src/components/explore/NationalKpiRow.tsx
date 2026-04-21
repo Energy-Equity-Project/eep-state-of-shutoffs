@@ -1,5 +1,5 @@
-import { getNationalTotals, getNationalRate, FUEL_DISPLAY } from '../../lib/national';
-import type { Fuel } from '../../lib/national';
+import { FUEL_DISPLAY } from '../../lib/national-constants';
+import type { Fuel, NationalSummary } from '../../lib/national-constants';
 import { formatCondensed } from '../../lib/format';
 
 const labelCls = 'text-[11px] md:text-xs text-[--color-text-secondary] mb-1.5';
@@ -7,11 +7,8 @@ const valueCls = 'text-[20px] md:text-[22px] font-medium mb-1';
 const metaCls = 'text-[11px] md:text-xs text-[--color-text-tertiary]';
 const cardCls = 'bg-white border border-[--color-border-light] p-4';
 
-const totals = getNationalTotals();
-
-function getMetrics(fuel: Fuel) {
+function getMetrics(totals: NationalSummary, rate: number, fuel: Fuel) {
   const fuelLabel = FUEL_DISPLAY[fuel];
-  const rate = getNationalRate({ fuel, metric: 'shutoffs' });
 
   let finalNotices: number;
   let shutoffs: number;
@@ -38,10 +35,12 @@ function getMetrics(fuel: Fuel) {
 
 interface Props {
   fuel: Fuel;
+  totals: NationalSummary;
+  rate: number;
 }
 
-export default function NationalKpiRow({ fuel }: Props) {
-  const { fuelLabel, finalNotices, shutoffs, rate, reconnections, reconPer100 } = getMetrics(fuel);
+export default function NationalKpiRow({ fuel, totals, rate }: Props) {
+  const { fuelLabel, finalNotices, shutoffs, reconnections, reconPer100 } = getMetrics(totals, rate, fuel);
   const ratePct = (rate * 100).toFixed(1);
 
   return (

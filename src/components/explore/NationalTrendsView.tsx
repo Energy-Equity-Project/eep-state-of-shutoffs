@@ -1,23 +1,26 @@
 import { useMemo } from 'react';
 import { useMetricControls } from '../../lib/useMetricControls';
 import {
-  getStatesForNational,
-  getNationalTotals,
+  computeStatesForNational,
   FUEL_DISPLAY,
   METRIC_DISPLAY,
   FUEL_LABELS,
   METRIC_VERBS,
   METRIC_NOUNS_PLURAL,
-} from '../../lib/national';
-import type { Fuel, Metric, NationalSummary } from '../../lib/national';
-import { getYear } from '../../lib/shutoffs';
+} from '../../lib/national-constants';
+import type { Fuel, Metric, NationalSummary } from '../../lib/national-constants';
+import type { StateAnnual } from '../../data/shutoffs-types';
 import MetricBar from './MetricBar';
 import HexMap from './HexMap';
 import NationalKpiRow from './NationalKpiRow';
 import ScrollableRankList from './ScrollableRankList';
 
-const YEAR = getYear();
-const TOTALS = getNationalTotals();
+interface Props {
+  year: number;
+  totals: NationalSummary;
+  stateAnnual: StateAnnual[];
+  shutoffRates: { electric: number; gas: number; combined: number };
+}
 
 function getNationalCount(totals: NationalSummary, fuel: Fuel, metric: Metric): number {
   if (metric === 'shutoffs') {
@@ -41,11 +44,14 @@ function getOtherFuelLabel(fuel: string): string {
   return 'individual fuels';
 }
 
-export default function NationalTrendsView() {
+export default function NationalTrendsView({ year, totals, stateAnnual, shutoffRates }: Props) {
   const { controls, onChange } = useMetricControls();
   const { fuel, metric, unit } = controls;
 
-  const statesData = useMemo(() => getStatesForNational(controls), [controls]);
+  const statesData = useMemo(
+    () => computeStatesForNational(stateAnnual, controls),
+    [stateAnnual, controls],
+  );
 
   const hexData = statesData.map((r) => ({ st: r.st, value: r.value }));
 
@@ -56,8 +62,8 @@ export default function NationalTrendsView() {
   const lowPct = lowState ? lowState.rateValue.toFixed(0) : '?';
 
   const fuelLabel = FUEL_LABELS[fuel];
-  const totalCount = getNationalCount(TOTALS, fuel, metric);
-  const eyebrow = `National · ${YEAR} · ${FUEL_DISPLAY[fuel]} ${METRIC_DISPLAY[metric]}`;
+  const totalCount = getNationalCount(totals, fuel, metric);
+  const eyebrow = `National · ${year} · ${FUEL_DISPLAY[fuel]} ${METRIC_DISPLAY[metric]}`;
 
   const sectionTag =
     unit === 'count' ? 'ALL STATES · RANKED BY COUNT' : 'ALL STATES · RANKED BY RATE';
@@ -83,7 +89,7 @@ export default function NationalTrendsView() {
           <span className="highlight">
             utilities {METRIC_VERBS[metric]} {totalCount.toLocaleString()} {fuelLabel} {METRIC_NOUNS_PLURAL[metric]}
           </span>{' '}
-          in {YEAR}.
+          in {year}.
         </h1>
         {highState && lowState && (
           <p className="text-[14px] text-[--color-text-secondary] leading-relaxed max-w-2xl">
@@ -95,7 +101,7 @@ export default function NationalTrendsView() {
       </div>
 
       {/* KPI summary row */}
-      <NationalKpiRow fuel={fuel} />
+      <NationalKpiRow fuel={fuel} totals={totals} rate={shutoffRates[fuel]} />
 
       {/* Metric control bar */}
       <MetricBar value={controls} onChange={onChange} />
