@@ -1,3 +1,21 @@
 ---
-return Astro.redirect('/explore/MI', 301);
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masthead from '../../components/Masthead.astro';
+import ExploreTabNav from '../../components/explore/ExploreTabNav.astro';
+import NationalTrendsView from '../../components/explore/NationalTrendsView';
+import { getYear } from '../../lib/shutoffs';
+
+const year = getYear();
 ---
+
+<BaseLayout
+  title={`National trends — Utility shutoffs, ${year} — EEP`}
+  hideTopRightMenu={true}
+>
+  <Masthead titleAs="p" />
+  <main class="max-w-[960px] mx-auto px-4 md:px-6 pt-28 pb-6">
+    <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
+    <ExploreTabNav activeTab="national" />
+    <NationalTrendsView client:load />
+  </main>
+</BaseLayout>

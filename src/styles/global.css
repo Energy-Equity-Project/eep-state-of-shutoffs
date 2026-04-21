@@ -21,6 +21,22 @@
   --color-pipeline-reconnect: #a8c4a2;
   --color-pipeline-warn: #c2410c;
   --color-flag: #dc2626;
+
+  /* Semantic aliases used by National trends components */
+  --color-pencil: var(--color-text-secondary);
+  --color-quiet: var(--color-text-tertiary);
+  --color-hairline: var(--color-border-light);
+  --color-hairline-hard: var(--color-border-medium);
+  --color-card: var(--color-surface);
+  --color-marker: var(--color-highlight);
+  --color-warn: #c97568;
+
+  /* Sequential ramp for hex-tile map */
+  --color-ramp-0: #f0ecdc;
+  --color-ramp-1: #e4d7a6;
+  --color-ramp-2: #d6b57c;
+  --color-ramp-3: #c97568;
+  --color-ramp-4: #8a3328;
 }
 
 @layer components {

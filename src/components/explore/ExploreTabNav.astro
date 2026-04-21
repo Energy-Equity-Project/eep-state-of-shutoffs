@@ -1,0 +1,54 @@
+---
+import StateSelector from './StateSelector';
+
+interface Props {
+  activeTab: 'national' | 'state';
+  currentCode?: string;
+}
+
+const { activeTab, currentCode } = Astro.props;
+
+const activeCls =
+  'text-[13px] text-[--color-ink] border-b border-current pb-0.5 no-underline';
+const inactiveCls =
+  'text-[13px] text-[--color-text-secondary] pb-0.5 no-underline hover:text-[--color-ink] transition-colors';
+---
+
+<nav
+  class="flex justify-between items-center pb-4 border-b border-[--color-border-light] mb-6 pr-14"
+>
+  <div class="flex gap-5 items-center">
+    <a href="/explore" class={activeTab === 'national' ? activeCls : inactiveCls}>
+      National trends
+    </a>
+    <a
+      id="state-tab-link"
+      href="/explore/MI"
+      class={activeTab === 'state' ? activeCls : inactiveCls}
+    >
+      Explore by state
+    </a>
+  </div>
+  {
+    activeTab === 'state' && currentCode && (
+      <div class="min-w-[180px]">
+        <StateSelector currentCode={currentCode} client:load />
+      </div>
+    )
+  }
+</nav>
+
+<script define:vars={{ activeTab, currentCode }}>
+  if (activeTab === 'state' && currentCode) {
+    try {
+      sessionStorage.setItem('eep.lastState', currentCode);
+    } catch {}
+  }
+  const stateLink = document.getElementById('state-tab-link');
+  if (stateLink && activeTab === 'national') {
+    try {
+      const last = sessionStorage.getItem('eep.lastState') ?? 'MI';
+      stateLink.href = `/explore/${last}`;
+    } catch {}
+  }
+</script>

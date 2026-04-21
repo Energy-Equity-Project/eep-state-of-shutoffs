@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Masthead from '../../components/Masthead.astro';
-import TopNav from '../../components/explore/TopNav.astro';
+import ExploreTabNav from '../../components/explore/ExploreTabNav.astro';
 
 import KpiGrid from '../../components/explore/KpiGrid';
 import StateRankCard from '../../components/explore/StateRankCard';
@@ -73,7 +73,7 @@ const costSubhead = bill == null
   <Masthead titleAs="p" />
   <main class="max-w-[960px] mx-auto px-4 md:px-6 pt-28 pb-6">
     <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
-    <TopNav currentCode={code} />
+    <ExploreTabNav activeTab="state" currentCode={code} />
 
     <div class="relative">
       <h1 class="text-[19px] md:text-[26px] font-medium leading-snug mb-3 max-w-2xl">
