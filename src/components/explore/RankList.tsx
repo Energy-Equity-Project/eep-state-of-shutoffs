@@ -8,7 +8,12 @@ interface Props {
 
 function formatValue(row: StateNationalRow, unit: Unit): string {
   if (unit === 'rate') return `${row.rateValue.toFixed(1)}%`;
-  return `${Math.round(row.countValue / 1000)}k`;
+  const n = row.countValue;
+  if (n >= 1_000_000) {
+    const m = n / 1_000_000;
+    return `${Number.isInteger(m) ? m : m.toFixed(1)}M`;
+  }
+  return `${Math.round(n / 1000)}k`;
 }
 
 export default function RankList({ rows, unit, compact }: Props) {
