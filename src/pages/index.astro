@@ -8,6 +8,7 @@ import Conclusion from '../components/Conclusion.astro';
 import Resources from '../components/Resources.astro';
 import ScrollProgress from '../components/ScrollProgress';
 import { insights } from '../data/insights';
+import Acknowledgments from '../components/Acknowledgments.astro';
 
 const sections = [
   { id: 'intro', label: 'Introduction' },
@@ -17,6 +18,7 @@ const sections = [
   })),
   { id: 'conclusion', label: 'Conclusion' },
   { id: 'resources', label: 'Resources' },
+  { id: 'acknowledgements', label: "Acknowledgements"}
 ];
 ---
 
@@ -44,6 +46,9 @@ const sections = [
 
     <Section id="resources" label="Resources">
       <Resources />
+    </Section>
+    <Section id="acknowledgements", label="Acknowledgements">
+      <Acknowledgments />
     </Section>
   </main>
 </BaseLayout>

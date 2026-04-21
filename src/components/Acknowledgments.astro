@@ -1,0 +1,57 @@
+---
+import AnimateOnEnter from './AnimateOnEnter';
+
+const acknowledgements = [
+  {
+    href: "https://energyjustice.indiana.edu/index.html",
+    title: "IU Energy Justice Lab",
+    description: '"The Lab mission is to explore, measure, and improve the equity and justice dimensions of society’s ongoing energy transition"',
+  },
+  {
+    href: "https://www.biologicaldiversity.org/programs/energy-justice/",
+    title: "Center for Biological Diversity",
+    description: '"The Center wages innovative legal and grassroots campaigns to drive this urgent transition for energy justice."',
+  },
+  {
+    href: "https://drdianahernandez.com/",
+    title: "Dr.Diana Hernandez",
+    description: '"A pioneer in energy, equity, housing and health research and practice"',
+  },
+  {
+    href: "https://outliermedia.org/author/sarah-alvarez/",
+    title: "Sarah Alvarez & Outlier Media",
+    description: '"A groundbreaking nonprofit newsroom designed to center and respond to Detroiters’ needs."',
+  },
+  {
+    href: "https://www.isaacsevier.com/",
+    title: "Isaac sevier",
+    description: '"Energy engineer, policy advocate, organizer, and strategy advisor collaborating with others for systems change and a just transition."',
+  },
+  {
+    href: "https://www.interruptingcriminalization.com/resources-all/abolition-imagination-cards",
+    title: "Interrupting Crimilization",
+    description: '"Projects focus on interrupting criminalization in health care, supporting transformative justice and liberatory harm reduction, and strengthening abolitionist journalism"',
+  },
+];
+---
+
+<AnimateOnEnter client:visible>
+  <h2 class="font-serif text-3xl md:text-4xl font-bold leading-tight mb-8">
+    Acknowledgements
+  </h2>
+  <ul class="space-y-4 mb-12">
+    {acknowledgements.map((r) => (
+      <li>
+        <a
+          href={r.href}
+          class="highlight-link font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {r.title}
+        </a>
+        <span class="text-ink/70"> — {r.description}</span>
+      </li>
+    ))}
+  </ul>
+</AnimateOnEnter>
