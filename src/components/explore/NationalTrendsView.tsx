@@ -83,7 +83,7 @@ export default function NationalTrendsView() {
       </div>
 
       {/* KPI summary row */}
-      <NationalKpiRow />
+      <NationalKpiRow fuel={fuel} />
 
       {/* Metric control bar */}
       <MetricBar value={controls} onChange={onChange} />
