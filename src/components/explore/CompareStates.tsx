@@ -13,6 +13,15 @@ import {
 import { formatPercent } from '../../lib/format';
 import { FlagAsterisk, FlagFootnote } from './QualityFlag';
 import StatePickerSheet from './StatePickerSheet';
+import SegmentedControl from './SegmentedControl';
+import type { PillOption } from './SegmentedControl';
+
+type Fuel = 'electric' | 'gas';
+
+const FUEL_OPTIONS: PillOption<Fuel>[] = [
+  { value: 'electric', label: 'Electric' },
+  { value: 'gas', label: 'Gas' },
+];
 
 interface Props {
   currentCode: string;
@@ -88,7 +97,7 @@ function parseCompareParam(): string[] {
 export default function CompareStates({ currentCode }: Props) {
   const [extraCodes, setExtraCodes] = useState<string[]>([]);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [fuel, setFuel] = useState<'electric' | 'gas'>('electric');
+  const [fuel, setFuel] = useState<Fuel>('electric');
 
   useEffect(() => {
     setExtraCodes(parseCompareParam());
@@ -163,24 +172,12 @@ export default function CompareStates({ currentCode }: Props) {
       </div>
       <p className="text-[13px] text-[--color-text-secondary] mb-3">{fuel === 'electric' ? 'Electric' : 'Gas'} annual shutoff rate, 2024.</p>
 
-      <div className="flex gap-3 mb-4">
-        {(['electric', 'gas'] as const).map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => setFuel(f)}
-            style={
-              fuel === f
-                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
-                : undefined
-            }
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
-              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
-            }`}
-          >
-            {f === 'electric' ? 'Electric' : 'Gas'}
-          </button>
-        ))}
+      <div className="mb-4">
+        <SegmentedControl<Fuel>
+          options={FUEL_OPTIONS}
+          value={fuel}
+          onChange={setFuel}
+        />
       </div>
 
       <div>

@@ -3,6 +3,15 @@ import { getPipelineData, type PipelineStage } from '../../lib/pipeline';
 import { formatCount, formatCondensed } from '../../lib/format';
 import { getMonthlyFlags } from '../../lib/shutoffs';
 import { FlagAsterisk, FlagFootnote } from './QualityFlag';
+import SegmentedControl from './SegmentedControl';
+import type { PillOption } from './SegmentedControl';
+
+type Fuel = 'electric' | 'gas';
+
+const FUEL_OPTIONS: PillOption<Fuel>[] = [
+  { value: 'electric', label: 'Electric' },
+  { value: 'gas', label: 'Gas' },
+];
 
 interface Props {
   stateCode: string;
@@ -45,7 +54,7 @@ function stageColor(stage: PipelineStage): string {
 }
 
 export default function ShutoffPipeline({ stateCode, stateName }: Props) {
-  const [fuel, setFuel] = useState<'electric' | 'gas'>('electric');
+  const [fuel, setFuel] = useState<Fuel>('electric');
   const { stages, maxValue } = getPipelineData(stateCode, fuel);
   const noticesFlags = getMonthlyFlags(stateCode, fuel, ['shutoff_notices']);
   const shutoffsFlags = getMonthlyFlags(stateCode, fuel, ['shutoffs']);
@@ -123,24 +132,12 @@ export default function ShutoffPipeline({ stateCode, stateName }: Props) {
       <p className="text-[13px] text-[--color-text-secondary] mb-3 max-w-xl">{caption}</p>
 
       {/* Fuel toggle */}
-      <div className="flex gap-3 mb-4">
-        {(['electric', 'gas'] as const).map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => setFuel(f)}
-            style={
-              fuel === f
-                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
-                : undefined
-            }
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
-              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
-            }`}
-          >
-            {f === 'electric' ? 'Electric' : 'Gas'}
-          </button>
-        ))}
+      <div className="mb-4">
+        <SegmentedControl<Fuel>
+          options={FUEL_OPTIONS}
+          value={fuel}
+          onChange={setFuel}
+        />
       </div>
 
       {/* Desktop SVG view */}

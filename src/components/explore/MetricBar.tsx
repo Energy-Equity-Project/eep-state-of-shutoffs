@@ -1,4 +1,6 @@
 import type { MetricControls, Fuel, Metric, Unit } from '../../lib/national';
+import SegmentedControl from './SegmentedControl';
+import type { PillOption } from './SegmentedControl';
 
 interface Props {
   value: MetricControls;
@@ -6,19 +8,19 @@ interface Props {
   compact?: boolean;
 }
 
-const FUEL_OPTIONS: { value: Fuel; label: string }[] = [
+const FUEL_OPTIONS: PillOption<Fuel>[] = [
   { value: 'electric', label: 'Electric' },
   { value: 'gas', label: 'Gas' },
   { value: 'combined', label: 'Combined' },
 ];
 
-const METRIC_OPTIONS: { value: Metric; label: string }[] = [
+const METRIC_OPTIONS: PillOption<Metric>[] = [
   { value: 'shutoffs', label: 'Shutoffs' },
   { value: 'finalNotices', label: 'Final notices' },
   { value: 'reconnections', label: 'Reconnections' },
 ];
 
-const UNIT_OPTIONS: { value: Unit; label: string }[] = [
+const UNIT_OPTIONS: PillOption<Unit>[] = [
   { value: 'rate', label: 'Percent (of customers)' },
   { value: 'count', label: 'Counts' },
 ];
@@ -28,15 +30,13 @@ function PillGroup<T extends string>({
   options,
   selected,
   onSelect,
-  compact,
 }: {
   legend: string;
-  options: { value: T; label: string }[];
+  options: PillOption<T>[];
   selected: T;
   onSelect: (v: T) => void;
-  compact?: boolean;
 }) {
-  function handleKeyDown(e: React.KeyboardEvent, idx: number) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLButtonElement>, idx: number) {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
       onSelect(options[(idx + 1) % options.length].value);
@@ -50,35 +50,18 @@ function PillGroup<T extends string>({
     <fieldset className="flex flex-col gap-1 border-0 p-0 m-0">
       <legend className="sr-only">{legend}</legend>
       <p
-        className="text-[11px] uppercase tracking-[0.12em] text-[--color-text-secondary] mb-0"
+        className="text-[11px] uppercase tracking-[0.12em] text-[--color-text-secondary]"
         aria-hidden="true"
       >
         {legend}
       </p>
-      <div className="flex gap-1 flex-wrap">
-        {options.map((opt, idx) => {
-          const isActive = opt.value === selected;
-          return (
-            <button
-              key={opt.value}
-              type="button"
-              role="radio"
-              aria-checked={isActive}
-              onClick={() => onSelect(opt.value)}
-              onKeyDown={(e) => handleKeyDown(e, idx)}
-              className={[
-                'text-[13px] px-3 rounded-lg border transition-colors focus-visible:outline-2 focus-visible:outline-[--color-accent]',
-                compact ? 'py-1' : 'py-1.5',
-                isActive
-                  ? 'bg-[--color-ink] text-[--color-paper] border-[--color-ink]'
-                  : 'bg-transparent text-[--color-text-secondary] border-[--color-border-medium] hover:text-[--color-ink]',
-              ].join(' ')}
-            >
-              {opt.label}
-            </button>
-          );
-        })}
-      </div>
+      <SegmentedControl
+        options={options}
+        value={selected}
+        onChange={onSelect}
+        pillRole="radio"
+        onPillKeyDown={handleKeyDown}
+      />
     </fieldset>
   );
 }
@@ -93,14 +76,10 @@ function Divider() {
   );
 }
 
-export default function MetricBar({ value, onChange, compact }: Props) {
+export default function MetricBar({ value, onChange, compact: _compact }: Props) {
   return (
     <div
-      className={[
-        'flex flex-wrap items-start gap-y-3',
-        compact ? 'py-2 px-3' : 'py-3 px-4',
-        'border-y border-dashed border-[--color-border-light] mb-6',
-      ].join(' ')}
+      className="flex flex-wrap items-start gap-y-3 py-3 px-4 border-y border-dashed border-[--color-border-light] mb-6"
       role="group"
       aria-label="View controls"
     >
@@ -109,7 +88,6 @@ export default function MetricBar({ value, onChange, compact }: Props) {
         options={FUEL_OPTIONS}
         selected={value.fuel}
         onSelect={(fuel) => onChange({ ...value, fuel })}
-        compact={compact}
       />
       <Divider />
       <PillGroup
@@ -117,7 +95,6 @@ export default function MetricBar({ value, onChange, compact }: Props) {
         options={METRIC_OPTIONS}
         selected={value.metric}
         onSelect={(metric) => onChange({ ...value, metric })}
-        compact={compact}
       />
       <Divider />
       <PillGroup
@@ -125,7 +102,6 @@ export default function MetricBar({ value, onChange, compact }: Props) {
         options={UNIT_OPTIONS}
         selected={value.unit}
         onSelect={(unit) => onChange({ ...value, unit })}
-        compact={compact}
       />
     </div>
   );

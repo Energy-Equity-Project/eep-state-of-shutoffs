@@ -3,8 +3,16 @@ import type { ShutoffRecord } from '../../data/shutoffs-types';
 import { getChartCaption, getBothCaption } from '../../lib/chart-captions';
 import { getMonthlyFlags } from '../../lib/shutoffs';
 import { FlagFootnote } from './QualityFlag';
+import SegmentedControl from './SegmentedControl';
+import type { PillOption } from './SegmentedControl';
 
 type Fuel = 'electric' | 'gas' | 'both';
+
+const FUEL_OPTIONS: PillOption<Fuel>[] = [
+  { value: 'electric', label: 'Electric' },
+  { value: 'gas', label: 'Gas' },
+  { value: 'both', label: 'Both' },
+];
 
 interface Props {
   stateMonthly: ShutoffRecord[];
@@ -183,24 +191,12 @@ export default function MonthlyChart({ stateMonthly, stateName, stateCode }: Pro
       </div>
       <p className="text-[13px] text-[--color-text-secondary] mb-3 max-w-xl">{caption}</p>
 
-      <div className="flex gap-3 mb-4">
-        {(['electric', 'gas', 'both'] as Fuel[]).map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => setFuel(f)}
-            style={
-              fuel === f
-                ? { backgroundColor: 'var(--color-ink)', color: 'var(--color-paper)', borderColor: 'var(--color-ink)' }
-                : undefined
-            }
-            className={`text-[13px] px-3 py-1.5 rounded-lg border focus-visible:outline-2 focus-visible:outline-[--color-accent] transition-colors ${
-              fuel !== f ? 'border-[--color-border-light] text-[--color-text-secondary]' : ''
-            }`}
-          >
-            {f === 'electric' ? 'Electric' : f === 'gas' ? 'Gas' : 'Both'}
-          </button>
-        ))}
+      <div className="mb-4">
+        <SegmentedControl<Fuel>
+          options={FUEL_OPTIONS}
+          value={fuel}
+          onChange={setFuel}
+        />
       </div>
 
       <svg
