@@ -63,7 +63,9 @@ export default function NationalTrendsView({ year, totals, stateAnnual, shutoffR
 
   const fuelLabel = FUEL_LABELS[fuel];
   const totalCount = getNationalCount(totals, fuel, metric);
-  const eyebrow = `National · ${year} · ${FUEL_DISPLAY[fuel]} ${METRIC_DISPLAY[metric]}`;
+
+  const unitLabel = unit === 'rate' ? '%' : 'Count';
+  const hexMapTitle = `${FUEL_DISPLAY[fuel]} ${METRIC_DISPLAY[metric]} (${unitLabel})`;
 
   const sectionTag =
     unit === 'count' ? 'ALL STATES · RANKED BY COUNT' : 'ALL STATES · RANKED BY RATE';
@@ -80,9 +82,6 @@ export default function NationalTrendsView({ year, totals, stateAnnual, shutoffR
     <div>
       {/* Headline block */}
       <div className="mb-8">
-        <p className="text-[11px] uppercase tracking-[0.12em] text-[--color-text-secondary] mb-2">
-          {eyebrow}
-        </p>
         <h1 className="text-[26px] md:text-[34px] font-semibold leading-tight mb-3 max-w-3xl"
             style={{ fontFamily: 'var(--font-serif)', letterSpacing: '-0.01em' }}>
           Across the country,{' '}
@@ -111,7 +110,7 @@ export default function NationalTrendsView({ year, totals, stateAnnual, shutoffR
         {/* Left: hex map */}
         <div>
           <p className="text-[11px] uppercase tracking-[0.12em] text-[--color-text-secondary] mb-3">
-            Every state, equal weight
+            {hexMapTitle}
           </p>
           <HexMap
             data={hexData}
