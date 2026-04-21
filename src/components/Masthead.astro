@@ -9,7 +9,7 @@ const { titleAs = 'h1' } = Astro.props;
 const TitleTag = titleAs;
 
 const NAV_LINKS = [
-  { index: '01', label: 'Read', href: '/' },
+  { index: '01', label: 'The Story', href: '/' },
   { index: '02', label: 'Explore the data', href: '/explore/' },
 ];
 ---
@@ -20,13 +20,13 @@ const NAV_LINKS = [
     <div class="hidden md:flex items-center justify-between gap-8">
       <div class="flex-1 min-w-0">
         <p class="masthead-eyebrow text-[11px] font-sans text-[--color-text-secondary] uppercase tracking-widest mb-1">
-          Energy Equity Project · A report
+          Energy Equity Project
         </p>
         <TitleTag class="masthead-title font-serif font-bold leading-none">
           Tsunami of Shutoffs
         </TitleTag>
         <p class="masthead-subtitle text-sm font-sans text-[--color-text-secondary] mt-1">
-          What the US' first national survey reveals
+          What the first national survey reveals
         </p>
       </div>
       <nav aria-label="Primary" class="flex items-center gap-6 shrink-0">

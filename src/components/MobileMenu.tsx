@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 const NAV_LINKS = [
-  { index: '01', label: 'Read', href: '/' },
+  { index: '01', label: 'The Story', href: '/' },
   { index: '02', label: 'Explore the data', href: '/explore/' },
 ];
 
