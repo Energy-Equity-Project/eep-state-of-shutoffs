@@ -21,9 +21,9 @@ const sections = [
     label: `Insight ${ins.number} of 10: ${ins.headline}`,
   })),
   { id: 'conclusion', label: 'Conclusion' },
-  { id: 'endnotes', label: 'Endnotes' },
   { id: 'resources', label: 'Resources' },
-  { id: 'acknowledgements', label: "Acknowledgements"}
+  { id: 'acknowledgements', label: "Acknowledgements"},
+  { id: 'endnotes', label: 'Endnotes' }
 ];
 ---
 
@@ -48,16 +48,14 @@ const sections = [
     <Section id="conclusion" label="Conclusion and call to action">
       <Conclusion registry={registry} />
     </Section>
-
-    <Section id="endnotes" label="Endnotes">
-      <Endnotes registry={registry} />
-    </Section>
-
     <Section id="resources" label="Resources">
       <Resources />
     </Section>
     <Section id="acknowledgements", label="Acknowledgements">
       <Acknowledgments />
+    </Section>
+    <Section id="endnotes" label="Endnotes">
+      <Endnotes registry={registry} />
     </Section>
   </main>
 </BaseLayout>
