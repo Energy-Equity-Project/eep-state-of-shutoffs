@@ -79,7 +79,7 @@ export default function ShutoffPipeline({ stateAnnual, stateMonthly, households,
   let caption: string;
   if (hasReconnections && neverReconnected != null) {
     const pct = shutoffs > 0 ? Math.round((neverReconnected / shutoffs) * 100) : 0;
-    caption = `Of ${formatCount(shutoffs)} shutoffs executed, ${formatCount(neverReconnected)} (${pct}%) were never followed by a reconnection in 2024.`;
+    caption = `Of ${formatCount(shutoffs)} shutoffs executed, ${formatCount(neverReconnected)} (${pct}%) were never reconnected in 2024.`;
   } else {
     caption = `Utilities in ${stateName} sent ${formatCount(notices ?? 0)} shutoff notices and executed ${formatCount(shutoffs)} ${fuel} shutoffs in 2024.`;
   }
@@ -126,7 +126,7 @@ export default function ShutoffPipeline({ stateAnnual, stateMonthly, households,
 
   return (
     <div className="bg-white border border-[--color-border-light] px-6 py-5 mb-6">
-      <h2 className="text-base font-medium mb-1">The shutoff pipeline, to scale</h2>
+      <h2 className="text-base font-medium mb-1">The shutoff pipeline:</h2>
       <p className="text-[13px] text-[--color-text-secondary] mb-3 max-w-xl">{caption}</p>
 
       {/* Fuel toggle */}
