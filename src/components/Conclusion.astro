@@ -1,25 +1,25 @@
 ---
 import type { EndnoteRegistry } from '../lib/endnotes';
 import AnimateOnEnter from './AnimateOnEnter';
+import Note from './Note.astro';
 
 interface Props {
   registry?: EndnoteRegistry;
 }
 
-const { registry: _registry } = Astro.props;
+const { registry } = Astro.props;
 ---
 
 <AnimateOnEnter client:visible>
   <h2 class="font-serif text-3xl md:text-4xl font-bold leading-tight mb-8">
     The data must <span class="highlight">end the death trap of shutoffs now</span>, not be complicit in it.
-    <!-- <span class="highlight">Another world is possible</span>. Build it with us. -->
   </h2>
   <div class="space-y-5 text-lg leading-relaxed mb-8">
     <p>
       When new DNA evidence exonerates someone wrongfully convicted, we do not allow a prison to devise a multi-year plan for their release. They are entitled to immediate emancipation. Similarly, the EIA’s irrefutable data about the national scale of shutoffs must not be used to justify additional studies, pilot programs, or a swiss cheese of shutoff protections. There is a place for engaging the most impacted communities in designing programs that structurally mitigate unaffordable bills and deliver climate resilience. But questions about how best to foster a just and affordable energy system belong after freedom from shutoffs has been firmly established.
     </p>
     <p>
-      Fifteen million times in 2024, somebody in America lost access to energy, feeling their home descend into a barely habitable shell, little more than a tent. All because a utility company unilaterally decided they hadn't paid enough. Powerless to squeeze any more money out of empty pockets, desperate to hold onto their dignity. We are told this is what the system requires. We are fed a lie–this is what the architects of the system always wanted.
+      Fifteen million times in 2024, somebody in America lost access to energy, feeling their home descend into a barely habitable shell, little more than a tent<Note id="umich-roadmap-ending-shutoffs-2026" registry={registry}/>. All because a utility company unilaterally decided they hadn't paid enough. Powerless to squeeze any more money out of empty pockets, desperate to hold onto their dignity. We are told this is what the system requires. We are fed a lie–this is what the architects of the system always wanted.
     </p>
     <p>
       The 2020 and 2021 COVID shutoff moratoriums proved the country can eliminate shutoffs overnight when it decides to. The lights stayed on. The grid held. The utilities kept running and, to the delight of their shareholders, churned out profits. The only thing that changed was that people were not cut from power during a crisis — and we recognized, briefly, that it was possible to simply not do this.
