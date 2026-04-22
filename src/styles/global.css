@@ -54,6 +54,12 @@
   }
 
   .highlight-link {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+
     background: linear-gradient(
       to right,
       var(--color-highlight) 0%,
@@ -62,14 +68,21 @@
     background-size: 0% 100%;
     background-repeat: no-repeat;
     background-position: left center;
-    transition: background-size 0.25s ease;
+    transition:
+      background-size 0.25s ease,
+      color 0.2s ease;
     padding: 0 0.1em;
   }
 
   .highlight-link:hover,
   .highlight-link:focus-visible {
     background-size: 100% 100%;
-    outline: none;
+    color: var(--color-ink);
+  }
+
+  .highlight-link:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
   }
 }
 
