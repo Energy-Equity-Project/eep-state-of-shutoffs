@@ -61,7 +61,7 @@ export default function ScrollableRankList({ rows, unit, compact }: Props) {
         className="flex justify-between items-center px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-[--color-text-secondary] border-t border-[--color-border-light]"
         style={{ background: '#fbfaf6' }}
       >
-        <span>{rows.length} states + DC</span>
+        <span>50 states + DC</span>
         <span>scroll ↓</span>
       </div>
     </div>
