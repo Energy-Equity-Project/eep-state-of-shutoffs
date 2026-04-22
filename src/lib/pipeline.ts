@@ -32,7 +32,7 @@ export function getPipelineData(
     stages.push({
       id: 'households',
       stageNumber: '01',
-      label: 'Households',
+      label: 'Total Households',
       value: households,
       ratioCaption: 'Baseline',
     });
