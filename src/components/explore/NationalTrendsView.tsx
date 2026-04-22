@@ -121,7 +121,7 @@ export default function NationalTrendsView({ year, totals, stateAnnual, shutoffR
             onHexClick={navigateToState}
           />
           <p className="md:hidden text-[12px] text-[--color-text-tertiary] mt-2">
-            Tap a hex to open a state page.
+            Click a hex to open a state page.
           </p>
         </div>
 

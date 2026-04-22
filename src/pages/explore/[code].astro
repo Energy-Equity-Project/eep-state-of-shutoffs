@@ -23,6 +23,8 @@ import {
   getNationalGasRate,
   getHighestRateState,
   getNeighbor,
+  getNoticeToShutoffRank,
+  getNoticeToShutoffOneInX,
   STATE_CODES,
 } from '../../lib/shutoffs';
 import { computeMonthlyFlags } from '../../lib/shutoffs-constants';
@@ -52,6 +54,10 @@ const households = getStateHouseholds(code);
 
 const electricRank = getNationalRank(code, 'electric');
 const electricMultiplier = getMultiplierVsNational(code, 'electric');
+const electricNoticeRank = getNoticeToShutoffRank(code, 'electric');
+const gasNoticeRank = getNoticeToShutoffRank(code, 'gas');
+const electricOneInNotices = getNoticeToShutoffOneInX(stateAnnual, 'electric');
+const gasOneInNotices = getNoticeToShutoffOneInX(stateAnnual, 'gas');
 const oneInX = getOneInX(stateAnnual.electric_annual_shutoff_rate);
 const year = getYear();
 const totalStates = 51;
@@ -157,6 +163,11 @@ const neighborCode = getNeighbor(code);
       stateMonthly={stateMonthly}
       households={households}
       stateName={stateName}
+      electricNoticeRank={electricNoticeRank}
+      gasNoticeRank={gasNoticeRank}
+      electricOneInNotices={electricOneInNotices}
+      gasOneInNotices={gasOneInNotices}
+      totalStates={totalStates}
       client:load
     />
 

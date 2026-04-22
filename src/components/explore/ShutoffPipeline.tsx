@@ -19,6 +19,11 @@ interface Props {
   stateMonthly: ShutoffRecord[];
   households: number | null;
   stateName: string;
+  electricNoticeRank: number;
+  gasNoticeRank: number;
+  electricOneInNotices: number;
+  gasOneInNotices: number;
+  totalStates: number;
 }
 
 const MIN_AREA_PCT = 0.015;
@@ -56,7 +61,7 @@ function stageColor(stage: PipelineStage): string {
   return 'var(--color-pipeline-fill)';
 }
 
-export default function ShutoffPipeline({ stateAnnual, stateMonthly, households, stateName }: Props) {
+export default function ShutoffPipeline({ stateAnnual, stateMonthly, households, stateName, electricNoticeRank, gasNoticeRank, electricOneInNotices, gasOneInNotices, totalStates }: Props) {
   const [fuel, setFuel] = useState<Fuel>('electric');
   const { stages, maxValue } = getPipelineData(stateAnnual, households, fuel);
   const noticesFlags = computeMonthlyFlags(stateMonthly, fuel, ['shutoff_notices']);
@@ -76,12 +81,19 @@ export default function ShutoffPipeline({ stateAnnual, stateMonthly, households,
 
   const hasReconnections = reconnectedStage != null && neverStage != null;
 
+  const noticeRank = fuel === 'electric' ? electricNoticeRank : gasNoticeRank;
+  const oneInNotices = fuel === 'electric' ? electricOneInNotices : gasOneInNotices;
+  const fuelNotices = stateAnnual[`${fuel}_shutoff_notices_total`] as number | null;
+
+  const baseCaption = hasReconnections && neverReconnected != null
+    ? `Of ${formatCount(shutoffs)} shutoffs executed, ${formatCount(neverReconnected)} (${shutoffs > 0 ? Math.round((neverReconnected / shutoffs) * 100) : 0}%) were never reconnected in 2024.`
+    : `Utilities in ${stateName} sent ${formatCount(notices ?? 0)} shutoff notices and executed ${formatCount(shutoffs)} ${fuel} shutoffs in 2024.`;
+
   let caption: string;
-  if (hasReconnections && neverReconnected != null) {
-    const pct = shutoffs > 0 ? Math.round((neverReconnected / shutoffs) * 100) : 0;
-    caption = `Of ${formatCount(shutoffs)} shutoffs executed, ${formatCount(neverReconnected)} (${pct}%) were never reconnected in 2024.`;
+  if (oneInNotices > 0 && noticeRank > 0 && fuelNotices && fuelNotices > 0) {
+    caption = `1 in ${oneInNotices} shutoff notices result in a shutoff (ranked #${noticeRank}). ${baseCaption}`;
   } else {
-    caption = `Utilities in ${stateName} sent ${formatCount(notices ?? 0)} shutoff notices and executed ${formatCount(shutoffs)} ${fuel} shutoffs in 2024.`;
+    caption = baseCaption;
   }
 
   // Build aria label

@@ -63,6 +63,34 @@ export function getNationalMonthly(): NationalMonthly[] {
   return data.aggregates.national_monthly as NationalMonthly[];
 }
 
+const noticeConversionRankingCache: { electric?: string[]; gas?: string[] } = {};
+
+function buildNoticeConversionRanking(fuel: 'electric' | 'gas'): string[] {
+  if (noticeConversionRankingCache[fuel]) return noticeConversionRankingCache[fuel]!;
+  const noticesKey = `${fuel}_shutoff_notices_total` as const;
+  const shutoffsKey = `${fuel}_shutoffs_total` as const;
+  const ranked = (data.aggregates.state_annual as StateAnnual[])
+    .filter((s) => (s[noticesKey] as number) > 0)
+    .map((s) => ({ state: s.state, rate: (s[shutoffsKey] as number) / (s[noticesKey] as number) }))
+    .sort((a, b) => b.rate - a.rate)
+    .map((x) => x.state);
+  noticeConversionRankingCache[fuel] = ranked;
+  return ranked;
+}
+
+export function getNoticeToShutoffRank(code: string, fuel: 'electric' | 'gas'): number {
+  const name = STATE_CODES[code];
+  const idx = buildNoticeConversionRanking(fuel).indexOf(name);
+  return idx === -1 ? 0 : idx + 1;
+}
+
+export function getNoticeToShutoffOneInX(annual: StateAnnual, fuel: 'electric' | 'gas'): number {
+  const notices = annual[`${fuel}_shutoff_notices_total`] as number | null;
+  const shutoffs = annual[`${fuel}_shutoffs_total`] as number | null;
+  if (!notices || !shutoffs) return 0;
+  return Math.round(notices / shutoffs);
+}
+
 export function getNationalRank(code: string, fuel: 'electric' | 'gas'): number {
   const name = STATE_CODES[code];
   const key = fuel === 'electric' ? 'electric_annual_shutoff_rate_desc' : 'gas_annual_shutoff_rate_desc';
