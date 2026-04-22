@@ -24,7 +24,6 @@ export default function RankList({ rows, unit, compact }: Props) {
     <div>
       {rows.map((row, idx) => {
         const barPct = maxValue > 0 ? (row.value / maxValue) * 100 : 0;
-        const useWarnColor = row.rateValue >= 9;
 
         return (
           <div
@@ -65,7 +64,7 @@ export default function RankList({ rows, unit, compact }: Props) {
                   style={{
                     width: `${barPct}%`,
                     height: '100%',
-                    background: useWarnColor ? 'var(--color-warn)' : 'var(--color-ink)',
+                    background: 'var(--color-warn)',
                     borderRadius: 3,
                   }}
                 />
