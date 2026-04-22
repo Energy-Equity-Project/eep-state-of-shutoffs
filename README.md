@@ -2,7 +2,7 @@
 
 A public-facing data debrief that presents 2024 EIA Form 112 residential utility shutoff data for a non-technical audience, combined with an interactive state-by-state explorer.
 
-Production: [`eep-state-of-shutoffs.pages.dev`](https://eep-state-of-shutoffs.pages.dev)
+Production: [`https://tsunami-of-shutoffs.org/`](https://https://tsunami-of-shutoffs.org/)
 
 ## Goals
 
