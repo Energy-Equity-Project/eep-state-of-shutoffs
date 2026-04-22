@@ -175,7 +175,7 @@ export default function HexMap({ data, fuel, metric, size = 28, unit, onHexClick
             {legendLabels[i]}
           </span>
         ))}
-        <span className="ml-auto italic">Each hex = one state</span>
+        <span className="ml-auto italic">Click on the state tiles to view their state profile.</span>
       </div>
 
       <figcaption className="sr-only">
