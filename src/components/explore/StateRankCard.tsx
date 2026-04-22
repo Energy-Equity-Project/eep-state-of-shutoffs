@@ -28,7 +28,7 @@ export default function StateRankCard({ rank, outOf, className }: Props) {
           <span className="text-[18px] italic text-[--color-text-tertiary]"> of {outOf}</span>
         </div>
         <div className="font-sans text-[11px] text-[--color-text-tertiary]">
-          1 = highest rate
+          1 = highest shutoff rate<br />per household
         </div>
       </div>
     </aside>
