@@ -109,25 +109,20 @@ export default function ShutoffPipeline({ stateAnnual, stateMonthly, households,
 
   const shutoffsBox = svgBoxes.find((b) => b.stage.id === 'shutoffs');
 
-  // 04A and 04B boxes positioned to the right of shutoffs box
-  const SPLIT_X = shutoffsBox ? shutoffsBox.x + shutoffsBox.w + 60 : 700;
-  const splitMid = BASELINE_Y - (shutoffsBox ? shutoffsBox.h / 2 : 150);
+  // Stage 4 — single stacked bar, same dimensions as the shutoffs box
+  const STAGE04_X = shutoffsBox ? shutoffsBox.x + shutoffsBox.w + 60 : 700;
 
-  const reconnectedBox = reconnectedStage
-    ? (() => {
-        const { w, h } = desktopBoxDims(reconnectedStage.value, maxValue);
-        const y = splitMid - h - 8;
-        return { stage: reconnectedStage, x: SPLIT_X, y, w, h };
-      })()
+  const stage4Box = shutoffsBox && reconnectedStage && neverStage
+    ? { x: STAGE04_X, y: shutoffsBox.y, w: shutoffsBox.w, h: shutoffsBox.h }
     : null;
 
-  const neverBox = neverStage
-    ? (() => {
-        const { w, h } = desktopBoxDims(neverStage.value, maxValue);
-        const y = splitMid + 8;
-        return { stage: neverStage, x: SPLIT_X, y, w, h };
-      })()
-    : null;
+  const reconnValue = reconnectedStage?.value ?? 0;
+  const neverValue = neverStage?.value ?? 0;
+  const segmentTotal = reconnValue + neverValue;
+  const reconnH = stage4Box && segmentTotal > 0
+    ? Math.round(stage4Box.h * (reconnValue / segmentTotal))
+    : 0;
+  const neverH = stage4Box ? stage4Box.h - reconnH : 0;
 
   return (
     <div className="bg-white border border-[--color-border-light] px-6 py-5 mb-6">
@@ -226,113 +221,168 @@ export default function ShutoffPipeline({ stateAnnual, stateMonthly, households,
             </g>
           ))}
 
-          {/* Connector line from shutoffs to split boxes */}
-          {shutoffsBox && (reconnectedBox || neverBox) && (
+          {/* Connector line from shutoffs to stage 4 box */}
+          {shutoffsBox && stage4Box && (
             <line
               x1={shutoffsBox.x + shutoffsBox.w}
               y1={shutoffsBox.y + shutoffsBox.h / 2}
-              x2={SPLIT_X}
+              x2={STAGE04_X}
               y2={shutoffsBox.y + shutoffsBox.h / 2}
               stroke="var(--color-border-medium)"
               strokeWidth={1}
             />
           )}
 
-          {/* 04A reconnected box */}
-          {reconnectedBox && (() => {
-            const { stage, x, y, w, h } = reconnectedBox;
+          {/* Stage 4 — stacked bar (never reconnected on top, reconnected on bottom) */}
+          {stage4Box && reconnectedStage && neverStage && (() => {
+            const { x, y, w, h } = stage4Box;
+            const neverY = y;
+            const reconnY = y + neverH;
             return (
-              <g key="reconnected">
-                <rect x={x} y={y} width={w} height={h} fill={stageColor(stage)} rx={3} />
-                {h > 16 && stage.value != null && (
-                  <text
-                    x={x + w / 2}
-                    y={y + h / 2 + 4}
-                    textAnchor="middle"
-                    fontSize={10}
-                    fontWeight="600"
-                    fill="#0a0a0a"
-                    fontFamily="var(--font-sans)"
-                  >
-                    {formatCondensed(stage.value)}
-                    {reconnectionsFlags.size > 0 && (
-                      <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
-                    )}
-                  </text>
-                )}
+              <g key="stage4">
+                {/* Eyebrow + label */}
                 <text
-                  x={x + w + 8}
-                  y={y + h / 2 - 6}
-                  fontSize="11"
+                  x={x + w / 2}
+                  y={y - 28}
+                  textAnchor="middle"
+                  fontSize="9"
+                  letterSpacing="1.5"
+                  fill="var(--color-text-tertiary)"
+                  fontFamily="var(--font-sans)"
+                >
+                  STAGE 04
+                </text>
+                <text
+                  x={x + w / 2}
+                  y={y - 12}
+                  textAnchor="middle"
+                  fontSize="12"
                   fill="var(--color-ink)"
                   fontFamily="var(--font-sans)"
                 >
-                  STAGE {stage.stageNumber} {stage.label}
+                  Shutoff outcomes
                 </text>
-                {stage.ratioCaption && (
-                  <text
-                    x={x + w + 8}
-                    y={y + h / 2 + 9}
-                    fontSize="10"
-                    fill="var(--color-text-tertiary)"
-                    fontFamily="var(--font-sans)"
-                  >
-                    {stage.ratioCaption}
-                  </text>
-                )}
-              </g>
-            );
-          })()}
 
-          {/* 04B never reconnected box */}
-          {neverBox && (() => {
-            const { stage, x, y, w, h } = neverBox;
-            return (
-              <g key="never_reconnected">
-                <rect
-                  x={x}
-                  y={y}
-                  width={w}
-                  height={h}
-                  fill={stageColor(stage)}
-                  stroke="var(--color-pipeline-warn)"
-                  strokeWidth={2}
-                  rx={3}
-                />
-                {h > 16 && stage.value != null && (
+                {/* Clip path so stacked rects get rounded corners from the outer box */}
+                <clipPath id="stage4clip">
+                  <rect x={x} y={y} width={w} height={h} rx={3} />
+                </clipPath>
+
+                {/* Never reconnected segment (top, warn red) */}
+                {neverH > 0 && (
+                  <rect
+                    x={x}
+                    y={neverY}
+                    width={w}
+                    height={neverH}
+                    fill="var(--color-pipeline-warn)"
+                    clipPath="url(#stage4clip)"
+                  />
+                )}
+
+                {/* Reconnected segment (bottom, green) */}
+                {reconnH > 0 && (
+                  <rect
+                    x={x}
+                    y={reconnY}
+                    width={w}
+                    height={reconnH}
+                    fill="var(--color-pipeline-reconnect)"
+                    clipPath="url(#stage4clip)"
+                  />
+                )}
+
+                {/* Value inside never segment */}
+                {neverH > 16 && neverStage.value != null && (
                   <text
                     x={x + w / 2}
-                    y={y + h / 2 + 4}
+                    y={neverY + neverH / 2 + 4}
                     textAnchor="middle"
                     fontSize={10}
                     fontWeight="600"
                     fill="#ffffff"
                     fontFamily="var(--font-sans)"
                   >
-                    {formatCondensed(stage.value)}
+                    {formatCondensed(neverStage.value)}
                     {reconnectionsFlags.size > 0 && (
                       <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
                     )}
                   </text>
                 )}
+
+                {/* Value inside reconnected segment */}
+                {reconnH > 16 && reconnectedStage.value != null && (
+                  <text
+                    x={x + w / 2}
+                    y={reconnY + reconnH / 2 + 4}
+                    textAnchor="middle"
+                    fontSize={10}
+                    fontWeight="600"
+                    fill="#0a0a0a"
+                    fontFamily="var(--font-sans)"
+                  >
+                    {formatCondensed(reconnectedStage.value)}
+                    {reconnectionsFlags.size > 0 && (
+                      <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
+                    )}
+                  </text>
+                )}
+
+                {/* Right-side label for never reconnected segment */}
                 <text
                   x={x + w + 8}
-                  y={y + h / 2 - 6}
+                  y={neverY + neverH / 2 - 6}
                   fontSize="11"
                   fill="var(--color-ink)"
                   fontFamily="var(--font-sans)"
                 >
-                  STAGE {stage.stageNumber} {stage.label}
+                  {neverStage.label}
                 </text>
-                {stage.ratioCaption && (
+                {neverStage.ratioCaption && (
                   <text
                     x={x + w + 8}
-                    y={y + h / 2 + 9}
+                    y={neverY + neverH / 2 + 9}
                     fontSize="10"
                     fill="var(--color-pipeline-warn)"
                     fontFamily="var(--font-sans)"
                   >
-                    {stage.ratioCaption}
+                    {neverStage.ratioCaption}
+                  </text>
+                )}
+
+                {/* Right-side label for reconnected segment */}
+                <text
+                  x={x + w + 8}
+                  y={reconnY + reconnH / 2 - 6}
+                  fontSize="11"
+                  fill="var(--color-ink)"
+                  fontFamily="var(--font-sans)"
+                >
+                  {reconnectedStage.label}
+                </text>
+                {reconnectedStage.ratioCaption && (
+                  <text
+                    x={x + w + 8}
+                    y={reconnY + reconnH / 2 + 9}
+                    fontSize="10"
+                    fill="var(--color-text-tertiary)"
+                    fontFamily="var(--font-sans)"
+                  >
+                    {reconnectedStage.ratioCaption}
+                  </text>
+                )}
+
+                {/* Axis label below box */}
+                {shutoffsStage?.value != null && (
+                  <text
+                    x={x + w / 2}
+                    y={BASELINE_Y + 16}
+                    textAnchor="middle"
+                    fontSize="11"
+                    fill="var(--color-text-tertiary)"
+                    fontFamily="var(--font-sans)"
+                  >
+                    {formatCondensed(shutoffsStage.value)}
                   </text>
                 )}
               </g>
