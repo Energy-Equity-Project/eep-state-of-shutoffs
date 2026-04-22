@@ -1,0 +1,15 @@
+---
+import type { EndnoteRegistry } from '../lib/endnotes';
+
+interface Props {
+  id: string;
+  registry: EndnoteRegistry;
+}
+
+const { id, registry } = Astro.props;
+const { number, isFirst } = registry.register(id);
+---
+
+<sup class="endnote-ref" id={isFirst ? `endnote-ref-${number}` : undefined}>
+  <a href={`#endnote-${number}`}>{number}</a>
+</sup>

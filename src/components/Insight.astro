@@ -1,17 +1,28 @@
 ---
 import type { Insight } from '../data/insights';
+import type { EndnoteRegistry, Segment } from '../lib/endnotes';
+import { renderSegments } from '../lib/endnotes';
 import { renderWithHighlights } from '../lib/highlight';
 import AnimateOnEnter from './AnimateOnEnter';
 
 interface Props {
   insight: Insight;
   total: number;
+  registry?: EndnoteRegistry;
 }
 
-const { insight, total } = Astro.props;
+const { insight, total, registry } = Astro.props;
 
-const headlineSegments = renderWithHighlights(insight.headline, insight.headlineHighlights);
-const statSegments = renderWithHighlights(insight.stat, insight.statHighlights);
+function toSegments(text: string, highlights: string[]): Segment[] {
+  if (registry) return renderSegments(text, { highlights, registry });
+  return renderWithHighlights(text, highlights).map((s): Segment =>
+    s.highlight ? { type: 'highlight', text: s.text } : { type: 'text', text: s.text }
+  );
+}
+
+const headlineSegments = toSegments(insight.headline, insight.headlineHighlights);
+const statSegments = toSegments(insight.stat, insight.statHighlights);
+const frameSegments = toSegments(insight.frame, []);
 ---
 
 <AnimateOnEnter client:visible>
@@ -20,19 +31,35 @@ const statSegments = renderWithHighlights(insight.stat, insight.statHighlights);
   </p>
   <h2 class="font-serif text-3xl md:text-4xl font-bold leading-tight mb-8">
     {headlineSegments.map((seg) =>
-      seg.highlight
-        ? <span class="highlight">{seg.text}</span>
-        : seg.text
+      seg.type === 'highlight' ? (
+        <span class="highlight">{seg.text}</span>
+      ) : seg.type === 'endnote' ? (
+        <sup class="endnote-ref" id={seg.isFirst ? `endnote-ref-${seg.number}` : undefined}>
+          <a href={`#endnote-${seg.number}`}>{seg.number}</a>
+        </sup>
+      ) : seg.text
     )}
   </h2>
   <p class="text-base leading-relaxed mb-6">
     <strong>Stat: </strong>{statSegments.map((seg) =>
-      seg.highlight
-        ? <span class="highlight">{seg.text}</span>
-        : seg.text
+      seg.type === 'highlight' ? (
+        <span class="highlight">{seg.text}</span>
+      ) : seg.type === 'endnote' ? (
+        <sup class="endnote-ref" id={seg.isFirst ? `endnote-ref-${seg.number}` : undefined}>
+          <a href={`#endnote-${seg.number}`}>{seg.number}</a>
+        </sup>
+      ) : seg.text
     )}
   </p>
   <p class="text-base leading-relaxed text-ink/80">
-    <strong>Why this matters: </strong>{insight.frame}
+    <strong>Why this matters: </strong>{frameSegments.map((seg) =>
+      seg.type === 'highlight' ? (
+        <span class="highlight">{seg.text}</span>
+      ) : seg.type === 'endnote' ? (
+        <sup class="endnote-ref" id={seg.isFirst ? `endnote-ref-${seg.number}` : undefined}>
+          <a href={`#endnote-${seg.number}`}>{seg.number}</a>
+        </sup>
+      ) : seg.text
+    )}
   </p>
 </AnimateOnEnter>

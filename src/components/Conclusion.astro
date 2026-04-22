@@ -1,5 +1,12 @@
 ---
+import type { EndnoteRegistry } from '../lib/endnotes';
 import AnimateOnEnter from './AnimateOnEnter';
+
+interface Props {
+  registry?: EndnoteRegistry;
+}
+
+const { registry: _registry } = Astro.props;
 ---
 
 <AnimateOnEnter client:visible>

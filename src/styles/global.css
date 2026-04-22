@@ -84,6 +84,19 @@
     outline: 2px solid var(--color-ink);
     outline-offset: 2px;
   }
+
+  .endnote-ref {
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 0.1em;
+  }
+  .endnote-ref a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .endnote-ref a:hover { text-decoration: underline; }
 }
 
 @keyframes enter-fade-up {

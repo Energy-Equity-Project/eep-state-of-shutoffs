@@ -6,9 +6,13 @@ import Introduction from '../components/Introduction.astro';
 import Insight from '../components/Insight.astro';
 import Conclusion from '../components/Conclusion.astro';
 import Resources from '../components/Resources.astro';
+import Endnotes from '../components/Endnotes.astro';
 import ScrollProgress from '../components/ScrollProgress';
 import { insights } from '../data/insights';
 import Acknowledgments from '../components/Acknowledgments.astro';
+import { createEndnoteRegistry } from '../lib/endnotes';
+
+const registry = createEndnoteRegistry();
 
 const sections = [
   { id: 'intro', label: 'Introduction' },
@@ -17,6 +21,7 @@ const sections = [
     label: `Insight ${ins.number} of 10: ${ins.headline}`,
   })),
   { id: 'conclusion', label: 'Conclusion' },
+  { id: 'endnotes', label: 'Endnotes' },
   { id: 'resources', label: 'Resources' },
   { id: 'acknowledgements', label: "Acknowledgements"}
 ];
@@ -31,17 +36,21 @@ const sections = [
   >
     <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
     <Section id="intro" label="Introduction" class="!justify-start !pt-28 md:!pt-32">
-      <Introduction />
+      <Introduction registry={registry} />
     </Section>
 
     {insights.map((insight) => (
       <Section id={`insight-${insight.number}`} label={`Insight ${insight.number} of 10`}>
-        <Insight insight={insight} total={10} />
+        <Insight insight={insight} total={10} registry={registry} />
       </Section>
     ))}
 
     <Section id="conclusion" label="Conclusion and call to action">
-      <Conclusion />
+      <Conclusion registry={registry} />
+    </Section>
+
+    <Section id="endnotes" label="Endnotes">
+      <Endnotes registry={registry} />
     </Section>
 
     <Section id="resources" label="Resources">

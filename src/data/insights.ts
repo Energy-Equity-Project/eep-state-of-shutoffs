@@ -11,7 +11,7 @@ export const insights: Insight[] = [
   {
     number: 1,
     headline: "Illuminating America’s hidden hardship",
-    stat: "The EIA 112 report is the first comprehensive national survey of shutoffs capturing shutoff data for 95% of Americans. Before this report, the number of states reporting shutoffs by any utility plummeted from a high of 40 in 2021 to just 21 by 2024. The vast majority of the country’s 700 cooperative and 2,000 municipal utilities have never been required to disclose shutoffs.",
+    stat: "The EIA 112 report is the first comprehensive national survey of shutoffs capturing shutoff data for 95% of Americans[^eia-112-2024]. Before this report, the number of states reporting shutoffs by any utility plummeted from a high of 40 in 2021 to just 21 by 2024[^disconnection-dashboard]. The vast majority of the country’s 700 cooperative and 2,000 municipal utilities have never been required to disclose shutoffs.",
     frame: "Before the federal government stepped in, many states were moving in the wrong direction. Dr. Diana Hernandez, often admired as the “mother of energy justice,” has called energy insecurity America’s Hidden Hardship. As utilities plunged millions of households into darkness, public awareness of the problem was similarly kept in the shadows. The EIA data is a hidden gem, helping us to reveal the depth of harm from what was once America’s Hidden Hardship. ",
     headlineHighlights: [],
     statHighlights: ["first comprehensive national survey of shutoffs"]

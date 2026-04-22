@@ -1,0 +1,22 @@
+---
+import type { EndnoteRegistry } from '../lib/endnotes';
+
+interface Props {
+  registry: EndnoteRegistry;
+}
+
+const { registry } = Astro.props;
+const entries = registry.entries();
+---
+
+{entries.length > 0 && (
+  <ol class="space-y-3 text-sm text-ink/70 leading-relaxed list-decimal list-outside pl-5">
+    {entries.map((entry) => (
+      <li id={`endnote-${entry.number}`}>
+        <span set:html={entry.html} />
+        {' '}
+        <a href={`#endnote-ref-${entry.number}`} class="text-ink/40 hover:text-ink transition-colors" aria-label={`Back to citation ${entry.number}`}>↑</a>
+      </li>
+    ))}
+  </ol>
+)}
