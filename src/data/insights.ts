@@ -11,16 +11,16 @@ export const insights: Insight[] = [
   {
     number: 1,
     headline: "Illuminating America’s hidden hardship",
-    stat: "The EIA report is the first comprehensive national survey of shutoffs capturing shutoff data for 95% of Americans. Before this report, the number of states reporting shutoffs by any utility plummeted from a high of 40 in 2021 to just 21 by 2024. The vast majority of the country’s 700 cooperative and 2,000 municipal utilities have never been required to disclose shutoffs.",
+    stat: "The EIA 112 report is the first comprehensive national survey of shutoffs capturing shutoff data for 95% of Americans. Before this report, the number of states reporting shutoffs by any utility plummeted from a high of 40 in 2021 to just 21 by 2024. The vast majority of the country’s 700 cooperative and 2,000 municipal utilities have never been required to disclose shutoffs.",
     frame: "Before the federal government stepped in, many states were moving in the wrong direction. Dr. Diana Hernandez, often admired as the “mother of energy justice,” has called energy insecurity America’s Hidden Hardship. As utilities plunged millions of households into darkness, public awareness of the problem was similarly kept in the shadows. The EIA data is a hidden gem, helping us to reveal the depth of harm from what was once America’s Hidden Hardship. ",
     headlineHighlights: [],
-    statHighlights: []
+    statHighlights: ["first comprehensive national survey of shutoffs"]
   },
   {
     number: 2,
     headline: "The scale is worse than we thought",
     stat: "In 2024, utilities in the United States executed 15.1 million shutoffs — about 13.4 million electric (89%) and 1.5 million gas (11%). That is one shutoff every 2.1 seconds, every day, all year. Overall 2 million households were never reconnected.",
-    frame: `For years the actual number of shutoffs was a mystery. Many cited 3 million shutoffs reported annually, while we, an outlier, extrapolated to an estimate of 7 million shutoffs each year. The new federal data doubles that, including data from cooperative and municipal utilities and states like Texas, Oklahoma, Tennessee and Alabama that had never before reported. The previous conservative reporting underestimated the true hardship by 80%, and even our model low-balled the toll. Whatever the old estimates told us, the real one tells us more loudly: this is not an edge case. Shutoffs are a brutal national practice as commonplace as eviction for past due rent. A system that allows utilities to shuts off power 15 million times a year is a system that runs on cruelty.`,
+    frame: `For years the actual number of shutoffs was a mystery. Many cited 3 million shutoffs reported annually, while we, an outlier, extrapolated to an estimate of 7 million shutoffs each year. The new federal data doubles that, including data from cooperative and municipal utilities and states like Texas, Oklahoma, Tennessee and Alabama that had never before reported. The previous conservative reporting underestimated the true hardship by 80%, and even our model low-balled the toll. Whatever the old estimates told us, the real one tells us more loudly: this is not an edge case. Shutoffs are a brutal national practice as commonplace as eviction for past due rent. A system that allows utilities to shut off power 15 million times a year is a system that runs on cruelty.`,
     headlineHighlights: ["worse than we thought"],
     statHighlights: ["executed 15.1 million shutoffs"],
   },
