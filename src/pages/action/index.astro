@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masthead from '../../components/Masthead.astro';
+import WhatYouCanDoView from '../../components/action/WhatYouCanDoView';
+---
+
+<BaseLayout title="What you can do — Utility shutoffs — EEP" hideTopRightMenu={true}>
+  <Masthead titleAs="p" />
+  <main class="max-w-[960px] mx-auto px-4 md:px-6 pt-28 pb-16">
+    <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
+    <WhatYouCanDoView client:load />
+  </main>
+</BaseLayout>
