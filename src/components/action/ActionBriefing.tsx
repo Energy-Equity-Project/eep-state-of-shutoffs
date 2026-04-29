@@ -2,13 +2,11 @@ import type { Audience } from '../../data/whatYouCanDo';
 
 interface Props {
   audience: Audience;
-  index: number;
   activeTabId: string;
 }
 
-export default function ActionBriefing({ audience, index, activeTabId }: Props) {
+export default function ActionBriefing({ audience, activeTabId }: Props) {
   const total = audience.actions.length;
-  const num = String(index + 1).padStart(2, '0');
 
   return (
     <div
@@ -34,39 +32,6 @@ export default function ActionBriefing({ audience, index, activeTabId }: Props) 
           background: '#fbfaf3',
         }}
       >
-        <div
-          style={{
-            border: '1.5px solid var(--color-ink)',
-            padding: '8px 12px',
-            flexShrink: 0,
-          }}
-        >
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              lineHeight: 1.3,
-              color: 'var(--color-ink)',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            No. {num} / 07
-          </div>
-          <div
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '10px',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.14em',
-              color: 'var(--color-ink)',
-              marginTop: '2px',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Action Briefing
-          </div>
-        </div>
         <div>
           <div
             style={{

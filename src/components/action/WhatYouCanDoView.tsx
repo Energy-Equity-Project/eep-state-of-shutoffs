@@ -122,7 +122,6 @@ export default function WhatYouCanDoView() {
         />
         <ActionBriefing
           audience={activeAudience}
-          index={activeIndex}
           activeTabId={`tab-${activeRole}`}
         />
       </div>
