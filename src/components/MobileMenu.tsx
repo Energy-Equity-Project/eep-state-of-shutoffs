@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 const NAV_LINKS = [
   { index: '01', label: 'The Story', href: '/' },
   { index: '02', label: 'Explore the data', href: '/explore/' },
+  { index: '03', label: 'What you can do', href: '/action/' },
 ];
 
 export default function MobileMenu() {

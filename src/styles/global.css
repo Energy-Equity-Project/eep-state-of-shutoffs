@@ -6,6 +6,7 @@
   --color-highlight: #fbcc0f;
   --font-serif: "Fraunces", serif;
   --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* State explorer palette */
   --color-accent: #185fa5;
