@@ -1,17 +1,18 @@
 ---
 name: Copy edit request
-about: Request a wording change to the State of Shutoffs site
+about: Request a wording change to the Tsunami of Shutoffs site
 title: "[copy edit] "
 labels: copy-edit
 ---
 
 <!--
-Thanks for helping improve the State of Shutoffs site! Please fill out the
+Thanks for helping improve the Tsunami of Shutoffs site! Please fill out the
 fields below so a maintainer can apply your change quickly.
 -->
 
 **Where is the text?**
-<!-- e.g., "Insight 3 — stat paragraph" or "Introduction, second paragraph" or "Conclusion, 'What you can do right now' list" -->
+
+e.g., "Insight 3 — stat paragraph" or "Introduction, second paragraph" or "Conclusion, 'What you can do right now' list"
 
 **Current text** (copy and paste exactly what's on the site today):
 
