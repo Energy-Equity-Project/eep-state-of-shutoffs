@@ -90,6 +90,8 @@ Data-quality flags from EIA (`Q` = revised, `R` = revised/qualitative) are surfa
 
 ## Editing content
 
+> **Non-technical copy editors:** see [EDITING_GUIDE.md](./EDITING_GUIDE.md) for a step-by-step walkthrough using the GitHub web interface — no code knowledge required.
+
 All narrative content — insights, intro, conclusion, endnotes — lives in `src/data/` and `src/components/`. No build step is required to see changes; just save and reload the dev server.
 
 ### Adding, removing, or renumbering an insight
