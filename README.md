@@ -90,7 +90,7 @@ Data-quality flags from EIA (`Q` = revised, `R` = revised/qualitative) are surfa
 
 ## Editing content
 
-> **Non-technical copy editors:** see [EDITING_GUIDE.md](./EDITING_GUIDE.md) for a step-by-step walkthrough using the GitHub web interface — no code knowledge required.
+> **Non-technical copy editors / non-developers:** to request a wording change, [open an issue using the "Copy edit request" template](https://github.com/Energy-Equity-Project/eep-state-of-shutoffs/issues/new?template=copy-edit.md) — a maintainer will apply the change.
 
 All narrative content — insights, intro, conclusion, endnotes — lives in `src/data/` and `src/components/`. No build step is required to see changes; just save and reload the dev server.
 
