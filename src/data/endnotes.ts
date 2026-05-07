@@ -24,5 +24,13 @@ export const endnotes: Record<string, string> = {
     "kim-2025":
       'Jonathan Kim, April 21, 2025. Utility CEO pay surges amid higher profits, customer struggles. Energy and Policy Institute. Available at: https://energyandpolicy.org/utility-ceo-pay-2025/',
     "umich-roadmap-ending-shutoffs-2026":
-      'Referencing an anonymous interview quote from an academic researcher, from: Zoë Bishop, John Blake, Melissa Lewis, Marisela Macias, April 2026. National Roadmap to Ending Utility Shutoffs (Masters Capstone Project). School for Environment and Sustainability, University of Michigan. Publication forthcoming; project site available at: https://seas.umich.edu/clinic/projects/masters-projects/national-roadmap-end-utility-shutoffs'
+      'Referencing an anonymous interview quote from an academic researcher, from: Zoë Bishop, John Blake, Melissa Lewis, Marisela Macias, April 2026. National Roadmap to Ending Utility Shutoffs (Masters Capstone Project). School for Environment and Sustainability, University of Michigan. Publication forthcoming; project site available at: https://seas.umich.edu/clinic/projects/masters-projects/national-roadmap-end-utility-shutoffs',
+    "action-extreme-temperatures":
+      "Because of climate change, protections for extreme temperatures should include both seasonal (i.e. date-based) protections and protections for specific weather thresholds. For instance, standard protections for extreme heat in the Southwest might span April 1\u2013October 31 (when temperatures >100\u00b0F are common), but should also include protections for historically early heat waves, as experienced in 2026, when temperatures in California reached 112\u00b0F in March.",
+    "action-deep-retrofits":
+      "&ldquo;Deep&rdquo; energy efficient retrofits should significantly reduce energy consumption and costs, typically by a minimum of 20%.",
+    "action-affordability-scope":
+      "This could certainly extend to affordability for other utilities (water, internet) and other basic needs / human rights (housing, transportation).",
+    "action-task-force-compensation":
+      "The full costs of participation, including time and travel, should be compensated by the state.",
 };
