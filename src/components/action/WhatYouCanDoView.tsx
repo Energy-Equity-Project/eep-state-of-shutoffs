@@ -61,8 +61,8 @@ export default function WhatYouCanDoView() {
             margin: '0 0 16px',
           }}
         >
-          Seven action briefings —{' '}
-          <span className="highlight">one for every desk that can move this.</span>
+          Action briefings —{' '}
+          <span className="highlight">one for every desk that can move this forward.</span>
         </h1>
 
         {/* Mobile h1 */}
@@ -122,6 +122,7 @@ export default function WhatYouCanDoView() {
         />
         <ActionBriefing
           audience={activeAudience}
+          index={activeIndex}
           activeTabId={`tab-${activeRole}`}
         />
       </div>

@@ -30,6 +30,7 @@
   --color-hairline-hard: var(--color-border-medium);
   --color-card: var(--color-surface);
   --color-marker: var(--color-highlight);
+  --color-soft: #f4f2ea;
   --color-warn: #c97568;
 
   /* Sequential ramp for hex-tile map */

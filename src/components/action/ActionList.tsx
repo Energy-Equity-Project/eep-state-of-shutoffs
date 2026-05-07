@@ -1,8 +1,43 @@
-import type { Audience } from '../../data/whatYouCanDo';
+import { TIERS } from '../../data/whatYouCanDo';
+import type { Audience, ActionKind } from '../../data/whatYouCanDo';
 
 interface Props {
   audience: Audience;
   index: number;
+}
+
+function getTierStyles(kind: ActionKind) {
+  switch (kind) {
+    case 'no-brainer':
+      return {
+        rowExtra: {} as React.CSSProperties,
+        swatchStyle: { background: 'var(--color-card)', border: '1px solid var(--color-ink)' } as React.CSSProperties,
+        headlineWeight: 400 as React.CSSProperties['fontWeight'],
+        tierLabelColor: 'var(--color-quiet)',
+      };
+    case 'no-regrets':
+      return {
+        rowExtra: {
+          borderLeft: '2px solid var(--color-marker)',
+          background: 'linear-gradient(rgba(254,231,138,0.22), transparent 80%)',
+          paddingLeft: '12px',
+        } as React.CSSProperties,
+        swatchStyle: { background: 'var(--color-marker)' } as React.CSSProperties,
+        headlineWeight: 500 as React.CSSProperties['fontWeight'],
+        tierLabelColor: 'var(--color-ink)',
+      };
+    case 'no-fear':
+      return {
+        rowExtra: {
+          borderLeft: '3px solid var(--color-ink)',
+          background: 'var(--color-soft)',
+          paddingLeft: '12px',
+        } as React.CSSProperties,
+        swatchStyle: { background: 'var(--color-ink)' } as React.CSSProperties,
+        headlineWeight: 600 as React.CSSProperties['fontWeight'],
+        tierLabelColor: 'var(--color-ink)',
+      };
+  }
 }
 
 export default function ActionList({ audience, index }: Props) {
@@ -82,43 +117,116 @@ export default function ActionList({ audience, index }: Props) {
         Recommended actions — {total}
       </div>
 
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-        {audience.actions.map((action, i) => (
-          <li
-            key={i}
-            style={{
-              padding: '10px 0',
-              borderTop: '1px solid var(--color-hairline)',
-              borderBottom: '1px solid var(--color-hairline)',
-              marginBottom: '-1px',
-            }}
-          >
-            <span
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '13px',
-                fontWeight: action.kind === 'long' ? 500 : 400,
-                lineHeight: 1.55,
-                color: 'var(--color-ink)',
-              }}
-            >
-              {action.text}
-            </span>
-            {action.kind === 'long' && action.detail && (
+      {/* Mobile legend */}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '8px',
+          marginBottom: '10px',
+        }}
+      >
+        {TIERS.map((tier) => {
+          const { swatchStyle } = getTierStyles(tier.kind);
+          return (
+            <div key={tier.kind} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               <div
                 style={{
+                  width: '10px',
+                  height: '10px',
+                  flexShrink: 0,
+                  ...swatchStyle,
+                }}
+              />
+              <span
+                style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '11.5px',
-                  color: 'var(--color-pencil)',
-                  lineHeight: 1.6,
-                  marginTop: '6px',
+                  fontSize: '9.5px',
+                  color: 'var(--color-quiet)',
                 }}
               >
-                {action.detail}
+                {tier.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+        {audience.actions.map((action, i) => {
+          const tier = TIERS.find((t) => t.kind === action.kind)!;
+          const { rowExtra, swatchStyle, headlineWeight, tierLabelColor } = getTierStyles(action.kind);
+
+          return (
+            <li
+              key={i}
+              style={{
+                padding: '10px 0',
+                borderTop: '1px solid var(--color-hairline)',
+                borderBottom: '1px solid var(--color-hairline)',
+                marginBottom: '-1px',
+                ...rowExtra,
+              }}
+            >
+              {/* Tier label row */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  marginBottom: '4px',
+                }}
+              >
+                <div
+                  style={{
+                    width: '9px',
+                    height: '9px',
+                    flexShrink: 0,
+                    ...swatchStyle,
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '8.5px',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.16em',
+                    color: tierLabelColor,
+                  }}
+                >
+                  {tier.label}
+                </span>
               </div>
-            )}
-          </li>
-        ))}
+              {/* Headline */}
+              <span
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '13px',
+                  fontWeight: headlineWeight,
+                  lineHeight: 1.55,
+                  color: 'var(--color-ink)',
+                }}
+              >
+                {action.text}
+              </span>
+              {/* Detail */}
+              {action.detail && (
+                <div
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '11.5px',
+                    color: 'var(--color-pencil)',
+                    lineHeight: 1.6,
+                    marginTop: '6px',
+                  }}
+                >
+                  {action.detail}
+                </div>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
