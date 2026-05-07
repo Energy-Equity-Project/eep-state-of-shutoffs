@@ -1,5 +1,8 @@
 import { TIERS } from '../../data/whatYouCanDo';
 import type { Audience, ActionKind } from '../../data/whatYouCanDo';
+import { createEndnoteRegistry } from '../../lib/endnotes';
+import ActionText from './ActionText';
+import ActionEndnotes from './ActionEndnotes';
 
 interface Props {
   audience: Audience;
@@ -41,6 +44,7 @@ function getTierStyles(kind: ActionKind) {
 }
 
 export default function ActionList({ audience, index }: Props) {
+  const registry = createEndnoteRegistry();
   const total = audience.actions.length;
   const num = String(index + 1).padStart(2, '0');
 
@@ -208,7 +212,7 @@ export default function ActionList({ audience, index }: Props) {
                   color: 'var(--color-ink)',
                 }}
               >
-                {action.text}
+                <ActionText text={action.text} registry={registry} />
               </span>
               {/* Detail */}
               {action.detail && (
@@ -221,13 +225,15 @@ export default function ActionList({ audience, index }: Props) {
                     marginTop: '6px',
                   }}
                 >
-                  {action.detail}
+                  <ActionText text={action.detail} registry={registry} />
                 </div>
               )}
             </li>
           );
         })}
       </ul>
+
+      <ActionEndnotes registry={registry} />
     </div>
   );
 }
