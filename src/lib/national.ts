@@ -44,20 +44,14 @@ export function getNationalTotals(): NationalSummary {
   const statesReporting = stateAnnual.filter((s) => (s.electric_shutoffs_total ?? 0) > 0).length;
   const statesTotal = 51;
 
-  const electricShutoffs = nt.electric_shutoffs_total;
-  const electricReconnections = nt.electric_reconnections_total ?? 0;
-
   return {
-    electricShutoffs,
+    electricShutoffs: nt.electric_shutoffs_total,
     gasShutoffs: nt.gas_shutoffs_total,
     combinedShutoffs: nt.electric_shutoffs_total + nt.gas_shutoffs_total,
     electricFinalNotices: nt.electric_shutoff_notices_total,
     gasFinalNotices: nt.gas_shutoff_notices_total,
-    electricReconnections,
-    gasReconnections: nt.gas_reconnections_total ?? 0,
-    electricShutoffsPerReconnection: electricShutoffs > 0
-      ? Math.round((electricReconnections / electricShutoffs) * 100)
-      : 0,
+    electricNeverReconnected: nt.electric_net_shutoffs_total ?? 0,
+    gasNeverReconnected: nt.gas_net_shutoffs_total ?? 0,
     statesReporting,
     statesTotal,
     statesExempt: statesTotal - statesReporting,
@@ -80,10 +74,21 @@ export function getNationalRate({ fuel, metric }: Pick<MetricControls, 'fuel' | 
     if (fuel === 'gas') return nt.gas_shutoff_notices_total / totalGasCustomers;
     return (nt.electric_shutoff_notices_total + nt.gas_shutoff_notices_total) / totalElectricCustomers;
   }
-  // reconnections
-  if (fuel === 'electric') return (nt.electric_reconnections_total ?? 0) / totalElectricCustomers;
-  if (fuel === 'gas') return (nt.gas_reconnections_total ?? 0) / totalGasCustomers;
-  return ((nt.electric_reconnections_total ?? 0) + (nt.gas_reconnections_total ?? 0)) / totalElectricCustomers;
+  // neverReconnected
+  if (fuel === 'electric') {
+    return nt.electric_shutoffs_total > 0
+      ? (nt.electric_net_shutoffs_total ?? 0) / nt.electric_shutoffs_total
+      : 0;
+  }
+  if (fuel === 'gas') {
+    return nt.gas_shutoffs_total > 0
+      ? (nt.gas_net_shutoffs_total ?? 0) / nt.gas_shutoffs_total
+      : 0;
+  }
+  const combinedShutoffs = nt.electric_shutoffs_total + nt.gas_shutoffs_total;
+  return combinedShutoffs > 0
+    ? ((nt.electric_net_shutoffs_total ?? 0) + (nt.gas_net_shutoffs_total ?? 0)) / combinedShutoffs
+    : 0;
 }
 
 export function getStatesForNational(controls: MetricControls): StateNationalRow[] {
