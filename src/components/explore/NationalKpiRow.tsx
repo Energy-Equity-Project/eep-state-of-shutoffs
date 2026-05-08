@@ -12,25 +12,25 @@ function getMetrics(totals: NationalSummary, rate: number, fuel: Fuel) {
 
   let finalNotices: number;
   let shutoffs: number;
-  let reconnections: number;
+  let neverReconnected: number;
 
   if (fuel === 'electric') {
     finalNotices = totals.electricFinalNotices;
     shutoffs = totals.electricShutoffs;
-    reconnections = totals.electricReconnections;
+    neverReconnected = totals.electricNeverReconnected;
   } else if (fuel === 'gas') {
     finalNotices = totals.gasFinalNotices;
     shutoffs = totals.gasShutoffs;
-    reconnections = totals.gasReconnections;
+    neverReconnected = totals.gasNeverReconnected;
   } else {
     finalNotices = totals.electricFinalNotices + totals.gasFinalNotices;
     shutoffs = totals.combinedShutoffs;
-    reconnections = totals.electricReconnections + totals.gasReconnections;
+    neverReconnected = totals.electricNeverReconnected + totals.gasNeverReconnected;
   }
 
-  const reconPer100 = shutoffs > 0 ? Math.round((reconnections / shutoffs) * 100) : 0;
+  const pctOfShutoffs = shutoffs > 0 ? Math.round((neverReconnected / shutoffs) * 100) : 0;
 
-  return { fuelLabel, finalNotices, shutoffs, rate, reconnections, reconPer100 };
+  return { fuelLabel, finalNotices, shutoffs, rate, neverReconnected, pctOfShutoffs };
 }
 
 interface Props {
@@ -40,7 +40,7 @@ interface Props {
 }
 
 export default function NationalKpiRow({ fuel, totals, rate }: Props) {
-  const { fuelLabel, finalNotices, shutoffs, reconnections, reconPer100 } = getMetrics(totals, rate, fuel);
+  const { fuelLabel, finalNotices, shutoffs, neverReconnected, pctOfShutoffs } = getMetrics(totals, rate, fuel);
   const ratePct = (rate * 100).toFixed(1);
 
   return (
@@ -62,10 +62,10 @@ export default function NationalKpiRow({ fuel, totals, rate }: Props) {
       </div>
 
       <div className={cardCls}>
-        <p className={labelCls}>{fuelLabel} reconnections</p>
-        <p className={valueCls}>{formatCondensed(reconnections)}</p>
+        <p className={labelCls}>{fuelLabel} never reconnected</p>
+        <p className={valueCls}>{formatCondensed(neverReconnected)}</p>
         <p className={metaCls}>
-          {reconPer100 > 0 ? `${reconPer100} per 100 shutoffs` : ''}
+          {pctOfShutoffs > 0 ? `${pctOfShutoffs}% of shutoffs` : ''}
         </p>
       </div>
     </div>

@@ -33,9 +33,9 @@ function getNationalCount(totals: NationalSummary, fuel: Fuel, metric: Metric): 
     if (fuel === 'gas') return totals.gasFinalNotices;
     return totals.electricFinalNotices + totals.gasFinalNotices;
   }
-  if (fuel === 'electric') return totals.electricReconnections;
-  if (fuel === 'gas') return totals.gasReconnections;
-  return totals.electricReconnections + totals.gasReconnections;
+  if (fuel === 'electric') return totals.electricNeverReconnected;
+  if (fuel === 'gas') return totals.gasNeverReconnected;
+  return totals.electricNeverReconnected + totals.gasNeverReconnected;
 }
 
 function getOtherFuelLabel(fuel: string): string {

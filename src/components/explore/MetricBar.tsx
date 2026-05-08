@@ -17,11 +17,11 @@ const FUEL_OPTIONS: PillOption<Fuel>[] = [
 const METRIC_OPTIONS: PillOption<Metric>[] = [
   { value: 'shutoffs', label: 'Shutoffs' },
   { value: 'finalNotices', label: 'Final notices' },
-  { value: 'reconnections', label: 'Reconnections' },
+  { value: 'neverReconnected', label: 'Never reconnected' },
 ];
 
 const UNIT_OPTIONS: PillOption<Unit>[] = [
-  { value: 'rate', label: 'Percent (of customers)' },
+  { value: 'rate', label: 'Percent' },
   { value: 'count', label: 'Counts' },
 ];
 

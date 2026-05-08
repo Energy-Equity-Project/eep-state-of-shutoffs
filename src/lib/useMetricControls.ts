@@ -5,7 +5,7 @@ const DEFAULT: MetricControls = { fuel: 'electric', metric: 'shutoffs', unit: 'r
 const SESSION_KEY = 'eep.metricControls';
 
 const VALID_FUELS: readonly Fuel[] = ['electric', 'gas', 'combined'];
-const VALID_METRICS: readonly Metric[] = ['shutoffs', 'finalNotices', 'reconnections'];
+const VALID_METRICS: readonly Metric[] = ['shutoffs', 'finalNotices', 'neverReconnected'];
 const VALID_UNITS: readonly Unit[] = ['rate', 'count'];
 
 function parseControls(obj: unknown): MetricControls {

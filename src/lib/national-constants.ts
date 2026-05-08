@@ -2,7 +2,7 @@ import type { StateAnnual } from '../data/shutoffs-types';
 import { STATE_NAMES_TO_CODE } from './shutoffs-constants';
 
 export type Fuel = 'electric' | 'gas' | 'combined';
-export type Metric = 'shutoffs' | 'finalNotices' | 'reconnections';
+export type Metric = 'shutoffs' | 'finalNotices' | 'neverReconnected';
 export type Unit = 'rate' | 'count';
 
 export interface MetricControls {
@@ -17,9 +17,8 @@ export interface NationalSummary {
   combinedShutoffs: number;
   electricFinalNotices: number;
   gasFinalNotices: number;
-  electricReconnections: number;
-  gasReconnections: number;
-  electricShutoffsPerReconnection: number;
+  electricNeverReconnected: number;
+  gasNeverReconnected: number;
   statesReporting: number;
   statesTotal: number;
   statesExempt: number;
@@ -43,19 +42,19 @@ export const FUEL_LABELS: Record<Fuel, string> = {
 export const METRIC_NOUNS: Record<Metric, string> = {
   shutoffs: 'shutoff',
   finalNotices: 'final notice',
-  reconnections: 'reconnection',
+  neverReconnected: 'household never reconnected',
 };
 
 export const METRIC_VERBS: Record<Metric, string> = {
   shutoffs: 'executed',
   finalNotices: 'sent',
-  reconnections: 'executed',
+  neverReconnected: 'never reconnected',
 };
 
 export const METRIC_NOUNS_PLURAL: Record<Metric, string> = {
   shutoffs: 'shutoffs',
   finalNotices: 'final notices',
-  reconnections: 'reconnections',
+  neverReconnected: 'households never reconnected',
 };
 
 export const FUEL_DISPLAY: Record<Fuel, string> = {
@@ -67,11 +66,11 @@ export const FUEL_DISPLAY: Record<Fuel, string> = {
 export const METRIC_DISPLAY: Record<Metric, string> = {
   shutoffs: 'Shutoffs',
   finalNotices: 'Final notices',
-  reconnections: 'Reconnections',
+  neverReconnected: 'Never reconnected',
 };
 
 export const UNIT_DISPLAY: Record<Unit, string> = {
-  rate: 'Percent (of customers)',
+  rate: 'Percent',
   count: 'Counts',
 };
 
@@ -94,12 +93,12 @@ export const BREAKPOINTS: Record<string, [number, number, number, number]> = {
   'gas-finalNotices-count':        [50000,   150000,   250000,   700000],
   'combined-finalNotices-rate':    [35,      50,       90,       120],
   'combined-finalNotices-count':   [500000,  1000000,  2500000,  3500000],
-  'electric-reconnections-rate':   [5,       10,       15,       20],
-  'electric-reconnections-count':  [50000,   100000,   150000,   300000],
-  'gas-reconnections-rate':        [1,       2,        3,        5],
-  'gas-reconnections-count':       [5000,    10000,    20000,    40000],
-  'combined-reconnections-rate':   [5,       10,       15,       20],
-  'combined-reconnections-count':  [50000,   100000,   150000,   350000],
+  'electric-neverReconnected-rate':   [10,    15,       20,       25],
+  'electric-neverReconnected-count':  [25000, 50000,    100000,   200000],
+  'gas-neverReconnected-rate':        [25,    35,       45,       55],
+  'gas-neverReconnected-count':       [2000,  5000,     15000,    30000],
+  'combined-neverReconnected-rate':   [10,    15,       20,       25],
+  'combined-neverReconnected-count':  [25000, 50000,    100000,   200000],
 };
 
 export function getBreakpoints(
@@ -150,16 +149,23 @@ export function computeStatesForNational(
           rateValue = stateRate(countValue, s.electric_avg_customers) * 100;
         }
       } else {
-        // reconnections
+        // neverReconnected
         if (fuel === 'electric') {
-          countValue = s.electric_reconnections_total ?? 0;
-          rateValue = stateRate(s.electric_reconnections_total, s.electric_avg_customers) * 100;
+          countValue = s.electric_net_shutoffs_total ?? 0;
+          rateValue = s.electric_shutoffs_total > 0
+            ? (countValue / s.electric_shutoffs_total) * 100
+            : 0;
         } else if (fuel === 'gas') {
-          countValue = s.gas_reconnections_total ?? 0;
-          rateValue = stateRate(s.gas_reconnections_total, s.gas_avg_customers) * 100;
+          countValue = s.gas_net_shutoffs_total ?? 0;
+          rateValue = s.gas_shutoffs_total > 0
+            ? (countValue / s.gas_shutoffs_total) * 100
+            : 0;
         } else {
-          countValue = (s.electric_reconnections_total ?? 0) + (s.gas_reconnections_total ?? 0);
-          rateValue = stateRate(countValue, s.electric_avg_customers) * 100;
+          const elecNet = s.electric_net_shutoffs_total ?? 0;
+          const gasNet = s.gas_net_shutoffs_total ?? 0;
+          countValue = elecNet + gasNet;
+          const totalShutoffs = s.electric_shutoffs_total + s.gas_shutoffs_total;
+          rateValue = totalShutoffs > 0 ? (countValue / totalShutoffs) * 100 : 0;
         }
       }
 
