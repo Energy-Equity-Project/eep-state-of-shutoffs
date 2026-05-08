@@ -18,7 +18,17 @@ const NAV_LINKS = [
 <header role="banner" data-masthead class="fixed inset-x-0 top-0 z-40">
   <div class="relative px-6 md:px-10 py-3 md:py-4">
     <!-- Desktop layout (md+) -->
-    <div class="hidden md:flex items-center justify-between gap-8">
+    <div class="hidden md:flex items-center justify-between gap-4">
+      <a href="/" aria-label="Energy Equity Project — home" class="masthead-logo-link flex items-center gap-2 shrink-0">
+        <img
+          src="/eep-logo-masthead.png"
+          alt=""
+          aria-hidden="true"
+          class="masthead-logo block"
+          width="80"
+          height="80"
+        />
+      </a>
       <div class="flex-1 min-w-0">
         <p class="masthead-eyebrow text-[11px] font-sans text-[--color-text-secondary] uppercase tracking-widest mb-1">
           Energy Equity Project
@@ -44,7 +54,17 @@ const NAV_LINKS = [
     </div>
 
     <!-- Mobile layout (<md) -->
-    <div class="flex md:hidden items-start justify-between gap-4">
+    <div class="flex md:hidden items-center justify-between gap-2">
+      <a href="/" aria-label="Energy Equity Project — home" class="masthead-logo-link flex items-center gap-1 shrink-0">
+        <img
+          src="/eep-logo-masthead.png"
+          alt=""
+          aria-hidden="true"
+          class="masthead-logo block"
+          width="48"
+          height="48"
+        />
+      </a>
       <div class="flex-1 min-w-0">
         <p class="masthead-eyebrow text-[10px] font-sans text-[--color-text-secondary] uppercase tracking-widest mb-0.5">
           Energy Equity Project
@@ -97,6 +117,22 @@ const NAV_LINKS = [
     font-size: 1rem;
   }
 
+  .masthead-logo {
+    width: 4rem;
+    height: 4rem;
+    transition: width 200ms ease-out, height 200ms ease-out;
+  }
+  @media (max-width: 767px) {
+    .masthead-logo {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+  [data-masthead][data-collapsed] .masthead-logo {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
   .masthead-border {
     opacity: 1;
   }
@@ -105,7 +141,8 @@ const NAV_LINKS = [
     [data-masthead],
     .masthead-eyebrow,
     .masthead-subtitle,
-    .masthead-title {
+    .masthead-title,
+    .masthead-logo {
       transition: none;
     }
   }
