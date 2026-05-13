@@ -12,7 +12,7 @@ const entries = registry.entries();
     <span class="highlight">References and Notes</span>
   </h2>
 {entries.length > 0 && (
-  <ol class="space-y-3 text-sm text-ink/70 leading-relaxed list-decimal list-outside pl-5">
+  <ol class="space-y-3 text-sm text-ink/70 leading-relaxed list-decimal list-outside pl-5 [overflow-wrap:anywhere]">
     {entries.map((entry) => (
       <li id={`endnote-${entry.number}`}>
         <span set:html={entry.html} />
