@@ -350,15 +350,22 @@ export default function ShutoffPipeline({ stateAnnual, stateMonthly, households,
                 >
                   {neverStage.label}
                 </text>
-                {neverStage.ratioCaption && (
+                {neverStage.value != null && (
                   <text
                     x={x + w + 8}
-                    y={neverY + neverH / 2 + 9}
+                    y={neverY + neverH / 2 + 7}
                     fontSize="10"
                     fill="var(--color-pipeline-warn)"
                     fontFamily="var(--font-sans)"
+                    className="tabular-nums"
                   >
-                    {neverStage.ratioCaption}
+                    <tspan fontWeight="600" fill="var(--color-ink)">{formatCondensed(neverStage.value)}</tspan>
+                    {reconnectionsFlags.size > 0 && (
+                      <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
+                    )}
+                    {neverStage.ratioCaption && (
+                      <tspan fontWeight="400"> {neverStage.ratioCaption}</tspan>
+                    )}
                   </text>
                 )}
 
@@ -372,15 +379,22 @@ export default function ShutoffPipeline({ stateAnnual, stateMonthly, households,
                 >
                   {reconnectedStage.label}
                 </text>
-                {reconnectedStage.ratioCaption && (
+                {reconnectedStage.value != null && (
                   <text
                     x={x + w + 8}
-                    y={reconnY + reconnH / 2 + 9}
+                    y={reconnY + reconnH / 2 + 7}
                     fontSize="10"
                     fill="var(--color-text-tertiary)"
                     fontFamily="var(--font-sans)"
+                    className="tabular-nums"
                   >
-                    {reconnectedStage.ratioCaption}
+                    <tspan fontWeight="600" fill="var(--color-ink)">{formatCondensed(reconnectedStage.value)}</tspan>
+                    {reconnectionsFlags.size > 0 && (
+                      <tspan fill="var(--color-flag)" fontWeight="600">*</tspan>
+                    )}
+                    {reconnectedStage.ratioCaption && (
+                      <tspan fontWeight="400"> {reconnectedStage.ratioCaption}</tspan>
+                    )}
                   </text>
                 )}
 
