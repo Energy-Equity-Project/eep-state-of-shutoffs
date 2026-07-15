@@ -78,8 +78,8 @@ export default function WhatYouCanDoView() {
             margin: '0 0 12px',
           }}
         >
-          What you can do{' '}
-          <span className="highlight">depends on where you sit.</span>
+          Action briefings —{' '}
+          <span className="highlight">Explore Shutoff Abolition actions for various decision makers</span>
         </h1>
 
         {/* Desktop lede */}
@@ -108,7 +108,7 @@ export default function WhatYouCanDoView() {
             margin: 0,
           }}
         >
-          Pick your role. The page rewrites itself to show only what applies.
+          Select a decision maker to view potential actions in each category.
         </p>
       </div>
 
