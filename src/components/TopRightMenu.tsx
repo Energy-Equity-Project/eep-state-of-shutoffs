@@ -5,8 +5,8 @@ interface Props {
 }
 
 const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Explore', href: '/explore/' },
+  { label: 'Explore', href: '/' },
+  { label: 'The Story', href: '/story' },
 ];
 
 export default function TopRightMenu({ pathname }: Props) {

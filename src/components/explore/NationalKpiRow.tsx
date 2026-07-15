@@ -44,7 +44,7 @@ export default function NationalKpiRow({ fuel, totals, rate }: Props) {
   const ratePct = (rate * 100).toFixed(1);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-[10px] md:gap-[14px] mb-8">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-[10px] md:gap-[14px] mb-3">
       <div className={cardCls}>
         <p className={labelCls}>{fuelLabel} final notices</p>
         <p className={valueCls}>{formatCondensed(finalNotices)}</p>
