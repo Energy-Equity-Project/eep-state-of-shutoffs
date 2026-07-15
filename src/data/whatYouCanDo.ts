@@ -16,9 +16,9 @@ export interface Audience {
 }
 
 export const TIERS: { kind: ActionKind; label: string; sub: string }[] = [
-  { kind: 'no-brainer', label: 'No-brainer', sub: 'Low lift · start now' },
-  { kind: 'no-regrets', label: 'No-regrets', sub: 'Worth the effort' },
-  { kind: 'no-fear',    label: 'No-fear',    sub: 'Bold · high impact' },
+  { kind: 'no-brainer', label: 'No brainers', sub: 'Low lift · start now' },
+  { kind: 'no-regrets', label: 'No regrets',   sub: 'Worth the effort' },
+  { kind: 'no-fear',    label: 'No fears',     sub: 'Bold · high impact' },
 ];
 
 export const AUDIENCES: Audience[] = [

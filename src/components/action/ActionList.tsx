@@ -16,7 +16,7 @@ function getTierStyles(kind: ActionKind) {
         rowExtra: { borderLeft: '2px solid var(--color-neutral-bar-light)', background: 'rgba(0,0,0,0.03)', paddingLeft: '12px' } as React.CSSProperties,
         swatchStyle: { background: 'var(--color-card)', border: '1px solid var(--color-ink)' } as React.CSSProperties,
         headlineWeight: 400 as React.CSSProperties['fontWeight'],
-        tierLabelColor: 'var(--color-quiet)',
+        tierLabelColor: 'var(--color-ink)',
       };
     case 'no-regrets':
       return {
