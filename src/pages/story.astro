@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Section from '../components/Section.astro';
+import Introduction from '../components/Introduction.astro';
+import Insight from '../components/Insight.astro';
+import Conclusion from '../components/Conclusion.astro';
+import Resources from '../components/Resources.astro';
+import Endnotes from '../components/Endnotes.astro';
+import ScrollProgress from '../components/ScrollProgress';
+import { insights } from '../data/insights';
+import Acknowledgments from '../components/Acknowledgments.astro';
+import { createEndnoteRegistry } from '../lib/endnotes';
+
+const registry = createEndnoteRegistry();
+
+const sections = [
+  { id: 'intro', label: 'Introduction' },
+  ...insights.map((ins) => ({
+    id: `insight-${ins.number}`,
+    label: `Insight ${ins.number} of 10: ${ins.headline}`,
+  })),
+  { id: 'conclusion', label: 'Conclusion' },
+  { id: 'resources', label: 'Resources' },
+  { id: 'acknowledgements', label: "Acknowledgements"},
+  { id: 'endnotes', label: 'Endnotes' }
+];
+---
+
+<BaseLayout title="Tsunami of Shutoffs: What the US' first national survey reveals" hideTopRightMenu={true}>
+  <Masthead />
+  <ScrollProgress client:load sections={sections} />
+  <main
+    data-scroll-container
+    class="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory scroll-pt-20 motion-reduce:h-auto motion-reduce:overflow-visible motion-reduce:snap-none"
+  >
+    <div data-masthead-sentinel aria-hidden="true" style="height:1px;overflow:hidden;position:relative"></div>
+    <Section id="intro" label="Introduction" class="!justify-start !pt-28 md:!pt-32">
+      <Introduction registry={registry} />
+    </Section>
+
+    {insights.map((insight) => (
+      <Section id={`insight-${insight.number}`} label={`Insight ${insight.number} of 10`}>
+        <Insight insight={insight} total={10} registry={registry} />
+      </Section>
+    ))}
+
+    <Section id="conclusion" label="Conclusion and call to action">
+      <Conclusion registry={registry} />
+    </Section>
+    <Section id="resources" label="Resources">
+      <Resources />
+    </Section>
+    <Section id="acknowledgements", label="Acknowledgements">
+      <Acknowledgments />
+    </Section>
+    <Section id="endnotes" label="Endnotes">
+      <Endnotes registry={registry} />
+    </Section>
+  </main>
+</BaseLayout>
+
+<script>
+  // Hash links (e.g. #endnote-1, #endnote-ref-3) don't work with native
+  // browser navigation here because the scrollable region is <main>, not
+  // the document root. Delegate to scrollIntoView() so the correct
+  // container scrolls — same pattern ScrollProgress already uses.
+  function scrollToHash(hash: string) {
+    const id = hash.startsWith('#') ? hash.slice(1) : hash;
+    if (!id) return false;
+    const target = document.getElementById(id);
+    if (!target) return false;
+    // snap-mandatory only lets the viewport rest on a section snap-start, so
+    // scrolling to a mid-section <sup> or <li> snaps back to an arbitrary
+    // neighbor. Scroll to the nearest <section> ancestor instead — that's
+    // always a valid snap point and matches what the sidebar nav does.
+    const section = target.closest('section') ?? target;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    section.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth' });
+    return true;
+  }
+
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (e.button !== 0) return;
+    const link = (e.target as Element | null)?.closest?.('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    if (!scrollToHash(href)) return;
+    e.preventDefault();
+    history.pushState(null, '', href);
+  });
+
+  window.addEventListener('hashchange', () => scrollToHash(window.location.hash));
+
+  if (window.location.hash) {
+    // Browser's default anchor jump silently fails inside our scroll container;
+    // run it manually once the DOM is ready.
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => scrollToHash(window.location.hash));
+    } else {
+      scrollToHash(window.location.hash);
+    }
+  }
+</script>
