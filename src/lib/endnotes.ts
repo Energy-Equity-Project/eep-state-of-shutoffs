@@ -39,9 +39,11 @@ export function createEndnoteRegistry(): EndnoteRegistry {
 export type TextSegment = { type: 'text'; text: string };
 export type HighlightSegment = { type: 'highlight'; text: string };
 export type EndnoteSegment = { type: 'endnote'; key: string; number: number; isFirst: boolean };
-export type Segment = TextSegment | HighlightSegment | EndnoteSegment;
+export type LinkSegment = { type: 'link'; text: string; href: string };
+export type Segment = TextSegment | HighlightSegment | EndnoteSegment | LinkSegment;
 
 const ENDNOTE_RE = /^\[\^[a-zA-Z0-9_-]+\]$/;
+const LINK_RE = /^\[([^\]]+)\]\(([^)]+)\)$/;
 
 export function renderSegments(
   text: string,
@@ -53,6 +55,7 @@ export function renderSegments(
 
   const patterns = [
     ...escapedHighlights,
+    '\\[[^\\]]+\\]\\([^)]+\\)',
     '\\[\\^[a-zA-Z0-9_-]+\\]',
   ];
 
@@ -66,7 +69,10 @@ export function renderSegments(
       segments.push({ type: 'text', text: text.slice(last, match.index) });
     }
     const matched = match[0];
-    if (ENDNOTE_RE.test(matched)) {
+    const linkMatch = LINK_RE.exec(matched);
+    if (linkMatch) {
+      segments.push({ type: 'link', text: linkMatch[1], href: linkMatch[2] });
+    } else if (ENDNOTE_RE.test(matched)) {
       const key = matched.slice(2, -1);
       const { number, isFirst } = registry.register(key);
       segments.push({ type: 'endnote', key, number, isFirst });

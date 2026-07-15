@@ -87,6 +87,21 @@
     outline-offset: 2px;
   }
 
+  .action-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+  }
+  .action-link:hover,
+  .action-link:focus-visible {
+    color: var(--color-ink);
+  }
+  .action-link:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
   .endnote-ref {
     font-size: 0.75em;
     vertical-align: super;
