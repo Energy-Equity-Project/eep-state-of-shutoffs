@@ -62,7 +62,7 @@ export default function WhatYouCanDoView() {
           }}
         >
           Action briefings —{' '}
-          <span className="highlight">one for every desk that can move this forward.</span>
+          <span className="highlight">Explore Shutoff Abolition actions for various decision makers</span>
         </h1>
 
         {/* Mobile h1 */}
@@ -94,8 +94,7 @@ export default function WhatYouCanDoView() {
             margin: 0,
           }}
         >
-          Each tab below is a memo addressed to one of the people, offices, or organizations who
-          can change shutoff policy. Read yours. Forward another to whoever needs it.
+          Select a decision maker to view potential actions in each category.
         </p>
 
         {/* Mobile lede */}
