@@ -46,7 +46,7 @@ export const AUDIENCES: Audience[] = [
     id: 'executive',
     level: 'Federal \u00b7 Executive',
     title: 'Executive Office & Federal Agencies',
-    short: 'Executive',
+    short: 'Executive and Federal Agencies',
     why: 'You direct the agencies. Executive orders and interagency coordination can move before Congress does.',
     actions: [
       { kind: 'no-brainer', text: 'Set a national goal to eliminate utility shutoffs within two years.' },
@@ -71,7 +71,7 @@ export const AUDIENCES: Audience[] = [
     id: 'legislators',
     level: 'State \u00b7 Legislative',
     title: 'State legislators',
-    short: 'Legislators',
+    short: 'State Legislators',
     why: 'You write the statute the PUC has to follow. Strong floors and clear definitions live here.',
     actions: [
       { kind: 'no-brainer', text: 'Require all cooperative and municipal utilities to follow the same shutoff reporting procedures as the IOUs.' },
