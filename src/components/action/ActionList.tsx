@@ -96,18 +96,6 @@ export default function ActionList({ audience, index }: Props) {
         {audience.title}
       </h2>
 
-      <p
-        style={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: '12.5px',
-          color: 'var(--color-pencil)',
-          lineHeight: 1.55,
-          margin: '0 0 14px',
-        }}
-      >
-        {audience.why}
-      </p>
-
       <div
         style={{
           fontFamily: 'var(--font-sans)',
