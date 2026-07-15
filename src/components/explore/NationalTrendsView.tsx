@@ -102,6 +102,15 @@ export default function NationalTrendsView({ year, totals, stateAnnual, shutoffR
       {/* KPI summary row */}
       <NationalKpiRow fuel={fuel} totals={totals} rate={shutoffRates[fuel]} />
 
+      <p className="mb-6 text-[14px]">
+        <a
+          href="https://docs.google.com/spreadsheets/d/1V70ARdg6Zo6Pkuchllf6iIHEEUDEPpmh/edit?usp=sharing&ouid=110297811609737852717&rtpof=true&sd=true"
+          className="highlight-link"
+        >
+          Download a cleaned version of the utility level shutoff data here.
+        </a>
+      </p>
+
       {/* Metric control bar */}
       <MetricBar value={controls} onChange={onChange} />
 
